@@ -1,0 +1,8 @@
+.fighter-card{
+    display: flex;
+    justify-content: space-between;
+
+}
+.progress{
+    justify-content: space-between;
+}

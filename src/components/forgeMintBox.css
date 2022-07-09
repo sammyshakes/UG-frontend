@@ -1,0 +1,19 @@
+.forge1-bordr{
+    border-radius: 12px;
+    border: 1px solid rgb(255, 0, 0);
+    background: rgba(85, 2, 2, 0.7);
+    box-shadow: 1px 1px 5px rgba(238, 0, 32, 0.7);
+}
+
+.forge2-bordr{
+    border-radius: 12px;
+    box-shadow: -3px 3px 8px rgba(5, 240, 240, 0.884);
+}
+
+.forge-bordr{
+    border-radius: 15px;
+    border: 3px solid rgb(255, 0, 0);
+    background: rgba(85, 2, 2, 0.7);
+    box-shadow: -5px 5px 20px rgba(3, 245, 245, 0.7);
+}
+  

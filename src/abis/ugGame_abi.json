@@ -1,0 +1,1061 @@
+[
+	{
+		"inputs": [],
+		"name": "mintRing",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_ugnft",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_ugArena",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_ugRaid",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_blood",
+				"type": "address"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [],
+		"name": "BloodError",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InvalidAddress",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InvalidLevel",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint8",
+				"name": "size",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint32",
+				"name": "sweat",
+				"type": "uint32"
+			},
+			{
+				"internalType": "uint8",
+				"name": "yak",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint256",
+				"name": "i",
+				"type": "uint256"
+			}
+		],
+		"name": "InvalidSize",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InvalidSizes",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InvalidTokenId",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "MaxLevelAllowed",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "MaxSizeAllowed",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "MintNotActive",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "MismatchArrays",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "MustUpgradeLevel",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "MustUpgradeSize",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "txorigin",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "sender",
+				"type": "address"
+			}
+		],
+		"name": "OnlyEOA",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "TooMany",
+		"type": "error"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "BloodBurned",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_levelsToUpgrade",
+				"type": "uint256"
+			}
+		],
+		"name": "levelUpAmulet",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "totalBloodCost",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "tokenIds",
+				"type": "uint256[]"
+			},
+			{
+				"internalType": "bool[]",
+				"name": "_upgradeLevel",
+				"type": "bool[]"
+			},
+			{
+				"internalType": "bool[]",
+				"name": "_upgradeSize",
+				"type": "bool[]"
+			}
+		],
+		"name": "levelUpFightClubs",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "totalBloodCost",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "_tokenIds",
+				"type": "uint256[]"
+			},
+			{
+				"internalType": "uint256[]",
+				"name": "_levelsToUpgrade",
+				"type": "uint256[]"
+			},
+			{
+				"internalType": "bool",
+				"name": "_isStaked",
+				"type": "bool"
+			}
+		],
+		"name": "levelUpFighters",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "totalBloodCost",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "tokenIds",
+				"type": "uint256[]"
+			},
+			{
+				"internalType": "uint8[]",
+				"name": "_levelsToUpgrade",
+				"type": "uint8[]"
+			}
+		],
+		"name": "levelUpForges",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "totalBloodCost",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_levelsToUpgrade",
+				"type": "uint256"
+			}
+		],
+		"name": "levelUpRing",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "totalBloodCost",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "mintAmulet",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "mintFightClubs",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "mintForges",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "previousOwner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "OwnershipTransferred",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "Paused",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "newCost",
+				"type": "uint256"
+			}
+		],
+		"name": "setAmuletBaseLevelCost",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "number",
+				"type": "uint256"
+			}
+		],
+		"name": "setAmuletBloodMintCost",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint16",
+				"name": "pct",
+				"type": "uint16"
+			}
+		],
+		"name": "setAmuletLevelCostAdjustmentPct",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bool",
+				"name": "active",
+				"type": "bool"
+			}
+		],
+		"name": "setAmuletMintActive",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_uBlood",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_ugNFT",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_ugArena",
+				"type": "address"
+			}
+		],
+		"name": "setContracts",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "newWallet",
+				"type": "address"
+			}
+		],
+		"name": "setDevWallet",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "newCost",
+				"type": "uint256"
+			}
+		],
+		"name": "setFightClubBaseLevelCost",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "number",
+				"type": "uint256"
+			}
+		],
+		"name": "setFightClubBloodMintCost",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint16",
+				"name": "pct",
+				"type": "uint16"
+			}
+		],
+		"name": "setFightClubLevelCostAdjustmentPct",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bool",
+				"name": "active",
+				"type": "bool"
+			}
+		],
+		"name": "setFightClubMintActive",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "newCost",
+				"type": "uint256"
+			}
+		],
+		"name": "setFighterBaseLevelCost",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint16",
+				"name": "pct",
+				"type": "uint16"
+			}
+		],
+		"name": "setFighterLevelCostAdjustmentPct",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "newCost",
+				"type": "uint256"
+			}
+		],
+		"name": "setForgeBaseLevelCost",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "newCost",
+				"type": "uint256"
+			}
+		],
+		"name": "setForgeBaseSizeCost",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "number",
+				"type": "uint256"
+			}
+		],
+		"name": "setForgeBloodMintCost",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bool",
+				"name": "active",
+				"type": "bool"
+			}
+		],
+		"name": "setForgeMintActive",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "amt",
+				"type": "uint256"
+			}
+		],
+		"name": "setMaxFightClubsPerMint",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "amt",
+				"type": "uint256"
+			}
+		],
+		"name": "setMaxFightClubsPerWallet",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "amt",
+				"type": "uint256"
+			}
+		],
+		"name": "setMaxForgesPerMint",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "amt",
+				"type": "uint256"
+			}
+		],
+		"name": "setMaxForgesPerWallet",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "number",
+				"type": "uint256"
+			}
+		],
+		"name": "setMaximumBloodSupply",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bool",
+				"name": "paused",
+				"type": "bool"
+			}
+		],
+		"name": "setPaused",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "newCost",
+				"type": "uint256"
+			}
+		],
+		"name": "setRingBaseLevelCost",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "number",
+				"type": "uint256"
+			}
+		],
+		"name": "setRingBloodMintCost",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint16",
+				"name": "pct",
+				"type": "uint16"
+			}
+		],
+		"name": "setRingLevelCostAdjustmentPct",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bool",
+				"name": "active",
+				"type": "bool"
+			}
+		],
+		"name": "setRingMintActive",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "addr",
+				"type": "address"
+			}
+		],
+		"name": "setWithdrawAddress",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "tokenIds",
+				"type": "uint256[]"
+			}
+		],
+		"name": "sizeUpForges",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "totalBloodCost",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_newOwner",
+				"type": "address"
+			}
+		],
+		"name": "transferOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "Unpaused",
+		"type": "event"
+	},
+	{
+		"inputs": [],
+		"name": "withdraw",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "AMULET_MINT_ACTIVE",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "FIGHTCLUB_MINT_ACTIVE",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "FORGE_MINT_ACTIVE",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint16",
+				"name": "currentLevel",
+				"type": "uint16"
+			},
+			{
+				"internalType": "uint256",
+				"name": "levelsToUpgrade",
+				"type": "uint256"
+			}
+		],
+		"name": "getAmuletLevelUpBloodCost",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "totalBloodCost",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint16",
+				"name": "currentLevel",
+				"type": "uint16"
+			},
+			{
+				"internalType": "uint16",
+				"name": "currentSize",
+				"type": "uint16"
+			},
+			{
+				"internalType": "uint8",
+				"name": "levelsToUpgrade",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint8",
+				"name": "sizesToUpgrade",
+				"type": "uint8"
+			}
+		],
+		"name": "getFightClubLevelUpBloodCost",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "totalBloodCost",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint16",
+				"name": "currentLevel",
+				"type": "uint16"
+			},
+			{
+				"internalType": "uint256",
+				"name": "levelsToUpgrade",
+				"type": "uint256"
+			}
+		],
+		"name": "getFighterLevelUpBloodCost",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "totalBloodCost",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint8",
+				"name": "currentLevel",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint8",
+				"name": "currentSize",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint8",
+				"name": "levelsToUpgrade",
+				"type": "uint8"
+			}
+		],
+		"name": "getForgeLevelUpBloodCost",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "totalBloodCost",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint16",
+				"name": "currentSize",
+				"type": "uint16"
+			}
+		],
+		"name": "getForgeSizeUpBloodCost",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "totalBloodCost",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint16",
+				"name": "currentLevel",
+				"type": "uint16"
+			},
+			{
+				"internalType": "uint256",
+				"name": "levelsToUpgrade",
+				"type": "uint256"
+			}
+		],
+		"name": "getRingLevelUpBloodCost",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "totalBloodCost",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "ierc1155",
+		"outputs": [
+			{
+				"internalType": "contract IERC1155",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "paused",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "RING_MINT_ACTIVE",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "uBlood",
+		"outputs": [
+			{
+				"internalType": "contract IUBlood",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "ugArena",
+		"outputs": [
+			{
+				"internalType": "contract IUGArena",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "ugNFT",
+		"outputs": [
+			{
+				"internalType": "contract IUGNFTs",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "ugRaid",
+		"outputs": [
+			{
+				"internalType": "contract IUGRaid",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]

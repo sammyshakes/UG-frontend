@@ -1,0 +1,1441 @@
+[
+	{
+	  "inputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "constructor"
+	},
+	{
+	  "anonymous": false,
+	  "inputs": [
+		{
+		  "indexed": true,
+		  "internalType": "address",
+		  "name": "owner",
+		  "type": "address"
+		},
+		{
+		  "indexed": false,
+		  "internalType": "uint256",
+		  "name": "totalBurned",
+		  "type": "uint256"
+		},
+		{
+		  "indexed": false,
+		  "internalType": "uint256",
+		  "name": "totalMinted",
+		  "type": "uint256"
+		}
+	  ],
+	  "name": "BloodGoldSwapped",
+	  "type": "event"
+	},
+	{
+	  "anonymous": false,
+	  "inputs": [
+		{
+		  "indexed": true,
+		  "internalType": "address",
+		  "name": "originalOwner",
+		  "type": "address"
+		},
+		{
+		  "indexed": true,
+		  "internalType": "address",
+		  "name": "newOwner",
+		  "type": "address"
+		},
+		{
+		  "indexed": true,
+		  "internalType": "uint256",
+		  "name": "tokenId",
+		  "type": "uint256"
+		}
+	  ],
+	  "name": "FYStolen",
+	  "type": "event"
+	},
+	{
+	  "anonymous": false,
+	  "inputs": [
+		{
+		  "indexed": true,
+		  "internalType": "address",
+		  "name": "owner",
+		  "type": "address"
+		},
+		{
+		  "indexed": true,
+		  "internalType": "uint256",
+		  "name": "tokenId",
+		  "type": "uint256"
+		}
+	  ],
+	  "name": "FighterLeveledUp",
+	  "type": "event"
+	},
+	{
+	  "anonymous": false,
+	  "inputs": [
+		{
+		  "indexed": true,
+		  "internalType": "address",
+		  "name": "owner",
+		  "type": "address"
+		},
+		{
+		  "indexed": true,
+		  "internalType": "uint256",
+		  "name": "amount",
+		  "type": "uint256"
+		}
+	  ],
+	  "name": "ManyAmuletsMinted",
+	  "type": "event"
+	},
+	{
+	  "anonymous": false,
+	  "inputs": [
+		{
+		  "indexed": true,
+		  "internalType": "address",
+		  "name": "owner",
+		  "type": "address"
+		},
+		{
+		  "indexed": false,
+		  "internalType": "uint16[]",
+		  "name": "tokenIds",
+		  "type": "uint16[]"
+		}
+	  ],
+	  "name": "ManyFYMinted",
+	  "type": "event"
+	},
+	{
+	  "anonymous": false,
+	  "inputs": [
+		{
+		  "indexed": true,
+		  "internalType": "address",
+		  "name": "owner",
+		  "type": "address"
+		},
+		{
+		  "indexed": false,
+		  "internalType": "uint16[]",
+		  "name": "tokenIds",
+		  "type": "uint16[]"
+		}
+	  ],
+	  "name": "ManyFYRevealed",
+	  "type": "event"
+	},
+	{
+	  "anonymous": false,
+	  "inputs": [
+		{
+		  "indexed": true,
+		  "internalType": "address",
+		  "name": "owner",
+		  "type": "address"
+		},
+		{
+		  "indexed": false,
+		  "internalType": "uint16[]",
+		  "name": "tokenIds",
+		  "type": "uint16[]"
+		}
+	  ],
+	  "name": "ManyFightersLeveledUp",
+	  "type": "event"
+	},
+	{
+	  "anonymous": false,
+	  "inputs": [
+		{
+		  "indexed": true,
+		  "internalType": "address",
+		  "name": "owner",
+		  "type": "address"
+		},
+		{
+		  "indexed": true,
+		  "internalType": "uint256",
+		  "name": "amount",
+		  "type": "uint256"
+		}
+	  ],
+	  "name": "ManyRingsMinted",
+	  "type": "event"
+	},
+	{
+	  "anonymous": false,
+	  "inputs": [
+		{
+		  "indexed": true,
+		  "internalType": "address",
+		  "name": "previousOwner",
+		  "type": "address"
+		},
+		{
+		  "indexed": true,
+		  "internalType": "address",
+		  "name": "newOwner",
+		  "type": "address"
+		}
+	  ],
+	  "name": "OwnershipTransferred",
+	  "type": "event"
+	},
+	{
+	  "anonymous": false,
+	  "inputs": [
+		{
+		  "indexed": false,
+		  "internalType": "address",
+		  "name": "account",
+		  "type": "address"
+		}
+	  ],
+	  "name": "Paused",
+	  "type": "event"
+	},
+	{
+	  "anonymous": false,
+	  "inputs": [
+		{
+		  "indexed": false,
+		  "internalType": "address",
+		  "name": "account",
+		  "type": "address"
+		}
+	  ],
+	  "name": "Unpaused",
+	  "type": "event"
+	},
+	{
+	  "inputs": [],
+	  "name": "AMULET_BLOOD_MINT_COST",
+	  "outputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "",
+		  "type": "uint256"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "AMULET_LAST_MINT_TIME",
+	  "outputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "",
+		  "type": "uint256"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "AMULET_LEVEL_DOWN_INCREASE_DAYS",
+	  "outputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "",
+		  "type": "uint256"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "AMULET_MIN_BLOOD_MINT_COST",
+	  "outputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "",
+		  "type": "uint256"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "DAILY_BLOOD_PER_LEVEL",
+	  "outputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "",
+		  "type": "uint256"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "DAILY_BLOOD_RATE",
+	  "outputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "",
+		  "type": "uint256"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "GEN1_BLOOD_MINT_COST",
+	  "outputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "",
+		  "type": "uint256"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "GEN1_LAST_MINT_TIME",
+	  "outputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "",
+		  "type": "uint256"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "GEN1_MIN_BLOOD_MINT_COST",
+	  "outputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "",
+		  "type": "uint256"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "GOLD_BLOOD_MINT_COST",
+	  "outputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "",
+		  "type": "uint256"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "GOLD_PER_STAKED_NFT",
+	  "outputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "",
+		  "type": "uint256"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "LEVEL_DOWN_AFTER_DAYS",
+	  "outputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "",
+		  "type": "uint256"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "MAXIMUM_BLOOD_SUPPLY",
+	  "outputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "",
+		  "type": "uint256"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "MINT_COST_ADAPTIVE",
+	  "outputs": [
+		{
+		  "internalType": "bool",
+		  "name": "",
+		  "type": "bool"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "MINT_COST_INCREASE_PERCENT",
+	  "outputs": [
+		{
+		  "internalType": "uint8",
+		  "name": "",
+		  "type": "uint8"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "MINT_COST_REDUCE_INTERVAL",
+	  "outputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "",
+		  "type": "uint256"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "MINT_COST_REDUCE_PERCENT",
+	  "outputs": [
+		{
+		  "internalType": "uint8",
+		  "name": "",
+		  "type": "uint8"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "PUBLIC_SALE_STARTED",
+	  "outputs": [
+		{
+		  "internalType": "bool",
+		  "name": "",
+		  "type": "bool"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "RING_BLOOD_MINT_COST",
+	  "outputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "",
+		  "type": "uint256"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "RING_DAILY_BLOOD_RATE",
+	  "outputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "",
+		  "type": "uint256"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "RING_DIMINISHING_FROM",
+	  "outputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "",
+		  "type": "uint256"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "RING_LAST_MINT_TIME",
+	  "outputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "",
+		  "type": "uint256"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "RING_MIN_BLOOD_MINT_COST",
+	  "outputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "",
+		  "type": "uint256"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "WITHDRAW_ADDRESS",
+	  "outputs": [
+		{
+		  "internalType": "address",
+		  "name": "",
+		  "type": "address"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "owner",
+	  "outputs": [
+		{
+		  "internalType": "address",
+		  "name": "",
+		  "type": "address"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "paused",
+	  "outputs": [
+		{
+		  "internalType": "bool",
+		  "name": "",
+		  "type": "bool"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "randomizer",
+	  "outputs": [
+		{
+		  "internalType": "contract IRandomizer",
+		  "name": "",
+		  "type": "address"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "renounceOwnership",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "address",
+		  "name": "newOwner",
+		  "type": "address"
+		}
+	  ],
+	  "name": "transferOwnership",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [],
+	  "name": "uAmulet",
+	  "outputs": [
+		{
+		  "internalType": "contract IUAmulet",
+		  "name": "",
+		  "type": "address"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "uArena",
+	  "outputs": [
+		{
+		  "internalType": "contract IUArena",
+		  "name": "",
+		  "type": "address"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "uBlood",
+	  "outputs": [
+		{
+		  "internalType": "contract IUBlood",
+		  "name": "",
+		  "type": "address"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "uGold",
+	  "outputs": [
+		{
+		  "internalType": "contract IUGold",
+		  "name": "",
+		  "type": "address"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "uGoldStaking",
+	  "outputs": [
+		{
+		  "internalType": "contract IUGoldStaking",
+		  "name": "",
+		  "type": "address"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "uNFT",
+	  "outputs": [
+		{
+		  "internalType": "contract IUNFT",
+		  "name": "",
+		  "type": "address"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [],
+	  "name": "uRing",
+	  "outputs": [
+		{
+		  "internalType": "contract IURing",
+		  "name": "",
+		  "type": "address"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "amount",
+		  "type": "uint256"
+		}
+	  ],
+	  "name": "mintGen1",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [],
+	  "name": "getGen1MintCost",
+	  "outputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "newCost",
+		  "type": "uint256"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "amount",
+		  "type": "uint256"
+		}
+	  ],
+	  "name": "mintRing",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [],
+	  "name": "getRingMintCost",
+	  "outputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "newCost",
+		  "type": "uint256"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "amount",
+		  "type": "uint256"
+		}
+	  ],
+	  "name": "mintAmulet",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [],
+	  "name": "getAmuletMintCost",
+	  "outputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "newCost",
+		  "type": "uint256"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "amount",
+		  "type": "uint256"
+		},
+		{
+		  "internalType": "uint8",
+		  "name": "direction",
+		  "type": "uint8"
+		}
+	  ],
+	  "name": "swapBloodGold",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "address",
+		  "name": "addr",
+		  "type": "address"
+		}
+	  ],
+	  "name": "getBloodGoldSwapParameters",
+	  "outputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "",
+		  "type": "uint256"
+		},
+		{
+		  "internalType": "uint256",
+		  "name": "",
+		  "type": "uint256"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "tokenId",
+		  "type": "uint256"
+		}
+	  ],
+	  "name": "getOwnerOfFYToken",
+	  "outputs": [
+		{
+		  "internalType": "address",
+		  "name": "ownerOf",
+		  "type": "address"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "tokenId",
+		  "type": "uint256"
+		}
+	  ],
+	  "name": "getFyTokenTraits",
+	  "outputs": [
+		{
+		  "components": [
+			{
+			  "internalType": "bool",
+			  "name": "isRevealed",
+			  "type": "bool"
+			},
+			{
+			  "internalType": "bool",
+			  "name": "isFighter",
+			  "type": "bool"
+			},
+			{
+			  "internalType": "bool",
+			  "name": "isGen0",
+			  "type": "bool"
+			},
+			{
+			  "internalType": "uint16",
+			  "name": "level",
+			  "type": "uint16"
+			},
+			{
+			  "internalType": "uint256",
+			  "name": "lastLevelUpgradeTime",
+			  "type": "uint256"
+			},
+			{
+			  "internalType": "uint8",
+			  "name": "rank",
+			  "type": "uint8"
+			},
+			{
+			  "internalType": "uint256",
+			  "name": "lastRankUpgradeTime",
+			  "type": "uint256"
+			},
+			{
+			  "internalType": "uint8",
+			  "name": "courage",
+			  "type": "uint8"
+			},
+			{
+			  "internalType": "uint8",
+			  "name": "cunning",
+			  "type": "uint8"
+			},
+			{
+			  "internalType": "uint8",
+			  "name": "brutality",
+			  "type": "uint8"
+			},
+			{
+			  "internalType": "uint64",
+			  "name": "mintedBlockNumber",
+			  "type": "uint64"
+			}
+		  ],
+		  "internalType": "struct IUNFT.FighterYakuza",
+		  "name": "",
+		  "type": "tuple"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "address",
+		  "name": "owner",
+		  "type": "address"
+		}
+	  ],
+	  "name": "getBalanceOfActiveAmulets",
+	  "outputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "",
+		  "type": "uint256"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "uint256[]",
+		  "name": "tokenIds",
+		  "type": "uint256[]"
+		}
+	  ],
+	  "name": "calculateAllStakingRewards",
+	  "outputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "owed",
+		  "type": "uint256"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "tokenId",
+		  "type": "uint256"
+		}
+	  ],
+	  "name": "calculateStakingRewards",
+	  "outputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "owed",
+		  "type": "uint256"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "address",
+		  "name": "owner",
+		  "type": "address"
+		}
+	  ],
+	  "name": "getBalanceOfActiveRings",
+	  "outputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "",
+		  "type": "uint256"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "uint16[]",
+		  "name": "tokenIds",
+		  "type": "uint16[]"
+		},
+		{
+		  "internalType": "uint16",
+		  "name": "levelsToUpgrade",
+		  "type": "uint16"
+		}
+	  ],
+	  "name": "levelUpManyFighters",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "uint16",
+		  "name": "currentLevel",
+		  "type": "uint16"
+		},
+		{
+		  "internalType": "uint16",
+		  "name": "levelsToUpgrade",
+		  "type": "uint16"
+		}
+	  ],
+	  "name": "getLevelUpBloodCost",
+	  "outputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "totalBloodCost",
+		  "type": "uint256"
+		}
+	  ],
+	  "stateMutability": "view",
+	  "type": "function",
+	  "constant": true
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "uint16[]",
+		  "name": "tokenIds",
+		  "type": "uint16[]"
+		},
+		{
+		  "internalType": "uint256[]",
+		  "name": "seeds",
+		  "type": "uint256[]"
+		}
+	  ],
+	  "name": "revealManyFYTokenTraits",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "address",
+		  "name": "_rand",
+		  "type": "address"
+		},
+		{
+		  "internalType": "address",
+		  "name": "_uBlood",
+		  "type": "address"
+		},
+		{
+		  "internalType": "address",
+		  "name": "_uNFT",
+		  "type": "address"
+		},
+		{
+		  "internalType": "address",
+		  "name": "_uArena",
+		  "type": "address"
+		},
+		{
+		  "internalType": "address",
+		  "name": "_uRing",
+		  "type": "address"
+		},
+		{
+		  "internalType": "address",
+		  "name": "_uAmulet",
+		  "type": "address"
+		},
+		{
+		  "internalType": "address",
+		  "name": "_uGold",
+		  "type": "address"
+		},
+		{
+		  "internalType": "address",
+		  "name": "_uGoldStaking",
+		  "type": "address"
+		}
+	  ],
+	  "name": "setContracts",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "bool",
+		  "name": "paused",
+		  "type": "bool"
+		}
+	  ],
+	  "name": "setPaused",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "number",
+		  "type": "uint256"
+		}
+	  ],
+	  "name": "setMaximumBloodSupply",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "number",
+		  "type": "uint256"
+		}
+	  ],
+	  "name": "setDailyBloodRate",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "number",
+		  "type": "uint256"
+		}
+	  ],
+	  "name": "setDailyBloodPerLevel",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "number",
+		  "type": "uint256"
+		}
+	  ],
+	  "name": "setLevelDownAfterDays",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "number",
+		  "type": "uint256"
+		}
+	  ],
+	  "name": "setRingDiminishingFrom",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "number",
+		  "type": "uint256"
+		}
+	  ],
+	  "name": "setRingBloodMintCost",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "number",
+		  "type": "uint256"
+		}
+	  ],
+	  "name": "setRingDailyBloodRate",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "number",
+		  "type": "uint256"
+		}
+	  ],
+	  "name": "setRingMinBloodMintCost",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "number",
+		  "type": "uint256"
+		}
+	  ],
+	  "name": "setAmuletBloodMintCost",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "number",
+		  "type": "uint256"
+		}
+	  ],
+	  "name": "setAmuletLevelDownIncreaseDays",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "number",
+		  "type": "uint256"
+		}
+	  ],
+	  "name": "setAmuletMinBloodMintCost",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "number",
+		  "type": "uint256"
+		}
+	  ],
+	  "name": "setGoldBloodMintCost",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "number",
+		  "type": "uint256"
+		}
+	  ],
+	  "name": "setGoldPerStakedNft",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "bool",
+		  "name": "started",
+		  "type": "bool"
+		}
+	  ],
+	  "name": "setPublicSaleStarted",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "number",
+		  "type": "uint256"
+		}
+	  ],
+	  "name": "setGen1BloodMintCost",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "number",
+		  "type": "uint256"
+		}
+	  ],
+	  "name": "setGen1MinBloodMintCost",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "uint256",
+		  "name": "number",
+		  "type": "uint256"
+		}
+	  ],
+	  "name": "setMintCostReduceInterval",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "uint8",
+		  "name": "number",
+		  "type": "uint8"
+		}
+	  ],
+	  "name": "setMintCostReducePercent",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "uint8",
+		  "name": "number",
+		  "type": "uint8"
+		}
+	  ],
+	  "name": "setMintCostIncreasePercent",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "bool",
+		  "name": "adaptive",
+		  "type": "bool"
+		}
+	  ],
+	  "name": "setMintCostAdaptive",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "address",
+		  "name": "addr",
+		  "type": "address"
+		}
+	  ],
+	  "name": "addAdmin",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "address",
+		  "name": "addr",
+		  "type": "address"
+		}
+	  ],
+	  "name": "removeAdmin",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [
+		{
+		  "internalType": "address",
+		  "name": "addr",
+		  "type": "address"
+		}
+	  ],
+	  "name": "setWithdrawAddress",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	},
+	{
+	  "inputs": [],
+	  "name": "withdraw",
+	  "outputs": [],
+	  "stateMutability": "nonpayable",
+	  "type": "function"
+	}
+  ]

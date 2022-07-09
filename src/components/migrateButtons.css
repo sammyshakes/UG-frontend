@@ -1,0 +1,6 @@
+ 
+.migratebox-bordr{
+    border-radius: 12px;
+    border: 1px solid rgb(255, 0, 0);
+    background: rgb(0, 0, 0, 0.4);
+}

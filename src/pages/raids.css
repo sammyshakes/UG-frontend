@@ -1,0 +1,7 @@
+.raid-bordr{
+    border-radius: 15px;
+    border: 3px solid rgb(255, 0, 0);
+    background: rgba(2, 2, 2, 0.85);
+    box-shadow: -5px 5px 20px rgba(3, 245, 245, 0.7);
+    padding: 10px;
+}

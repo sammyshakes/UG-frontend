@@ -1,0 +1,9 @@
+.MuiDataGrid-cellContent{
+    font-size: 150%;
+}
+.MuiDataGrid-checkboxInput {
+    color:aqua;
+}
+.MuiDataGrid-columnHeader{
+    font-size: 100%;
+}

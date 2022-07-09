@@ -1,0 +1,1905 @@
+[
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "addr",
+				"type": "address"
+			}
+		],
+		"name": "addAdmin",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_to",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256[]",
+				"name": "v1TokenIds",
+				"type": "uint256[]"
+			},
+			{
+				"components": [
+					{
+						"internalType": "bool",
+						"name": "isFighter",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isGen0",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint8",
+						"name": "level",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "rank",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "courage",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "cunning",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "brutality",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "knuckles",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "chains",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "switchblade",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "machete",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "katana",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint16",
+						"name": "scars",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint16",
+						"name": "imageId",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastLevelUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastRankUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastRaidTime",
+						"type": "uint32"
+					}
+				],
+				"internalType": "struct IUGNFTs.FighterYakuza[]",
+				"name": "oldFighters",
+				"type": "tuple[]"
+			}
+		],
+		"name": "batchMigrateFYakuza",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_uri",
+				"type": "string"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [],
+		"name": "InvalidOnReceiveMsg",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InvalidOperator",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InvalidRecipient",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "InvalidTokenID",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "sizes",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "levels",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "isFightClub",
+				"type": "bool"
+			}
+		],
+		"name": "levelUpFightClubsForges",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint8",
+						"name": "size",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "level",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint16",
+						"name": "id",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastLevelUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastUnstakeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"internalType": "struct IUGNFTs.ForgeFightClub",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "MaxSupplyReached",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "MismatchArrays",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "Unauthorized",
+		"type": "error"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "_owner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "_operator",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "bool",
+				"name": "_approved",
+				"type": "bool"
+			}
+		],
+		"name": "ApprovalForAll",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"components": [
+					{
+						"internalType": "bool",
+						"name": "isFighter",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isGen0",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint8",
+						"name": "level",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "rank",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "courage",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "cunning",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "brutality",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "knuckles",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "chains",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "switchblade",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "machete",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "katana",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint16",
+						"name": "scars",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint16",
+						"name": "imageId",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastLevelUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastRankUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastRaidTime",
+						"type": "uint32"
+					}
+				],
+				"indexed": false,
+				"internalType": "struct IUGNFTs.FighterYakuza",
+				"name": "fighter",
+				"type": "tuple"
+			}
+		],
+		"name": "FighterYakuzaMinted",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256[]",
+				"name": "tokenIds",
+				"type": "uint256[]"
+			},
+			{
+				"components": [
+					{
+						"internalType": "bool",
+						"name": "isFighter",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isGen0",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint8",
+						"name": "level",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "rank",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "courage",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "cunning",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "brutality",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "knuckles",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "chains",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "switchblade",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "machete",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "katana",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint16",
+						"name": "scars",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint16",
+						"name": "imageId",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastLevelUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastRankUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastRaidTime",
+						"type": "uint32"
+					}
+				],
+				"indexed": false,
+				"internalType": "struct IUGNFTs.FighterYakuza[]",
+				"name": "fighters",
+				"type": "tuple[]"
+			}
+		],
+		"name": "FightersUpdated",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"components": [
+					{
+						"internalType": "uint8",
+						"name": "size",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "level",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint16",
+						"name": "id",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastLevelUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastUnstakeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"indexed": false,
+				"internalType": "struct IUGNFTs.ForgeFightClub",
+				"name": "forgeFightclub",
+				"type": "tuple"
+			}
+		],
+		"name": "ForgeFightClubMinted",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "level",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			}
+		],
+		"name": "LevelUpFighter",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "tokenIds",
+				"type": "uint256[]"
+			},
+			{
+				"internalType": "uint256[]",
+				"name": "levels",
+				"type": "uint256[]"
+			}
+		],
+		"name": "levelUpFighters",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "level",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "size",
+				"type": "uint256"
+			}
+		],
+		"name": "LevelUpForgeFightClub",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "level",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			}
+		],
+		"name": "LevelUpRingAmulet",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "levels",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "isRing",
+				"type": "bool"
+			}
+		],
+		"name": "levelUpRingAmulets",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_to",
+				"type": "address"
+			},
+			{
+				"internalType": "bytes",
+				"name": "_data",
+				"type": "bytes"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_size",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_level",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "isFightClub",
+				"type": "bool"
+			}
+		],
+		"name": "mintFightClubForge",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_to",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_level",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "isRing",
+				"type": "bool"
+			}
+		],
+		"name": "mintRingAmulet",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "previousOwner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "OwnershipTransferred",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "fighterId",
+				"type": "uint256"
+			},
+			{
+				"components": [
+					{
+						"internalType": "bool",
+						"name": "isFighter",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isGen0",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint8",
+						"name": "level",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "rank",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "courage",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "cunning",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "brutality",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "knuckles",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "chains",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "switchblade",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "machete",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "katana",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint16",
+						"name": "scars",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint16",
+						"name": "imageId",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastLevelUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastRankUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastRaidTime",
+						"type": "uint32"
+					}
+				],
+				"indexed": false,
+				"internalType": "struct IUGNFTs.FighterYakuza",
+				"name": "fighter",
+				"type": "tuple"
+			}
+		],
+		"name": "RaidTraitsUpdated",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "addr",
+				"type": "address"
+			}
+		],
+		"name": "removeAdmin",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"components": [
+					{
+						"internalType": "uint8",
+						"name": "level",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastLevelUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"indexed": false,
+				"internalType": "struct IUGNFTs.RingAmulet",
+				"name": "ringAmulet",
+				"type": "tuple"
+			}
+		],
+		"name": "RingAmuletMinted",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_from",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_to",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256[]",
+				"name": "_ids",
+				"type": "uint256[]"
+			},
+			{
+				"internalType": "uint256[]",
+				"name": "_amounts",
+				"type": "uint256[]"
+			},
+			{
+				"internalType": "bytes",
+				"name": "_data",
+				"type": "bytes"
+			}
+		],
+		"name": "safeBatchTransferFrom",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_from",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_to",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bytes",
+				"name": "_data",
+				"type": "bytes"
+			}
+		],
+		"name": "safeTransferFrom",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_operator",
+				"type": "address"
+			},
+			{
+				"internalType": "bool",
+				"name": "_approved",
+				"type": "bool"
+			}
+		],
+		"name": "setApprovalForAll",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "uri",
+				"type": "string"
+			}
+		],
+		"name": "setBaseURI",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "isUnstaking",
+				"type": "bool"
+			}
+		],
+		"name": "setFightClubUnstakeTime",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "packedTickets",
+				"type": "uint256[]"
+			}
+		],
+		"name": "setRaidTraitsFromPacked",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "TokenBurned",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "TokenMinted",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "_operator",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "_from",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "_to",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256[]",
+				"name": "_ids",
+				"type": "uint256[]"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256[]",
+				"name": "_amounts",
+				"type": "uint256[]"
+			}
+		],
+		"name": "TransferBatch",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_newOwner",
+				"type": "address"
+			}
+		],
+		"name": "transferOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "_operator",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "_from",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "_to",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "TransferSingle",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "_value",
+				"type": "string"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "URI",
+		"type": "event"
+	},
+	{
+		"stateMutability": "nonpayable",
+		"type": "fallback"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_owner",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "balanceOf",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address[]",
+				"name": "_owners",
+				"type": "address[]"
+			},
+			{
+				"internalType": "uint256[]",
+				"name": "_ids",
+				"type": "uint256[]"
+			}
+		],
+		"name": "balanceOfBatch",
+		"outputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "baseURI",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256[]",
+				"name": "tokenIds",
+				"type": "uint256[]"
+			}
+		],
+		"name": "checkUserBatchBalance",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			}
+		],
+		"name": "getAmuletIDsForUser",
+		"outputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			}
+		],
+		"name": "getFightClubIDsForUser",
+		"outputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			}
+		],
+		"name": "getFighterIDsForUser",
+		"outputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "tokenIds",
+				"type": "uint256[]"
+			}
+		],
+		"name": "getFighters",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "bool",
+						"name": "isFighter",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isGen0",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint8",
+						"name": "level",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "rank",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "courage",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "cunning",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "brutality",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "knuckles",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "chains",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "switchblade",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "machete",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "katana",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint16",
+						"name": "scars",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint16",
+						"name": "imageId",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastLevelUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastRankUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastRaidTime",
+						"type": "uint32"
+					}
+				],
+				"internalType": "struct IUGNFTs.FighterYakuza[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "getForgeFightClub",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint8",
+						"name": "size",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "level",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint16",
+						"name": "id",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastLevelUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastUnstakeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"internalType": "struct IUGNFTs.ForgeFightClub",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "tokenIds",
+				"type": "uint256[]"
+			}
+		],
+		"name": "getForgeFightClubs",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint8",
+						"name": "size",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "level",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint16",
+						"name": "id",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastLevelUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastUnstakeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"internalType": "struct IUGNFTs.ForgeFightClub[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			}
+		],
+		"name": "getForgeIDsForUser",
+		"outputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "getIDBinIndex",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "bin",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "pure",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "tokenIds",
+				"type": "uint256[]"
+			}
+		],
+		"name": "getPackedFighters",
+		"outputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "getRingAmulet",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint8",
+						"name": "level",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastLevelUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"internalType": "struct IUGNFTs.RingAmulet",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			}
+		],
+		"name": "getRingIDsForUser",
+		"outputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_binValues",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "bitsize",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_index",
+				"type": "uint256"
+			}
+		],
+		"name": "getValueInBin",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "pure",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "idToForgeFightClub",
+		"outputs": [
+			{
+				"internalType": "uint8",
+				"name": "size",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint8",
+				"name": "level",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint16",
+				"name": "id",
+				"type": "uint16"
+			},
+			{
+				"internalType": "uint32",
+				"name": "lastLevelUpgradeTime",
+				"type": "uint32"
+			},
+			{
+				"internalType": "uint32",
+				"name": "lastUnstakeTime",
+				"type": "uint32"
+			},
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "idToFYakuza",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "idToRingAmulet",
+		"outputs": [
+			{
+				"internalType": "uint8",
+				"name": "level",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint32",
+				"name": "lastLevelUpgradeTime",
+				"type": "uint32"
+			},
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_owner",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_operator",
+				"type": "address"
+			}
+		],
+		"name": "isApprovedForAll",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "isOperator",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes4",
+				"name": "_interfaceID",
+				"type": "bytes4"
+			}
+		],
+		"name": "supportsInterface",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "pure",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "tokenIds",
+				"type": "uint256[]"
+			}
+		],
+		"name": "tokenURIs",
+		"outputs": [
+			{
+				"internalType": "string[]",
+				"name": "",
+				"type": "string[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "ttlAmulets",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "ttlFightClubs",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "ttlForges",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "ttlFYakuzas",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "ttlRings",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
