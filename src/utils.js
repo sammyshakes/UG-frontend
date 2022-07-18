@@ -17,26 +17,32 @@ import oldNftTestnetAbi from './abis/oldNftTestnet_abi.json';
 const { ethers } = require("ethers");
 
 //const bloodAddress = '0x649A53b481031ff57367F672e07d0A488ad421d9';
-const bloodAddress = process.env.REACT_APP_BLOOD_TESTNET_ADDRESS;
-//const bloodAddress = process.env.REACT_APP_BLOOD_MAINNET_ADDRESS;
-const ugNftAddress = process.env.REACT_APP__UGNFT_TESTNET_ADDRESS;
-const ugArenaAddress = process.env.REACT_APP__UGARENA_TESTNET_ADDRES;
-const ugGameAddress = process.env.REACT_APP_UGGAME_TESTNET_ADDRESS;
-const ugRaidAddress = process.env.REACT_APP_UGRAID_TESTNET_ADDRESS;
-const ugWeaponsAddress = process.env.REACT_APP_UGWEAPONS_TESTNET_ADDRESS;
-const ugMigrationAddress = process.env.REACT_APP_UGMIGRATION_TESTNET_ADDRESS ;
+//const bloodAddress = process.env.REACT_APP_BLOOD_TESTNET_ADDRESS;
+const bloodAddress = process.env.REACT_APP_BLOOD_MAINNET_ADDRESS;
+// const ugNftAddress = process.env.REACT_APP__UGNFT_TESTNET_ADDRESS;
+// const ugArenaAddress = process.env.REACT_APP__UGARENA_TESTNET_ADDRESS;
+// const ugGameAddress = process.env.REACT_APP_UGGAME_TESTNET_ADDRESS;
+// const ugRaidAddress = process.env.REACT_APP_UGRAID_TESTNET_ADDRESS;
+// const ugWeaponsAddress = process.env.REACT_APP_UGWEAPONS_TESTNET_ADDRESS;
+ const ugMigrationAddress = process.env.REACT_APP_UGMIGRATION_TESTNET_ADDRESS ;
 
-//const oldNftAddress = process.env.REACT_APP_OLDNFT_MAINNET_ADDRESS;
-const oldNftAddress = process.env.REACT_APP_OLDNFT_TESTNET_ADDRESS;
-//const oldArenaAddress = process.env.REACT_APP_OLDARENA_MAINNET_ADDRESS;
-//const oldGameAddress = process.env.REACT_APP_OLDGAME_MAINNET_ADDRESS;
-const oldGameAddress = process.env.REACT_APP_OLDGAME_TESTNET_ADDRESS;
-//const oldRingAddress = process.env.REACT_APP_OLDRING_MAINNET_ADDRESS;
-//const oldAmuletAddress = process.env.REACT_APP_OLDAMULET_MAINNET_ADDRESS;
+const ugNftAddress = process.env.REACT_APP__UGNFT_MAINNET_ADDRESS;
+const ugArenaAddress = process.env.REACT_APP__UGARENA_MAINNET_ADDRESS;
+const ugGameAddress = process.env.REACT_APP_UGGAME_MAINNET_ADDRESS;
+const ugRaidAddress = process.env.REACT_APP_UGRAID_MAINNET_ADDRESS;
+const ugWeaponsAddress = process.env.REACT_APP_UGWEAPONS_MAINNET_ADDRESS;
 
-const oldRingAddress = process.env.REACT_APP_OLDRING_TESTNET_ADDRESS ;
-const oldAmuletAddress = process.env.REACT_APP_OLDAMULET_TESTNET_ADDRESS ;
-const oldArenaAddress = process.env.REACT_APP_OLDARENA_TESTNET_ADDRESS ;
+const oldNftAddress = process.env.REACT_APP_OLDNFT_MAINNET_ADDRESS;
+//const oldNftAddress = process.env.REACT_APP_OLDNFT_TESTNET_ADDRESS;
+const oldArenaAddress = process.env.REACT_APP_OLDARENA_MAINNET_ADDRESS;
+const oldGameAddress = process.env.REACT_APP_OLDGAME_MAINNET_ADDRESS;
+//const oldGameAddress = process.env.REACT_APP_OLDGAME_TESTNET_ADDRESS;
+const oldRingAddress = process.env.REACT_APP_OLDRING_MAINNET_ADDRESS;
+const oldAmuletAddress = process.env.REACT_APP_OLDAMULET_MAINNET_ADDRESS;
+
+// const oldRingAddress = process.env.REACT_APP_OLDRING_TESTNET_ADDRESS ;
+// const oldAmuletAddress = process.env.REACT_APP_OLDAMULET_TESTNET_ADDRESS ;
+// const oldArenaAddress = process.env.REACT_APP_OLDARENA_TESTNET_ADDRESS ;
 
 const getEthers = () => {
     return new ethers.providers.Web3Provider(window.ethereum);
@@ -88,6 +94,7 @@ const getOldGame = () => {
 const getOldNft = () => {
     return new ethers.Contract(oldNftAddress, oldNftTestnetAbi, getEthers());
 }
+
 
 
 export {

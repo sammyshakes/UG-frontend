@@ -1,15 +1,15 @@
 import React from 'react'
-import OwnedFighterList from '../components/OwnedFighterList'
-import V1RingWidget from '../components/V1RingWidget'
-import V1AmuletWidget from '../components/V1AmuletWidget'
-import {Box, Stack} from '@mui/material/';
+import {Stack} from '@mui/material/';
+import StakedV1FighterList from '../components/StakedV1FighterList'
+import OwnedV1FighterList from '../components/OwnedV1FighterList'
 
 
 const Home = () => {
   return (
     <React.Fragment>
       <Stack align="left" direction="row" >      
-        <OwnedFighterList/>
+      <StakedV1FighterList/>
+        <OwnedV1FighterList/>
       </Stack>   
     </React.Fragment>
   )

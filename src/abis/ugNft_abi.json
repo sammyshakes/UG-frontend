@@ -32,9 +32,9 @@
 						"type": "bool"
 					},
 					{
-						"internalType": "bool",
-						"name": "isGen0",
-						"type": "bool"
+						"internalType": "uint8",
+						"name": "Gen",
+						"type": "uint8"
 					},
 					{
 						"internalType": "uint8",
@@ -73,7 +73,7 @@
 					},
 					{
 						"internalType": "uint8",
-						"name": "switchblade",
+						"name": "butterfly",
 						"type": "uint8"
 					},
 					{
@@ -162,24 +162,19 @@
 	{
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "tokenId",
-				"type": "uint256"
+				"internalType": "uint256[]",
+				"name": "tokenIds",
+				"type": "uint256[]"
 			},
 			{
-				"internalType": "uint256",
-				"name": "sizes",
-				"type": "uint256"
+				"internalType": "uint256[]",
+				"name": "newSizes",
+				"type": "uint256[]"
 			},
 			{
-				"internalType": "uint256",
-				"name": "levels",
-				"type": "uint256"
-			},
-			{
-				"internalType": "bool",
-				"name": "isFightClub",
-				"type": "bool"
+				"internalType": "uint256[]",
+				"name": "newLevels",
+				"type": "uint256[]"
 			}
 		],
 		"name": "levelUpFightClubsForges",
@@ -217,9 +212,9 @@
 						"type": "address"
 					}
 				],
-				"internalType": "struct IUGNFTs.ForgeFightClub",
+				"internalType": "struct IUGNFTs.ForgeFightClub[]",
 				"name": "",
-				"type": "tuple"
+				"type": "tuple[]"
 			}
 		],
 		"stateMutability": "nonpayable",
@@ -269,16 +264,29 @@
 		"anonymous": false,
 		"inputs": [
 			{
-				"indexed": true,
+				"indexed": false,
 				"internalType": "uint256",
-				"name": "id",
+				"name": "tokenId",
 				"type": "uint256"
 			},
 			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			}
+		],
+		"name": "FightClubUnstakeTimeUpdated",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
 				"indexed": true,
-				"internalType": "address",
-				"name": "to",
-				"type": "address"
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
 			},
 			{
 				"components": [
@@ -288,9 +296,9 @@
 						"type": "bool"
 					},
 					{
-						"internalType": "bool",
-						"name": "isGen0",
-						"type": "bool"
+						"internalType": "uint8",
+						"name": "Gen",
+						"type": "uint8"
 					},
 					{
 						"internalType": "uint8",
@@ -329,7 +337,7 @@
 					},
 					{
 						"internalType": "uint8",
-						"name": "switchblade",
+						"name": "butterfly",
 						"type": "uint8"
 					},
 					{
@@ -374,17 +382,23 @@
 				"type": "tuple"
 			}
 		],
-		"name": "FighterYakuzaMinted",
+		"name": "FighterUpdated",
 		"type": "event"
 	},
 	{
 		"anonymous": false,
 		"inputs": [
 			{
-				"indexed": false,
-				"internalType": "uint256[]",
-				"name": "tokenIds",
-				"type": "uint256[]"
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
 			},
 			{
 				"components": [
@@ -394,9 +408,9 @@
 						"type": "bool"
 					},
 					{
-						"internalType": "bool",
-						"name": "isGen0",
-						"type": "bool"
+						"internalType": "uint8",
+						"name": "Gen",
+						"type": "uint8"
 					},
 					{
 						"internalType": "uint8",
@@ -435,7 +449,7 @@
 					},
 					{
 						"internalType": "uint8",
-						"name": "switchblade",
+						"name": "butterfly",
 						"type": "uint8"
 					},
 					{
@@ -475,12 +489,12 @@
 					}
 				],
 				"indexed": false,
-				"internalType": "struct IUGNFTs.FighterYakuza[]",
-				"name": "fighters",
-				"type": "tuple[]"
+				"internalType": "struct IUGNFTs.FighterYakuza",
+				"name": "fighter",
+				"type": "tuple"
 			}
 		],
-		"name": "FightersUpdated",
+		"name": "FighterYakuzaMigrated",
 		"type": "event"
 	},
 	{
@@ -533,7 +547,7 @@
 				],
 				"indexed": false,
 				"internalType": "struct IUGNFTs.ForgeFightClub",
-				"name": "forgeFightclub",
+				"name": "ffc",
 				"type": "tuple"
 			}
 		],
@@ -550,7 +564,7 @@
 				"type": "uint256"
 			},
 			{
-				"indexed": false,
+				"indexed": true,
 				"internalType": "uint256",
 				"name": "level",
 				"type": "uint256"
@@ -599,13 +613,13 @@
 				"type": "uint256"
 			},
 			{
-				"indexed": false,
+				"indexed": true,
 				"internalType": "uint256",
 				"name": "level",
 				"type": "uint256"
 			},
 			{
-				"indexed": false,
+				"indexed": true,
 				"internalType": "uint256",
 				"name": "size",
 				"type": "uint256"
@@ -624,7 +638,7 @@
 				"type": "uint256"
 			},
 			{
-				"indexed": false,
+				"indexed": true,
 				"internalType": "uint256",
 				"name": "level",
 				"type": "uint256"
@@ -648,13 +662,8 @@
 			},
 			{
 				"internalType": "uint256",
-				"name": "levels",
+				"name": "newLevel",
 				"type": "uint256"
-			},
-			{
-				"internalType": "bool",
-				"name": "isRing",
-				"type": "bool"
 			}
 		],
 		"name": "levelUpRingAmulets",
@@ -754,9 +763,9 @@
 						"type": "bool"
 					},
 					{
-						"internalType": "bool",
-						"name": "isGen0",
-						"type": "bool"
+						"internalType": "uint8",
+						"name": "Gen",
+						"type": "uint8"
 					},
 					{
 						"internalType": "uint8",
@@ -795,7 +804,7 @@
 					},
 					{
 						"internalType": "uint8",
-						"name": "switchblade",
+						"name": "butterfly",
 						"type": "uint8"
 					},
 					{
@@ -882,11 +891,6 @@
 						"internalType": "uint32",
 						"name": "lastLevelUpgradeTime",
 						"type": "uint32"
-					},
-					{
-						"internalType": "address",
-						"name": "owner",
-						"type": "address"
 					}
 				],
 				"indexed": false,
@@ -1016,6 +1020,111 @@
 	{
 		"inputs": [
 			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"components": [
+					{
+						"internalType": "bool",
+						"name": "isFighter",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint8",
+						"name": "Gen",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "level",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "rank",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "courage",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "cunning",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "brutality",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "knuckles",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "chains",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "butterfly",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "machete",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "katana",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint16",
+						"name": "scars",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint16",
+						"name": "imageId",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastLevelUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastRankUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastRaidTime",
+						"type": "uint32"
+					}
+				],
+				"internalType": "struct IUGNFTs.FighterYakuza",
+				"name": "FY",
+				"type": "tuple"
+			}
+		],
+		"name": "setFighter",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "uint256[]",
 				"name": "packedTickets",
 				"type": "uint256[]"
@@ -1025,44 +1134,6 @@
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "owner",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "uint256",
-				"name": "tokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "TokenBurned",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "owner",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "uint256",
-				"name": "tokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "TokenMinted",
-		"type": "event"
 	},
 	{
 		"anonymous": false,
@@ -1262,69 +1333,12 @@
 	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "user",
-				"type": "address"
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
 			}
 		],
-		"name": "getAmuletIDsForUser",
-		"outputs": [
-			{
-				"internalType": "uint256[]",
-				"name": "",
-				"type": "uint256[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "user",
-				"type": "address"
-			}
-		],
-		"name": "getFightClubIDsForUser",
-		"outputs": [
-			{
-				"internalType": "uint256[]",
-				"name": "",
-				"type": "uint256[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "user",
-				"type": "address"
-			}
-		],
-		"name": "getFighterIDsForUser",
-		"outputs": [
-			{
-				"internalType": "uint256[]",
-				"name": "",
-				"type": "uint256[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256[]",
-				"name": "tokenIds",
-				"type": "uint256[]"
-			}
-		],
-		"name": "getFighters",
+		"name": "getFighter",
 		"outputs": [
 			{
 				"components": [
@@ -1334,9 +1348,9 @@
 						"type": "bool"
 					},
 					{
-						"internalType": "bool",
-						"name": "isGen0",
-						"type": "bool"
+						"internalType": "uint8",
+						"name": "Gen",
+						"type": "uint8"
 					},
 					{
 						"internalType": "uint8",
@@ -1375,7 +1389,113 @@
 					},
 					{
 						"internalType": "uint8",
-						"name": "switchblade",
+						"name": "butterfly",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "machete",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "katana",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint16",
+						"name": "scars",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint16",
+						"name": "imageId",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastLevelUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastRankUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastRaidTime",
+						"type": "uint32"
+					}
+				],
+				"internalType": "struct IUGNFTs.FighterYakuza",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "tokenIds",
+				"type": "uint256[]"
+			}
+		],
+		"name": "getFighters",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "bool",
+						"name": "isFighter",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint8",
+						"name": "Gen",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "level",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "rank",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "courage",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "cunning",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "brutality",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "knuckles",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "chains",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "butterfly",
 						"type": "uint8"
 					},
 					{
@@ -1527,25 +1647,6 @@
 	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "user",
-				"type": "address"
-			}
-		],
-		"name": "getForgeIDsForUser",
-		"outputs": [
-			{
-				"internalType": "uint256[]",
-				"name": "",
-				"type": "uint256[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "uint256",
 				"name": "_id",
 				"type": "uint256"
@@ -1565,6 +1666,30 @@
 			}
 		],
 		"stateMutability": "pure",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "nftIndex",
+				"type": "uint256"
+			}
+		],
+		"name": "getNftIDsForUser",
+		"outputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -1607,35 +1732,11 @@
 						"internalType": "uint32",
 						"name": "lastLevelUpgradeTime",
 						"type": "uint32"
-					},
-					{
-						"internalType": "address",
-						"name": "owner",
-						"type": "address"
 					}
 				],
 				"internalType": "struct IUGNFTs.RingAmulet",
 				"name": "",
 				"type": "tuple"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "user",
-				"type": "address"
-			}
-		],
-		"name": "getRingIDsForUser",
-		"outputs": [
-			{
-				"internalType": "uint256[]",
-				"name": "",
-				"type": "uint256[]"
 			}
 		],
 		"stateMutability": "view",
@@ -1752,11 +1853,6 @@
 				"internalType": "uint32",
 				"name": "lastLevelUpgradeTime",
 				"type": "uint32"
-			},
-			{
-				"internalType": "address",
-				"name": "owner",
-				"type": "address"
 			}
 		],
 		"stateMutability": "view",

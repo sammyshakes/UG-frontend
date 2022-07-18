@@ -3,10 +3,8 @@ import React from 'react';
 const ProviderContext = React.createContext({
     provider: undefined,
     accounts: [],
-    balance: undefined,
+    balance: 0,
     totalUserUnclaimedArena: undefined,
-    stakedRing: undefined,
-    stakedAmulet: undefined,
     stakedFYIds: [],
     ownedFYIds: [],
     stakedFYs: [],
@@ -14,7 +12,10 @@ const ProviderContext = React.createContext({
     stakedV1FYIds: [],
     ownedV1FYIds: [],
     v1RingIds: [],
-    v1AmuletIds: []
+    v1AmuletIds: [],
+    stakedRing: [],
+    stakedAmulet: [],
+    ownedForgeIds: []
 });
 
 export default ProviderContext;

@@ -17,7 +17,7 @@ export default function OwnedFighterList() {
             Fighters Ready
         </Typography>
     <ImageList sx={{ width: 400, height: 500 }} cols={3} rowHeight={250} children="props" >
-      {ownedFYs?.map((fy) => (
+      {ownedFYs.map((fy) => (
         <ImageListItem key={fy.imageId}>
             <FighterCard key={fy.imageId} 
             id={fy.id}

@@ -4,22 +4,29 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea, CardHeader, Box, Stack } from '@mui/material';
+import { CardActionArea, Box, Stack } from '@mui/material';
 import {getUGArena} from '../utils.js';
-import './fighterCard.css';
+import './stakedFighterCard.css';
 import CircularProgressWithLabel from './CircularProgressWithLabel';
 /* global BigInt */
 
-export default function StakedFighterCard(props) {
+const StakedFighterCard = (props) => {
   const [unclaimed, setUnclaimed] = useState(undefined);
+  const [clicked, setClicked] = useState(false);
   const [progressForLevel, setProgressForLevel] = useState(0);
   const [progressForRaid, setProgressForRaid] = useState(0);
   const prv = useContext(ProviderContext);
   const ugArenaContract = getUGArena();
   const amulet = prv.stakedAmulet;
 
-  
-  
+  const clickHandler = () => {
+    setClicked((current) => {
+      props.onSelected(props.id, !current);
+      return !current;
+    });
+  }
+
+  if(clicked && props.emptyArray) setClicked(false);
 
   useEffect(() => {   
     const init = async() => {    
@@ -30,6 +37,7 @@ export default function StakedFighterCard(props) {
       
       //kinda need to make sure amulet isnt expired so we can give accurate display
       let amuletDays = amulet[0].lastLevelUpgradeTime + 7 * 86400 > block.timestamp ? amulet[0].level : 0;
+      
       let timeLeftToLevelUp = props.lastLevelTime + (7 + amuletDays)*86400 - block.timestamp;
       let progressLevel = timeLeftToLevelUp > 0 ? timeLeftToLevelUp * 100 /  ((7 + amuletDays)*86400) : 0;
       setProgressForLevel(progressLevel);
@@ -40,7 +48,9 @@ export default function StakedFighterCard(props) {
 
       
       const timer = setInterval(() => {
+       
         amuletDays = amulet[0].lastLevelUpgradeTime + 7 * 86400 > block.timestamp ? amulet[0].level : 0;
+        
         timeLeftToLevelUp = props.lastLevelTime + (7 + amuletDays)*86400 - block.timestamp;
         progressLevel = timeLeftToLevelUp > 0 ? timeLeftToLevelUp * 100 /  ((7 + amuletDays)*86400) : 0;
         setProgressForLevel(progressLevel);
@@ -49,6 +59,8 @@ export default function StakedFighterCard(props) {
         setProgressForRaid(progressRaid);
         
       }, 5000);
+
+      
       return () => {
         clearInterval(timer);
       };
@@ -58,20 +70,26 @@ export default function StakedFighterCard(props) {
   }, []);
 
   return (
-    <Card raised= {true} className="card-bordr" sx={{ maxWidth: 345 }}>
-      <CardActionArea >
+    <Card raised= {true}  
+    className={clicked ? "card-bordr clicked": "card-bordr"}
+    sx={{
+      borderRadius: 6, 
+      maxWidth: 345, 
+      borderColor: clicked ? 'aqua' : 'red' 
+    }}>
+      <CardActionArea onClick={clickHandler} >
         <CardContent  align="center" sx={{p: 0,color: 'red'}}>
           {props.isFighter && <Typography gutterBottom variant="body2" component="div" sx={{fontFamily: 'Roboto', fontSize:'.75rem'}}>
-                                {`  LEVEL: ${props.level}`}
+                                {`  LEVEL ${props.level}`}
                               </Typography>}
           {props.isFighter &&   <Typography variant="body2" sx={{fontFamily: 'Alegreya Sans SC', fontSize:'.8rem'}}>
-                                  {`$BLOOD: ${unclaimed}  `}
+                                  {` ${unclaimed} BLOOD `}
                                 </Typography>}
-            {!props.isFighter && <Typography gutterBottom variant="body2" component="div" sx={{fontFamily: 'Roboto',color: 'yellow', fontSize:'.75rem'}}>
-                                  {` RANK:${props.rank}`}
+            {!props.isFighter && <Typography gutterBottom variant="body2" component="div" sx={{fontFamily: 'Roboto',color: 'cyan', fontSize:'.75rem'}}>
+                                  {` RANK ${props.rank}`}
                                 </Typography>}
             {!props.isFighter &&   <Typography variant="body2" sx={{fontFamily: 'Alegreya Sans SC', color: 'yellow', fontSize:'.75rem'}}>
-                                      {`$BLOOD: ${unclaimed}  `}
+                                      {` ${unclaimed} BLOOD `}
                                     </Typography>}
         </CardContent>
         <CardMedia
@@ -81,26 +99,33 @@ export default function StakedFighterCard(props) {
           alt="FYakuza"
           loading="lazy"
         />
-        <CardContent  align="center" sx={{p: 0,color: 'yellow'}}>
+        <CardContent  align="center" sx={{p: 0,color: 'cyan'}}>
         {props.isFighter && <Stack   >
-                              <Stack direction="row" pl={2} spacing={2} >
-                                <CircularProgressWithLabel value={progressForLevel} sx={{  }} style={{color: Math.round(progressForLevel, 2) < 20 ? "red" : "#66FF66"}}/>
-                                <CircularProgressWithLabel value={progressForRaid} sx={{}} style={{color: Math.round(progressForRaid, 2) < 20 ? "red" : "#66FF66"}}/>
+          <Box  sx={{ display: 'inline-flex',justifyContent: 'space-evenly' }}>
+                              <Stack direction="row"  spacing={2} >
+                             
+                                <CircularProgressWithLabel value={progressForLevel} sx={{  }} style={{color: Math.round(progressForLevel, 2) < 20 ? "red" : "chartreuse"}}/>
+                                <CircularProgressWithLabel value={progressForRaid} sx={{}} style={{color: Math.round(progressForRaid, 2) < 20 ? "red" : "chartreuse"}}/>
+                              
                               </Stack>
-                              <Box  sx={{ display: 'inline-flex',justifyContent: 'space-around' }}>
-                                <Typography sx={{pl: .5, fontSize: '.6rem'}}>LEVEL</Typography>
-                                <Typography sx={{pr: 3.2, fontSize: '.6rem'}}>RAID</Typography>                              
+                              </Box>
+                              <Box  sx={{ display: 'inline-flex',justifyContent: 'space-evenly' }}>
+                                <Typography sx={{ fontSize: '.6rem'}}>LEVEL</Typography>
+                                <Typography sx={{ fontSize: '.6rem'}}>RAID</Typography>                              
                               </Box>
                             </Stack>
                             }
         {!props.isFighter && <Typography gutterBottom variant="body2" component="div" sx={{fontFamily: 'Roboto',color: 'yellow', fontSize:'.75rem'}}>
-                              {`#${props.id} RANK:${props.rank}`}
+                              {`#${props.id} `}
                             </Typography>}
-          {!props.isFighter &&   <Typography variant="body2" sx={{fontFamily: 'Alegreya Sans SC', color: 'yellow', fontSize:'.75rem'}}>
+          {!props.isFighter &&   <Typography variant="body2" sx={{fontFamily: 'Alegreya Sans SC', fontSize:'.75rem'}}>
                                     {"YAKUZA"}
                                   </Typography>}
         </CardContent>
       </CardActionArea>
     </Card>
   );
-}
+  
+};
+export default StakedFighterCard;
+

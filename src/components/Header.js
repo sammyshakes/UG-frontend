@@ -30,7 +30,7 @@ const Header = (props) => {
 
     return(
         <div>
-            <nav className="navbar navbar-expand-sm navbar-dark fixed-top" id="mainNav">
+            <nav className="navbar navbar-expand-md navbar-dark fixed-top" id="mainNav">
 			<div className="container bg-dark bg-gradient bg-opacity-75">
 				<a className="navbar-brand" ><img src= {logo} alt="Underground." width="370" height="20" /></a>
 

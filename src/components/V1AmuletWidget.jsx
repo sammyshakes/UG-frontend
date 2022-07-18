@@ -13,7 +13,7 @@ const V1RingWidget = () => {
     const baseUrl = 'https://the-u.club/reveal/amulet/amulet_reveal.png.png';
   return (
    
-    <Card raised= {true} className="ring-bordr"  sx={{ m:4, borderRadius:10, width: 165, backgroundColor: 'black'}}>
+    <Card raised= {true} className="ring-bordr"  sx={{ m:4, borderRadius:10, width: 100, backgroundColor: 'black'}}>
        
         <CardMedia
           component="img"
@@ -23,8 +23,8 @@ const V1RingWidget = () => {
           loading="lazy"
         />
         <CardContent  align="center"  sx={{p:0, color: 'red'}}>
-            <Typography gutterBottom variant="button" component="div" sx={{fontFamily: 'Alegreya Sans SC', height:0, fontSize:'1rem', backgroundColor: 'black'}}>
-                {`V1 Amulets: ${oldAmuletIds[0]?.length}`}
+            <Typography gutterBottom variant="button" component="div" sx={{fontFamily: 'Alegreya Sans SC', height:10, fontSize:'1rem', backgroundColor: 'black'}}>
+                {`V1 Amulets: ${oldAmuletIds.length}`}
             </Typography>
         </CardContent>
       

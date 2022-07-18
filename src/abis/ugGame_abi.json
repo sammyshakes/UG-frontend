@@ -1,12 +1,5 @@
 [
 	{
-		"inputs": [],
-		"name": "mintRing",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -114,6 +107,11 @@
 		"type": "error"
 	},
 	{
+		"inputs": [],
+		"name": "NeedMoreFighters",
+		"type": "error"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -185,14 +183,14 @@
 				"type": "uint256[]"
 			},
 			{
-				"internalType": "bool[]",
-				"name": "_upgradeLevel",
-				"type": "bool[]"
+				"internalType": "uint256[]",
+				"name": "_upgradeLevels",
+				"type": "uint256[]"
 			},
 			{
-				"internalType": "bool[]",
-				"name": "_upgradeSize",
-				"type": "bool[]"
+				"internalType": "uint256[]",
+				"name": "_upgradeSizes",
+				"type": "uint256[]"
 			}
 		],
 		"name": "levelUpFightClubs",
@@ -243,9 +241,9 @@
 				"type": "uint256[]"
 			},
 			{
-				"internalType": "uint8[]",
+				"internalType": "uint256[]",
 				"name": "_levelsToUpgrade",
-				"type": "uint8[]"
+				"type": "uint256[]"
 			}
 		],
 		"name": "levelUpForges",
@@ -312,6 +310,13 @@
 			}
 		],
 		"name": "mintForges",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "mintRing",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -885,19 +890,19 @@
 	{
 		"inputs": [
 			{
-				"internalType": "uint8",
+				"internalType": "uint256",
 				"name": "currentLevel",
-				"type": "uint8"
+				"type": "uint256"
 			},
 			{
-				"internalType": "uint8",
+				"internalType": "uint256",
 				"name": "currentSize",
-				"type": "uint8"
+				"type": "uint256"
 			},
 			{
-				"internalType": "uint8",
+				"internalType": "uint256",
 				"name": "levelsToUpgrade",
-				"type": "uint8"
+				"type": "uint256"
 			}
 		],
 		"name": "getForgeLevelUpBloodCost",
@@ -962,6 +967,32 @@
 				"internalType": "contract IERC1155",
 				"name": "",
 				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "MIN_FIGHTERS_PER_AMULET",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "MIN_FIGHTERS_PER_RING",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",

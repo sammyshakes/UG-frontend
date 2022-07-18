@@ -22,31 +22,25 @@ const MigrateButtons = () => {
 
     const walletFighterHandler = async () => {
       const signedContract =  ugMigrationContract.connect(prv.provider.getSigner());
-      const ids = ownedV1Ids[0]?.map(id => { return Number(id.toString()); })
-
-      console.log(ids);
+      const ids = ownedV1Ids.map(id => { return Number(id.toString()); })
       await signedContract.functions.migrateFighters(ids) ;
     }
 
     const stakedFighterHandler = async() => {
       const signedContract =  ugMigrationContract.connect(prv.provider.getSigner());
-      const ids = stakedV1Ids[0]?.map(id => { return Number(id.toString()); })
-
-      console.log(ids);
+      const ids = stakedV1Ids.map(id => { return Number(id.toString()); })
       await signedContract.functions.migrateFighters(ids) ;
-
     }
    
     const oldRingHandler = async() => {
       const signedContract =  ugMigrationContract.connect(prv.provider.getSigner());
-      const ids = oldRingIds[0]?.map(id => { return Number(id.toString()); })
+      const ids = oldRingIds.map(id => { return Number(id.toString()); })
       await signedContract.functions.migrateRingAmulet(ids, true) ;
     }
     const oldAmuletHandler = async() => {
       const signedContract =  ugMigrationContract.connect(prv.provider.getSigner());
-      const ids = oldAmuletIds[0]?.map(id => { return Number(id.toString()); })
+      const ids = oldAmuletIds.map(id => { return Number(id.toString()); })
       await signedContract.functions.migrateRingAmulet(ids, false) ;
-
     }
 
     useEffect(() => {
@@ -68,10 +62,10 @@ const MigrateButtons = () => {
     >
       <Typography variant="button" sx={{fontFamily: 'Alegreya Sans SC', fontSize: '1.6rem',color:'yellow'}}>Migrate Your V1 Assets:</Typography>
      <Stack direction="row" spacing={2} >
-        <Button variant="outlined" color="error" sx={{fontFamily: 'Alegreya Sans SC', border: 1, color:'yellow'}} onClick={stakedFighterHandler}>Staked Fighters</Button>
-        <Button variant="outlined" color="error" sx={{fontFamily: 'Alegreya Sans SC', border: 1, color:'yellow'}} onClick={walletFighterHandler}>Wallet Fighters</Button>
-        <Button variant="outlined" color="error" sx={{fontFamily: 'Alegreya Sans SC', border: 1, color:'yellow'}} onClick={oldRingHandler}>Rings</Button>
-        <Button variant="outlined" color="error" sx={{fontFamily: 'Alegreya Sans SC', border: 1, color:'yellow'}} onClick={oldAmuletHandler}>Amulets</Button>
+        <Button variant="outlined" color="error" disabled sx={{fontFamily: 'Alegreya Sans SC', border: 1, color:'yellow'}} onClick={stakedFighterHandler}>Staked Fighters</Button>
+        <Button variant="outlined" color="error" disabled sx={{fontFamily: 'Alegreya Sans SC', border: 1, color:'yellow'}} onClick={walletFighterHandler}>Wallet Fighters</Button>
+        <Button variant="outlined" color="error" disabled sx={{fontFamily: 'Alegreya Sans SC', border: 1, color:'yellow'}} onClick={oldRingHandler}>Rings</Button>
+        <Button variant="outlined" color="error" disabled sx={{fontFamily: 'Alegreya Sans SC', border: 1, color:'yellow'}} onClick={oldAmuletHandler}>Amulets</Button>
       </Stack>
     </Box>
     </Container>

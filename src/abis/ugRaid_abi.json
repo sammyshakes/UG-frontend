@@ -73,20 +73,6 @@
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "claimFightClubBloodRewards",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "claimRaiderBloodRewards",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -116,6 +102,20 @@
 		"inputs": [],
 		"name": "AlreadyInQueue",
 		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "claimFightClubBloodRewards",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "claimRaiderBloodRewards",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
 		"inputs": [
@@ -174,28 +174,7 @@
 		"type": "error"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint8",
-				"name": "size",
-				"type": "uint8"
-			},
-			{
-				"internalType": "uint32",
-				"name": "sweat",
-				"type": "uint32"
-			},
-			{
-				"internalType": "uint8",
-				"name": "yak",
-				"type": "uint8"
-			},
-			{
-				"internalType": "uint256",
-				"name": "i",
-				"type": "uint256"
-			}
-		],
+		"inputs": [],
 		"name": "InvalidSize",
 		"type": "error"
 	},
@@ -249,6 +228,34 @@
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "OnlyEOA",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "StillUnstakeCoolDown",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "Unauthorized",
+		"type": "error"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			}
+		],
+		"name": "FightClubOwnerBloodRewardClaimed",
+		"type": "event"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -286,32 +293,6 @@
 		],
 		"stateMutability": "nonpayable",
 		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "txorigin",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "sender",
-				"type": "address"
-			}
-		],
-		"name": "OnlyEOA",
-		"type": "error"
-	},
-	{
-		"inputs": [],
-		"name": "StillUnstakeCoolDown",
-		"type": "error"
-	},
-	{
-		"inputs": [],
-		"name": "Unauthorized",
-		"type": "error"
 	},
 	{
 		"anonymous": false,
@@ -469,7 +450,7 @@
 					},
 					{
 						"internalType": "uint8",
-						"name": "switchblade",
+						"name": "butterfly",
 						"type": "uint8"
 					},
 					{
@@ -527,6 +508,19 @@
 		"anonymous": false,
 		"inputs": [
 			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			}
+		],
+		"name": "RaiderOwnerBloodRewardClaimed",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
 				"components": [
 					{
 						"internalType": "uint8",
@@ -570,7 +564,7 @@
 					},
 					{
 						"internalType": "uint8",
-						"name": "switchblade",
+						"name": "butterfly",
 						"type": "uint8"
 					},
 					{
@@ -913,6 +907,30 @@
 	{
 		"inputs": [
 			{
+				"internalType": "uint256",
+				"name": "levelTier",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "sizeTier",
+				"type": "uint256"
+			}
+		],
+		"name": "getRaidCost",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "price",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "uint8",
 				"name": "level",
 				"type": "uint8"
@@ -1035,6 +1053,64 @@
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "sweatRoundActive",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "viewIfRaiderIsInQueue",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "weaponsRoundActive",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "yakuzaRoundActive",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
 			}
 		],
 		"stateMutability": "view",

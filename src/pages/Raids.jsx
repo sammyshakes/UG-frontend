@@ -5,7 +5,7 @@ import './raids.css';
 
 const Raids = () => {
   return (
-    <Container className="raid-bordr" maxWidth='lg' >
+    <Container className="raid-bordr" style={{ width: '100%'}} >
       <FighterTable/>
     </Container>
   )

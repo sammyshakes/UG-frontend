@@ -15,8 +15,8 @@ export default function StakedV1FighterList() {
         <Typography variant="h4" align="center" sx={{fontFamily: 'Alegreya Sans SC',  p:0, color: 'red' }}>
             V1 Staked Fighters
         </Typography>
-    <ImageList sx={{ width: 400, height: 500 }} cols={3} rowHeight={250} >
-      {stakedV1Ids[0]?.map((id) => (
+    <ImageList sx={{ width: 400, height: 500 }} cols={3} rowHeight={250} children="props">
+      {stakedV1Ids.map((id) => (
         <ImageListItem key={id}>
             <FighterV1Card key={id} id={id}/>
          

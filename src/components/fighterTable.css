@@ -5,5 +5,58 @@
     color:aqua;
 }
 .MuiDataGrid-columnHeader{
-    font-size: 100%;
+    font-size: 85%;
 }
+.MuiDataGrid-columnHeaders{
+    background-color: rgba(1, 235, 252, 0.8);
+}
+.MuiDataGrid-footerContainer{
+    color: 'red';
+    background-color: rgba(1, 245, 253, .8);
+}
+
+
+.raidButton:hover{
+    background-color: red;
+    color: rgb(235, 231, 12);
+    
+    border: 2px solid red;
+}
+.progress-box{
+    margin: 1px;
+    border: 2px solid aqua;
+    border-radius: 10px;
+    background-color:rgba(0, 0, 0);
+
+}
+.inraid-box{
+    color: rgb(190, 8, 8);
+    margin: 1px;
+    border: 2px solid aqua;
+    border-radius: 10px;
+    background-color:aqua;
+
+}
+
+.box10-bordr{
+    border-radius: 12px;
+    border: 1px solid rgb(255, 0, 0);
+    min-width: 300px;
+    margin: 10px;
+    min-height: 50px;
+    max-height: 80px;
+    color: aqua;
+}
+.box20-bordr{
+    border-radius: 12px;
+    min-width: 300px;
+    border: 1px solid rgb(255, 0, 0);
+    margin: 10px;
+    min-height: 300px;
+    max-height: 500px;
+    color: aqua;
+    padding: 10px
+   
+}
+
+

@@ -1,11 +1,11 @@
 import {useEffect, useState} from 'react';
-import {Route, Routes} from 'react-router-dom';
+import {Route, Router, Routes} from 'react-router-dom';
 import Header from "./components/Header";
 import Sidebar from './components/Sidebar';
 import "./App.css";
 import ProviderContext from './context/provider-context';
 import {getEthers, getBlood, getOldArena, getOldNft, getUGArena, getUGNft, getOldRing, getOldAmulet} from './utils';
-import {Container, Box, Stack} from '@mui/material/';
+import {Container, Box, Stack, CssBaseline} from '@mui/material/';
 import Home from './pages/Home';
 import Arena from './pages/Arena';
 import Raids from './pages/Raids';
@@ -14,12 +14,12 @@ import Forge from './pages/Forge';
 
 const baseUrl = 'https://the-u.club/reveal/fighteryakuza/';
 
+
 /* global BigInt */
 
 function App() {
-  const [provider, setProvider] = useState(undefined);
+  const [balance, setBalance] = useState(0);
   const [accounts, setAccounts] = useState([]);
-  const [balance, setBalance] = useState('');
   const [stakedFYIds, setStakedFYIds] = useState([]);
   const [ownedFYIds, setOwnedFYIds] = useState([]);
   const [stakedFYs, setStakedFYs] = useState([]);
@@ -28,11 +28,19 @@ function App() {
   const [ownedV1FYIds, setOwnedV1FYIds] = useState([]);
   const [v1RingIds, setV1RingIds] = useState([]);
   const [v1AmuletIds, setV1AmuletIds] = useState([]);
-  const [totalUserUnclaimedArena,  setTotalUserUnclaimedArena] = useState([]);
-  const [activeRing, setActiveRing] = useState(undefined);
-  const [activeAmulet, setActiveAmulet] = useState(undefined);
-  const [isRingExpired, setIsRingExpired] = useState(undefined);
-  const [isAmuletExpired, setIsAmuletExpired] = useState(undefined);
+  const [activeRing, setActiveRing] = useState([]);
+  const [activeAmulet, setActiveAmulet] = useState([]);
+  const [ownedForgeIds, setOwnedForgeIds] = useState();
+  
+  const provider = getEthers();
+  // get contracts
+  const oldArenaContract = getOldArena();
+  const oldNftContract = getOldNft();
+  const oldRingContract = getOldRing();
+  const oldAmuletContract = getOldAmulet();
+  const ugArenaContract = getUGArena();
+  const ugNftContract = getUGNft();
+  const bloodContract = getBlood();
   
 
   useEffect(() => {
@@ -57,64 +65,57 @@ function App() {
     else alert('MetaMask is not installed!');
     
     const init = async() => {   
-      // get contracts
-      const bloodContract = getBlood();
-      const oldArenaContract = getOldArena();
-      const oldNftContract = getOldNft();
-      const oldRingContract = getOldRing();
-      const oldAmuletContract = getOldAmulet();
-      const ugArenaContract = getUGArena();
-      const ugNftContract = getUGNft();
-      const provider = getEthers();
+      
          
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       const stakedRing = await ugArenaContract.getStakedRingIDForUser(accounts[0]);
-      const ring = await ugNftContract.functions.getRingAmulet(stakedRing);
       const stakedAmulet = await ugArenaContract.getStakedAmuletIDForUser(accounts[0]);
-      const amulet = await ugNftContract.functions.getRingAmulet(stakedAmulet);
-      const userBloodBalance = await bloodContract.balanceOf(accounts[0]); 
-      const v1StakedIds = await oldArenaContract.functions.getStakedTokenIds(accounts[0]);
-      const v1OwnedIds = await oldNftContract.functions.walletOfOwner(accounts[0]);
-      const v1RingIds = await oldRingContract.functions.walletOfOwner(accounts[0]);
-      const v1AmuletIds = await oldAmuletContract.functions.walletOfOwner(accounts[0]);
-      const _stakedIds = await ugArenaContract.functions.getStakedFighterIDsForUser(accounts[0]);
-      const _ownedIds = await ugNftContract.functions.getFighterIDsForUser(accounts[0]);
-      const stakedIds = _stakedIds[0]?.map(id => { return Number(id.toString()); })
-      const ownedIds = _ownedIds[0]?.map(id => { return Number(id.toString()); })
-      const _stakedFYs = await ugNftContract.functions.getFighters(stakedIds);
-      const _ownedFYs = await ugNftContract.functions.getFighters(ownedIds);      
-      const ttlUserUnclaimedArena = await ugArenaContract.functions.calculateAllStakingRewards(stakedIds);
+      const v1StakedIds = await oldArenaContract.getStakedTokenIds(accounts[0]);
+      const v1OwnedIds = await oldNftContract.walletOfOwner(accounts[0]);
+      const v1RingIds = await oldRingContract.walletOfOwner(accounts[0]);
+      const v1AmuletIds = await oldAmuletContract.walletOfOwner(accounts[0]);
+      const _stakedIds = await ugArenaContract.getStakedFighterIDsForUser(accounts[0]);
+      const _ownedIds = await ugNftContract.getNftIDsForUser(accounts[0], 1);
+      const _ownedForgeIds = await ugNftContract.getNftIDsForUser(accounts[0], 4);
+      const _balance = await bloodContract.balanceOf(accounts[0]);
+      const ownedForgeIds = _ownedForgeIds.map(id => { return Number(id.toString()); })
+      
+      const stakedIds = _stakedIds.map(id => { return Number(id.toString()); })
+      const ownedIds = _ownedIds.map(id => { return Number(id.toString()); })
+      const _stakedFYs = await ugNftContract.getFighters(stakedIds);
+      const _ownedFYs = await ugNftContract.getFighters(ownedIds);      
+      const ring = await ugNftContract.getRingAmulet(stakedRing);
+      const amulet = await ugNftContract.getRingAmulet(stakedAmulet);
 
-      const ownedFYs = ownedIds?.map((id, i) => {        
-        let imageUrl = !_ownedFYs[0][i].isFighter ?  "yakuza/" : "fighter/";
-        imageUrl = baseUrl.concat(imageUrl.concat(_ownedFYs[0][i].imageId).concat('.png'));
-        let fy = {id, imageUrl, ..._ownedFYs[0][i]};
+      const ownedFYs = ownedIds.map((id, i) => {        
+        let imageUrl = !_ownedFYs[i].isFighter ?  "yakuza/" : "fighter/";
+        imageUrl = baseUrl.concat(imageUrl.concat(_ownedFYs[i].imageId).concat('.png'));
+        let fy = {id, imageUrl, ..._ownedFYs[i]};
         return fy;
       })
-      const stakedFYs = stakedIds?.map((id, i) => {        
-        let imageUrl = !_stakedFYs[0][i].isFighter ?  "yakuza/" : "fighter/";
+      const stakedFYs = stakedIds.map((id, i) => {        
+        let imageUrl = !_stakedFYs[i].isFighter ?  "yakuza/" : "fighter/";
         
-        imageUrl = baseUrl.concat(imageUrl.concat(_stakedFYs[0][i].imageId).concat('.png'));
-        let fy = {id, imageUrl, ..._stakedFYs[0][i]};
-        console.log('fy',fy);
+        imageUrl = baseUrl.concat(imageUrl.concat(_stakedFYs[i].imageId).concat('.png'));
+        let fy = {id, imageUrl, ..._stakedFYs[i]};
+        //console.log('fy',fy);
         return fy;
       })
 
-
-      setBalance(userBloodBalance);
+      setBalance(_balance);
       setAccounts(accounts);    
       setStakedV1FYIds(v1StakedIds);    
       setOwnedV1FYIds(v1OwnedIds);   
-      setProvider(provider);
       setV1RingIds(v1RingIds);
       setV1AmuletIds(v1AmuletIds);
       setStakedFYIds(stakedIds);
       setOwnedFYIds(ownedIds);
       setStakedFYs(stakedFYs);
       setOwnedFYs(ownedFYs);
-      setTotalUserUnclaimedArena(ttlUserUnclaimedArena);
       setActiveAmulet(amulet);
       setActiveRing(ring);
+      setOwnedForgeIds(ownedForgeIds);
+      
     }
     init();
     // eslint-disable-next-line
@@ -124,8 +125,6 @@ function App() {
     <ProviderContext.Provider value={{
       provider: provider,
       accounts: accounts,
-      balance:  balance,
-      totalUserUnclaimedArena: totalUserUnclaimedArena,
       stakedFYIds: stakedFYIds,
       ownedFYIds: ownedFYIds,
       stakedFYs: stakedFYs,
@@ -135,25 +134,30 @@ function App() {
       v1RingIds: v1RingIds,
       v1AmuletIds: v1AmuletIds,
       stakedRing: activeRing,
-      stakedAmulet: activeAmulet
+      stakedAmulet: activeAmulet,
+      balance: balance,
+      ownedForgeIds: ownedForgeIds
     }}>
-      <div className=" bg-img" >
+      <div className=" bg-img" style={{height: {xs: '155vh', sm: '125vh', md: '115vh'}}}>
         <Stack spacing={6}>
           <Header/>          
           <Box sx={{ my: 0 }} ></Box>
-          <Stack direction="row" spacing={2} >        
-            <Sidebar />
+          <Stack direction={{ xs: 'column', sm: 'column', md: 'row' }} spacing={2} >            
+            <Sidebar />            
             <Container >
               <Routes>
+              
                 <Route path="/">
-                  <Route index element={<Home />}/>
-                  <Route path="arena" element={<Arena />}/>
-                  <Route path="raids" element={<Raids />} />
+                  <Route index element={<Forge />}/>
+                  <Route path="arena" element={<Forge />}/>
+                  <Route path="raids" element={<Forge />} />
                   <Route path="forge" element={<Forge />}/>
                   <Route path="migrate" element={<Migrate />}/>
                 </Route>
+               
               </Routes>
             </Container>
+         
           </Stack>
         </Stack>
       

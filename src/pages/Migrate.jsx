@@ -10,13 +10,15 @@ import {Stack} from '@mui/material/';
 const Migrate = () => {
   return (
     <React.Fragment>
-      <Stack direction="row" >
+      <Stack direction={{sm: "column", md: "row"}}  >
         <StakedV1FighterList/>
         <OwnedV1FighterList/>
       </Stack>
-      <Stack direction="row"  sm={6} >
+      <Stack direction={{sm: "column", md: "row"}} xs={12} >
+        <Stack direction="row">
         <V1RingWidget/>
         <V1AmuletWidget/>
+        </Stack>
         <MigrateButtons/>
       </Stack>
     </React.Fragment>

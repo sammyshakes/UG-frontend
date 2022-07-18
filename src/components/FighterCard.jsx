@@ -11,9 +11,6 @@ import './fighterCard.css';
 /* global BigInt */
 
 export default function FighterCard(props) {
-  const prv = useContext(ProviderContext);
-  const ownedFYs = prv.ownedFYs;
-  console.log('owned',ownedFYs);
 
   return (
     <Card raised= {true} className="card-bordr" sx={{ maxWidth: 345 }}>
