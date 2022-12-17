@@ -1,0 +1,11 @@
+.fc-bordr {
+    border-radius: 10px;
+    border-color: aqua;
+    border: 2px;
+}
+
+.MuiButton-outlined:hover{
+    color: aqua;
+    font-weight: 1000;
+    border-color: 'red';
+}

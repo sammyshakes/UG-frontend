@@ -1,0 +1,17 @@
+.clicked{
+    border: 2px solid aqua(255, 0, 0);
+    box-shadow: 0px 0px 5px 8px #0ff;
+}
+
+.card-bordr{
+    border-radius: 12px;
+    border: 1px solid rgb(255, 0, 0);
+}
+
+.card-bordr:hover{
+    border: 2px solid aqua(255, 0, 0);
+    box-shadow: 0px 0px 4px 4px #0ff;
+}
+
+
+

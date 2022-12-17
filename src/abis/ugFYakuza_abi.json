@@ -1,0 +1,1605 @@
+[
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_uri",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "__name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "__symbol",
+				"type": "string"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [],
+		"name": "InvalidOnReceiveMsg",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InvalidOperator",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InvalidRecipient",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "InvalidTokenID",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "MaxSupplyReached",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "MismatchArrays",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "Unauthorized",
+		"type": "error"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "_owner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "_operator",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "bool",
+				"name": "_approved",
+				"type": "bool"
+			}
+		],
+		"name": "ApprovalForAll",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"components": [
+					{
+						"internalType": "bool",
+						"name": "isFighter",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint8",
+						"name": "Gen",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "level",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "rank",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "courage",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "cunning",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "brutality",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "knuckles",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "chains",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "butterfly",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "machete",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "katana",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint16",
+						"name": "scars",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint16",
+						"name": "imageId",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastLevelUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastRankUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastRaidTime",
+						"type": "uint32"
+					}
+				],
+				"indexed": false,
+				"internalType": "struct IUGFYakuza.FighterYakuza",
+				"name": "fighter",
+				"type": "tuple"
+			}
+		],
+		"name": "FighterUpdated",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"components": [
+					{
+						"internalType": "bool",
+						"name": "isFighter",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint8",
+						"name": "Gen",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "level",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "rank",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "courage",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "cunning",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "brutality",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "knuckles",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "chains",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "butterfly",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "machete",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "katana",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint16",
+						"name": "scars",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint16",
+						"name": "imageId",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastLevelUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastRankUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastRaidTime",
+						"type": "uint32"
+					}
+				],
+				"indexed": false,
+				"internalType": "struct IUGFYakuza.FighterYakuza",
+				"name": "fighter",
+				"type": "tuple"
+			}
+		],
+		"name": "FighterYakuzaMigrated",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "level",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			}
+		],
+		"name": "LevelUpFighter",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "previousOwner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "OwnershipTransferred",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "fighterId",
+				"type": "uint256"
+			},
+			{
+				"components": [
+					{
+						"internalType": "bool",
+						"name": "isFighter",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint8",
+						"name": "Gen",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "level",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "rank",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "courage",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "cunning",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "brutality",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "knuckles",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "chains",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "butterfly",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "machete",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "katana",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint16",
+						"name": "scars",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint16",
+						"name": "imageId",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastLevelUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastRankUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastRaidTime",
+						"type": "uint32"
+					}
+				],
+				"indexed": false,
+				"internalType": "struct IUGFYakuza.FighterYakuza",
+				"name": "fighter",
+				"type": "tuple"
+			}
+		],
+		"name": "RaidTraitsUpdated",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "_operator",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "_from",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "_to",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256[]",
+				"name": "_ids",
+				"type": "uint256[]"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256[]",
+				"name": "_amounts",
+				"type": "uint256[]"
+			}
+		],
+		"name": "TransferBatch",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "_operator",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "_from",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "_to",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "TransferSingle",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "_value",
+				"type": "string"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "URI",
+		"type": "event"
+	},
+	{
+		"stateMutability": "nonpayable",
+		"type": "fallback"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "addr",
+				"type": "address"
+			}
+		],
+		"name": "addAdmin",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_owner",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "balanceOf",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_owner",
+				"type": "address"
+			}
+		],
+		"name": "balanceOf",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address[]",
+				"name": "_owners",
+				"type": "address[]"
+			},
+			{
+				"internalType": "uint256[]",
+				"name": "_ids",
+				"type": "uint256[]"
+			}
+		],
+		"name": "balanceOfBatch",
+		"outputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "baseURI",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_from",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256[]",
+				"name": "_ids",
+				"type": "uint256[]"
+			},
+			{
+				"internalType": "uint256[]",
+				"name": "amounts",
+				"type": "uint256[]"
+			}
+		],
+		"name": "batchBurn",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_to",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256[]",
+				"name": "v1TokenIds",
+				"type": "uint256[]"
+			},
+			{
+				"components": [
+					{
+						"internalType": "bool",
+						"name": "isFighter",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint8",
+						"name": "Gen",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "level",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "rank",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "courage",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "cunning",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "brutality",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "knuckles",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "chains",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "butterfly",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "machete",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "katana",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint16",
+						"name": "scars",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint16",
+						"name": "imageId",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastLevelUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastRankUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastRaidTime",
+						"type": "uint32"
+					}
+				],
+				"internalType": "struct IUGFYakuza.FighterYakuza[]",
+				"name": "oldFighters",
+				"type": "tuple[]"
+			}
+		],
+		"name": "batchMigrateFYakuza",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_from",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "burn",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256[]",
+				"name": "tokenIds",
+				"type": "uint256[]"
+			}
+		],
+		"name": "checkUserBatchBalance",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "getFighter",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "bool",
+						"name": "isFighter",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint8",
+						"name": "Gen",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "level",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "rank",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "courage",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "cunning",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "brutality",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "knuckles",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "chains",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "butterfly",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "machete",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "katana",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint16",
+						"name": "scars",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint16",
+						"name": "imageId",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastLevelUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastRankUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastRaidTime",
+						"type": "uint32"
+					}
+				],
+				"internalType": "struct IUGFYakuza.FighterYakuza",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "tokenIds",
+				"type": "uint256[]"
+			}
+		],
+		"name": "getFighters",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "bool",
+						"name": "isFighter",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint8",
+						"name": "Gen",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "level",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "rank",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "courage",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "cunning",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "brutality",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "knuckles",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "chains",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "butterfly",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "machete",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "katana",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint16",
+						"name": "scars",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint16",
+						"name": "imageId",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastLevelUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastRankUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastRaidTime",
+						"type": "uint32"
+					}
+				],
+				"internalType": "struct IUGFYakuza.FighterYakuza[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "getIDBinIndex",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "bin",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "pure",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			}
+		],
+		"name": "getNumFightersForUser",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "tokenIds",
+				"type": "uint256[]"
+			}
+		],
+		"name": "getPackedFighters",
+		"outputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_binValues",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "bitsize",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_index",
+				"type": "uint256"
+			}
+		],
+		"name": "getValueInBin",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "pure",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "idToFYakuza",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_owner",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_operator",
+				"type": "address"
+			}
+		],
+		"name": "isApprovedForAll",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "isOperator",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "tokenIds",
+				"type": "uint256[]"
+			},
+			{
+				"internalType": "uint256[]",
+				"name": "levels",
+				"type": "uint256[]"
+			}
+		],
+		"name": "levelUpFighters",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "name",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "addr",
+				"type": "address"
+			}
+		],
+		"name": "removeAdmin",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_from",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_to",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256[]",
+				"name": "_ids",
+				"type": "uint256[]"
+			},
+			{
+				"internalType": "uint256[]",
+				"name": "_amounts",
+				"type": "uint256[]"
+			},
+			{
+				"internalType": "bytes",
+				"name": "_data",
+				"type": "bytes"
+			}
+		],
+		"name": "safeBatchTransferFrom",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_from",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_to",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bytes",
+				"name": "_data",
+				"type": "bytes"
+			}
+		],
+		"name": "safeTransferFrom",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_operator",
+				"type": "address"
+			},
+			{
+				"internalType": "bool",
+				"name": "_approved",
+				"type": "bool"
+			}
+		],
+		"name": "setApprovalForAll",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_uri",
+				"type": "string"
+			}
+		],
+		"name": "setBaseURI",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"components": [
+					{
+						"internalType": "bool",
+						"name": "isFighter",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint8",
+						"name": "Gen",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "level",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "rank",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "courage",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "cunning",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "brutality",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "knuckles",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "chains",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "butterfly",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "machete",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "katana",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint16",
+						"name": "scars",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint16",
+						"name": "imageId",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastLevelUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastRankUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastRaidTime",
+						"type": "uint32"
+					}
+				],
+				"internalType": "struct IUGFYakuza.FighterYakuza",
+				"name": "FY",
+				"type": "tuple"
+			}
+		],
+		"name": "setFighter",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "packedTickets",
+				"type": "uint256[]"
+			}
+		],
+		"name": "setRaidTraitsFromPacked",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes4",
+				"name": "_interfaceID",
+				"type": "bytes4"
+			}
+		],
+		"name": "supportsInterface",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "pure",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "symbol",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_index",
+				"type": "uint256"
+			}
+		],
+		"name": "tokenOfOwnerByIndex",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "tokenURI",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "totalSupply",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_newOwner",
+				"type": "address"
+			}
+		],
+		"name": "transferOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "ttlFYakuzas",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "ttlFYakuzasBurned",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "uri",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			}
+		],
+		"name": "walletOfOwner",
+		"outputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]

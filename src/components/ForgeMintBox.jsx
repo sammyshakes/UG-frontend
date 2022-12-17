@@ -3,7 +3,7 @@ import ProviderContext from '../context/provider-context';
 import './forgeMintBox.css'
 import {Box, Stack, Avatar, Typography, Button, Card, CardMedia, CardActions } from '@mui/material/';
 import bloodToken from '../assets/images/coin_transp_500.png';
-import {getUGGame, getBlood} from '../utils.js';
+import {getUGGame3, getBlood, getUGNft2} from '../utils.js';
 import ErrorModal from './ui/ErrorModal';
 import ForgeCard from './ForgeCard'
 import { useEffect } from 'react';
@@ -13,11 +13,11 @@ export default function ForgeMintBox() {
     const [enteredQty, setEnteredQty] = useState() ;
     const [error, setError] = useState();
     const [balance, setBalance] = useState();
+    const [numMinted, setNumMinted] = useState();
     const prv = useContext(ProviderContext);
-    const ugGameContract = getUGGame();
+    const ugGameContract = getUGGame3();
     const bloodContract = getBlood();
-
-    
+    const ugNftContract = getUGNft2();    
 
     const QtyChangeHandler = (event) => {
         event.preventDefault();
@@ -44,6 +44,7 @@ export default function ForgeMintBox() {
             });
             return;
         }
+
         const signedContract =  ugGameContract.connect(prv.provider.getSigner());
         const receipt = await signedContract.functions.mintForges(enteredQty) ;
         
@@ -55,19 +56,30 @@ export default function ForgeMintBox() {
         
     }
 
+    const getUpdates = async() => {
+        const forgesMinted = await ugNftContract.ttlForges();
+        setNumMinted(forgesMinted?.toString());
+    }
+
     const errorHandler = () => {
         setError(null);
     }
 
     useEffect(() => {
-        
+        getUpdates();
+
         const init = async() => {   
             const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
             const bloodBalance = await bloodContract.balanceOf(accounts[0]);
-            setBalance(bloodBalance);
-          
+            setBalance(Number(bloodBalance));
+            getUpdates();          
         }
         init();
+
+        const interval = setInterval(() => {
+            getUpdates();
+        }, 60000);
+        return () => clearInterval(interval);       
         // eslint-disable-next-line
       }, []);
 
@@ -83,6 +95,7 @@ export default function ForgeMintBox() {
                         onConfirm={errorHandler}
                     />
         )}
+       
     <Stack direction = "row" spacing = {5}>
         <Box className='forge-bordr'  sx={{ maxWidth: 400, maxHeight: 750 }}>
         <Card  className='forge-bordr' >
@@ -109,8 +122,7 @@ export default function ForgeMintBox() {
             </CardActions>
         </Card>
         </Box>
-        
-            {prv.ownedForgeIds && <ForgeCard/>}
+           
         </Stack>  
         
     </div>

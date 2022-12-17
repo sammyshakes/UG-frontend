@@ -1,4 +1,5 @@
 .MuiDataGrid-cellContent{
+    color: aqua;
     font-size: 150%;
 }
 .MuiDataGrid-checkboxInput {
@@ -8,20 +9,27 @@
     font-size: 85%;
 }
 .MuiDataGrid-columnHeaders{
-    background-color: rgba(1, 235, 252, 0.8);
+    background-color: aqua;
 }
 .MuiDataGrid-footerContainer{
-    color: 'red';
-    background-color: rgba(1, 245, 253, .8);
+    background-color: aqua;
+}
+
+.raidButton{
+    min-width: 50%;
 }
 
 
 .raidButton:hover{
-    background-color: red;
-    color: rgb(235, 231, 12);
-    
-    border: 2px solid red;
+    color: aqua;
+    border: 2px solid aqua;
 }
+
+.refButton:hover{
+    color: red;
+    border: 1px solid rgb(29, 235, 11);
+}
+
 .progress-box{
     margin: 1px;
     border: 2px solid aqua;
@@ -39,23 +47,32 @@
 }
 
 .box10-bordr{
+    padding: 1px;
     border-radius: 12px;
-    border: 1px solid rgb(255, 0, 0);
     min-width: 300px;
     margin: 10px;
     min-height: 50px;
     max-height: 80px;
     color: aqua;
+    box-shadow: 0px 0px 5px 5px aqua;
+}
+.box10-bordr1{
+    padding: 1px;
+    border-radius: 12px;
+    min-width: 300px;
+    margin: 10px;
+    min-height: 70px;
+    max-height: 80px;
+    color: aqua;
+    box-shadow: 0px 0px 5px 5px aqua;
 }
 .box20-bordr{
     border-radius: 12px;
     min-width: 300px;
-    border: 1px solid rgb(255, 0, 0);
     margin: 10px;
-    min-height: 300px;
-    max-height: 500px;
     color: aqua;
-    padding: 10px
+    padding: 10px ;   
+    box-shadow: 0px 0px 5px 5px aqua;
    
 }
 

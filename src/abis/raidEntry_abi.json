@@ -1,0 +1,214 @@
+[
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "addr",
+				"type": "address"
+			}
+		],
+		"name": "addAdmin",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "tokenIds",
+				"type": "uint256[]"
+			},
+			{
+				"components": [
+					{
+						"internalType": "uint8",
+						"name": "size",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "yakFamily",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint32",
+						"name": "sweat",
+						"type": "uint32"
+					}
+				],
+				"internalType": "struct IRaidEntry.RaiderEntry[]",
+				"name": "raiderEntries",
+				"type": "tuple[]"
+			}
+		],
+		"name": "enterRaid",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "ttlBloodEntryFee",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_ugFYakuza",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_blood",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_ugArena",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_ugWeapons",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_ugRaid",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_devWallet",
+				"type": "address"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "AlreadyInQueue",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InvalidAddress",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InvalidOwner",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InvalidSize",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InvalidTokenId",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "MismatchArrays",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "OnlyEOA",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "addr",
+				"type": "address"
+			}
+		],
+		"name": "removeAdmin",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "newWallet",
+				"type": "address"
+			}
+		],
+		"name": "setDevWallet",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "StillUnstakeCoolDown",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "Unauthorized",
+		"type": "error"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "previousOwner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "OwnershipTransferred",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_newOwner",
+				"type": "address"
+			}
+		],
+		"name": "transferOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]

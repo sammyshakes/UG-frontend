@@ -30,6 +30,11 @@
 				"internalType": "address",
 				"name": "_uArena",
 				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_uGame",
+				"type": "address"
 			}
 		],
 		"stateMutability": "nonpayable",
@@ -37,8 +42,36 @@
 	},
 	{
 		"inputs": [],
+		"name": "InvalidAccount",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InvalidAmount",
+		"type": "error"
+	},
+	{
+		"inputs": [],
 		"name": "InvalidOwner",
 		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "v1TokenId1",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "v1TokenId2",
+				"type": "uint256"
+			}
+		],
+		"name": "mergeFighters",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
 		"inputs": [
@@ -70,6 +103,11 @@
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "NotEnough",
+		"type": "error"
 	},
 	{
 		"anonymous": false,
@@ -107,36 +145,24 @@
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "_ugNFT",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_unft",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_ublood",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_uring",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_uamulet",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_uArena",
+				"name": "newWallet",
 				"type": "address"
 			}
 		],
-		"name": "setContracts",
+		"name": "setDevWallet",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "setMergePrice",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -166,6 +192,19 @@
 		],
 		"name": "Unpaused",
 		"type": "event"
+	},
+	{
+		"inputs": [],
+		"name": "mergePrice",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
 		"inputs": [],

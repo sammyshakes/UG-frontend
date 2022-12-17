@@ -3,79 +3,6 @@
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "addr",
-				"type": "address"
-			}
-		],
-		"name": "addAdmin",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "tokenId",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint8",
-				"name": "sizeTiersToUpgrade",
-				"type": "uint8"
-			},
-			{
-				"internalType": "uint8",
-				"name": "levelTiersToUpgrade",
-				"type": "uint8"
-			},
-			{
-				"components": [
-					{
-						"internalType": "uint8",
-						"name": "size",
-						"type": "uint8"
-					},
-					{
-						"internalType": "uint8",
-						"name": "level",
-						"type": "uint8"
-					},
-					{
-						"internalType": "uint16",
-						"name": "id",
-						"type": "uint16"
-					},
-					{
-						"internalType": "uint32",
-						"name": "lastLevelUpgradeTime",
-						"type": "uint32"
-					},
-					{
-						"internalType": "uint32",
-						"name": "lastUnstakeTime",
-						"type": "uint32"
-					},
-					{
-						"internalType": "address",
-						"name": "owner",
-						"type": "address"
-					}
-				],
-				"internalType": "struct IUGNFTs.ForgeFightClub",
-				"name": "fightclub",
-				"type": "tuple"
-			}
-		],
-		"name": "addFightClubToQueueAfterLevelSizeUp",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
 				"name": "_ugnft",
 				"type": "address"
 			},
@@ -93,6 +20,11 @@
 				"internalType": "address",
 				"name": "_ugWeapons",
 				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_randomizer",
+				"type": "address"
 			}
 		],
 		"stateMutability": "nonpayable",
@@ -105,67 +37,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "claimFightClubBloodRewards",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "claimRaiderBloodRewards",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256[]",
-				"name": "tokenIds",
-				"type": "uint256[]"
-			},
-			{
-				"components": [
-					{
-						"internalType": "uint8",
-						"name": "size",
-						"type": "uint8"
-					},
-					{
-						"internalType": "uint8",
-						"name": "yakFamily",
-						"type": "uint8"
-					},
-					{
-						"internalType": "uint32",
-						"name": "sweat",
-						"type": "uint32"
-					}
-				],
-				"internalType": "struct IUGRaid.RaiderEntry[]",
-				"name": "raiderEntries",
-				"type": "tuple[]"
-			}
-		],
-		"name": "enterRaid",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "ttlBloodEntryFee",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
 		"name": "InvalidAddress",
-		"type": "error"
-	},
-	{
-		"inputs": [],
-		"name": "InvalidBlock",
 		"type": "error"
 	},
 	{
@@ -189,45 +61,6 @@
 		"type": "error"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256[]",
-				"name": "",
-				"type": "uint256[]"
-			},
-			{
-				"internalType": "uint256[]",
-				"name": "",
-				"type": "uint256[]"
-			},
-			{
-				"internalType": "bytes",
-				"name": "",
-				"type": "bytes"
-			}
-		],
-		"name": "onERC1155BatchReceived",
-		"outputs": [
-			{
-				"internalType": "bytes4",
-				"name": "",
-				"type": "bytes4"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"inputs": [],
 		"name": "OnlyEOA",
 		"type": "error"
@@ -246,7 +79,7 @@
 		"anonymous": false,
 		"inputs": [
 			{
-				"indexed": false,
+				"indexed": true,
 				"internalType": "address",
 				"name": "user",
 				"type": "address"
@@ -254,45 +87,6 @@
 		],
 		"name": "FightClubOwnerBloodRewardClaimed",
 		"type": "event"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"internalType": "bytes",
-				"name": "",
-				"type": "bytes"
-			}
-		],
-		"name": "onERC1155Received",
-		"outputs": [
-			{
-				"internalType": "bytes4",
-				"name": "",
-				"type": "bytes4"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
 	},
 	{
 		"anonymous": false,
@@ -317,19 +111,6 @@
 		"anonymous": false,
 		"inputs": [
 			{
-				"indexed": false,
-				"internalType": "address",
-				"name": "account",
-				"type": "address"
-			}
-		],
-		"name": "Paused",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
 				"indexed": true,
 				"internalType": "uint256",
 				"name": "raidId",
@@ -345,16 +126,6 @@
 					{
 						"internalType": "uint8",
 						"name": "sizeTier",
-						"type": "uint8"
-					},
-					{
-						"internalType": "uint8",
-						"name": "fightClubSize",
-						"type": "uint8"
-					},
-					{
-						"internalType": "uint8",
-						"name": "fightClubLevel",
 						"type": "uint8"
 					},
 					{
@@ -508,7 +279,7 @@
 		"anonymous": false,
 		"inputs": [
 			{
-				"indexed": false,
+				"indexed": true,
 				"internalType": "address",
 				"name": "user",
 				"type": "address"
@@ -619,13 +390,6 @@
 		"type": "event"
 	},
 	{
-		"inputs": [],
-		"name": "referee",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -645,6 +409,447 @@
 		"type": "event"
 	},
 	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "raidId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "yakFamily",
+				"type": "uint256"
+			}
+		],
+		"name": "YakuzaFamilyWinner",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "fighterId",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "raidId",
+				"type": "uint256"
+			}
+		],
+		"name": "YakuzaRaidShareStolen",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			}
+		],
+		"name": "YakuzaTaxPaidFromRaids",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "addr",
+				"type": "address"
+			}
+		],
+		"name": "addAdmin",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint8",
+				"name": "sizeTiersToUpgrade",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint8",
+				"name": "levelTiersToUpgrade",
+				"type": "uint8"
+			},
+			{
+				"components": [
+					{
+						"internalType": "uint8",
+						"name": "size",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "level",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint16",
+						"name": "id",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastLevelUpgradeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "lastUnstakeTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"internalType": "struct IUGNFTs.ForgeFightClub",
+				"name": "fightclub",
+				"type": "tuple"
+			}
+		],
+		"name": "addFightClubToQueueAfterLevelSizeUp",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "claimFightClubBloodRewards",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "claimRaiderBloodRewards",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint8",
+				"name": "level",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint8",
+				"name": "size",
+				"type": "uint8"
+			}
+		],
+		"name": "clearRaiderQueue",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "tokenIds",
+				"type": "uint256[]"
+			},
+			{
+				"components": [
+					{
+						"internalType": "uint8",
+						"name": "size",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "yakFamily",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint32",
+						"name": "sweat",
+						"type": "uint32"
+					}
+				],
+				"internalType": "struct IUGRaid.RaiderEntry[]",
+				"name": "raiderEntries",
+				"type": "tuple[]"
+			}
+		],
+		"name": "enterRaid",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "ttlBloodEntryFee",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "fightClubOwnerBloodRewards",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "levelTier",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "sizeTier",
+				"type": "uint256"
+			}
+		],
+		"name": "getRaidCost",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "price",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint8",
+				"name": "level",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint8",
+				"name": "sizeTier",
+				"type": "uint8"
+			}
+		],
+		"name": "getRaiderQueueLength",
+		"outputs": [
+			{
+				"internalType": "uint16",
+				"name": "",
+				"type": "uint16"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			}
+		],
+		"name": "getStakedFightClubIDsForUser",
+		"outputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_binValues",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "bitsize",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_index",
+				"type": "uint256"
+			}
+		],
+		"name": "getValueInBin",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "pure",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256[]",
+				"name": "",
+				"type": "uint256[]"
+			},
+			{
+				"internalType": "uint256[]",
+				"name": "",
+				"type": "uint256[]"
+			},
+			{
+				"internalType": "bytes",
+				"name": "",
+				"type": "bytes"
+			}
+		],
+		"name": "onERC1155BatchReceived",
+		"outputs": [
+			{
+				"internalType": "bytes4",
+				"name": "",
+				"type": "bytes4"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bytes",
+				"name": "",
+				"type": "bytes"
+			}
+		],
+		"name": "onERC1155Received",
+		"outputs": [
+			{
+				"internalType": "bytes4",
+				"name": "",
+				"type": "bytes4"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "raiderOwnerBloodRewards",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "maxRaiders",
+				"type": "uint256"
+			}
+		],
+		"name": "referee",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -653,6 +858,19 @@
 			}
 		],
 		"name": "removeAdmin",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "removeIfRaiderIsInQueue",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -691,6 +909,11 @@
 				"internalType": "address",
 				"name": "_ugWeapons",
 				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_randomizer",
+				"type": "address"
 			}
 		],
 		"name": "setContracts",
@@ -720,6 +943,19 @@
 			}
 		],
 		"name": "setDevWallet",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "numRaiders",
+				"type": "uint256"
+			}
+		],
+		"name": "setMaxRaidersPerRef",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -790,6 +1026,19 @@
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "sweatRoundActive",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -803,19 +1052,6 @@
 		"type": "function"
 	},
 	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"internalType": "address",
-				"name": "account",
-				"type": "address"
-			}
-		],
-		"name": "Unpaused",
-		"type": "event"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "uint256[]",
@@ -826,249 +1062,6 @@
 		"name": "unstakeFightclubs",
 		"outputs": [],
 		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "uint256",
-				"name": "raidId",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "yakFamily",
-				"type": "uint256"
-			}
-		],
-		"name": "YakuzaFamilyWinner",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "uint256",
-				"name": "fighterId",
-				"type": "uint256"
-			},
-			{
-				"indexed": true,
-				"internalType": "uint256",
-				"name": "raidId",
-				"type": "uint256"
-			}
-		],
-		"name": "YakuzaRaidShareStolen",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			},
-			{
-				"indexed": true,
-				"internalType": "uint256",
-				"name": "timestamp",
-				"type": "uint256"
-			}
-		],
-		"name": "YakuzaTaxPaidFromRaids",
-		"type": "event"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "fightClubOwnerBloodRewards",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "levelTier",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "sizeTier",
-				"type": "uint256"
-			}
-		],
-		"name": "getRaidCost",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "price",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint8",
-				"name": "level",
-				"type": "uint8"
-			},
-			{
-				"internalType": "uint8",
-				"name": "sizeTier",
-				"type": "uint8"
-			}
-		],
-		"name": "getRaiderQueueLength",
-		"outputs": [
-			{
-				"internalType": "uint8",
-				"name": "",
-				"type": "uint8"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "user",
-				"type": "address"
-			}
-		],
-		"name": "getStakedFightClubIDsForUser",
-		"outputs": [
-			{
-				"internalType": "uint256[]",
-				"name": "",
-				"type": "uint256[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_binValues",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "bitsize",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_index",
-				"type": "uint256"
-			}
-		],
-		"name": "getValueInBin",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "pure",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "lastRaidEntryTime",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "owner",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "paused",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "raiderOwnerBloodRewards",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "sweatRoundActive",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
 		"type": "function"
 	},
 	{

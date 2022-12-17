@@ -1,14 +1,65 @@
-import {React} from 'react';
+import {useContext, useState, useEffect} from 'react';
+import ProviderContext from '../context/provider-context';
 import StakedFighterList from '../components/StakedFighterList';
+import StakedYakuzaList from '../components/StakedYakuzaList';
 import ArenaWidget from '../components/ArenaWidget';
 import {Stack} from '@mui/material/';
+import { getUGArena2, getUGFYakuza} from '../utils.js';
+import './arena.css';
+const baseUrl = 'https://the-u.club/reveal/fighteryakuza/'; 
 //{ownedFYs.length>0 && <OwnedFighterList/>}
 
+
+
 const Arena = () => {
+  
+  const[stakedFYs, setStakedFYs] = useState([]);
+
+  const ugArenaContract = getUGArena2();
+  const ugFYakuzaContract = getUGFYakuza();
+
+  const getUpdates = async() => {      
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });      
+    const _stakedIds = await ugArenaContract.getStakedFighterIDsForUser(accounts[0]);        
+    const stakedIds = _stakedIds.map(id => { return Number(id); })       
+    if(stakedIds.length > 0){
+      const _stakedFYs = await ugFYakuzaContract.getFighters(stakedIds); 
+          
+      const stakedFYs = stakedIds.map((id, i) => {        
+        let imageUrl =  "fighter/" ;
+        
+        imageUrl = baseUrl.concat(imageUrl.concat(_stakedFYs[i].imageId).concat('.png'));
+        let fy = {id, imageUrl, ..._stakedFYs[i]};
+        //console.log('fy',fy);
+        return fy;
+      })   
+      setStakedFYs(stakedFYs);
+    } else setStakedFYs([]);
+    
+  }
+
+  useEffect(() => {   
+    getUpdates();
+    const init = async() => {          
+      const timer = setInterval(() => {
+        
+        getUpdates();
+      }, 60000);       
+      return () => {
+        clearInterval(timer);
+      };
+    }
+    init();
+    // eslint-disable-next-line
+  }, []);
+
   return (
-    <Stack className="arena-main" padding={3} direction={{xs: "column", md: "row"}} spacing={5} >      
-      <StakedFighterList className="arena-left"/>
-      <ArenaWidget className="arena-right"/>
+    <Stack justifyContent={'center'} padding={0} margin={0} spacing={2}  >   
+      <ArenaWidget />   
+      <Stack  direction="row" justifyContent={'flex-start'} padding={2} spacing={5} maxWidth={1/1}> 
+        <StakedFighterList stakedFYs={stakedFYs} />
+        <StakedYakuzaList stakedFYs={stakedFYs} />
+      </Stack>
     </Stack>     
   )
 }

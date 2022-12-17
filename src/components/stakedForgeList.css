@@ -1,0 +1,13 @@
+.fc-bordr {
+    border-radius: 10px;
+    border-color: aqua;
+    border: 2px;
+    background-color: black;
+}
+
+.MuiButton-contained:hover{
+    color: aqua;
+    font-weight: 1000;
+    border-color: 'aqua';
+    border: 2px;
+}

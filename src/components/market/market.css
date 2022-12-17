@@ -1,0 +1,16 @@
+.mkt-box{
+    margin:5px;
+    padding: 5px;
+    margin-top: 2px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.712);
+    box-shadow: 0px 0px 5px 3px aqua;
+  }
+
+  .img-box{
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.712);
+    box-shadow: 0px 0px 5px 3px aqua;
+  }
+
+ 

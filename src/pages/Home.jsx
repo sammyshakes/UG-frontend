@@ -1,15 +1,13 @@
 import React from 'react'
-import {Stack} from '@mui/material/';
-import StakedV1FighterList from '../components/StakedV1FighterList'
-import OwnedV1FighterList from '../components/OwnedV1FighterList'
+import OwnedFighterList from '../components/OwnedFighterList'
+import { Stack} from '@mui/material/';
 
 
 const Home = () => {
   return (
     <React.Fragment>
-      <Stack align="left" direction="row" >      
-      <StakedV1FighterList/>
-        <OwnedV1FighterList/>
+      <Stack align="left" direction="row" > 
+        <OwnedFighterList/>
       </Stack>   
     </React.Fragment>
   )

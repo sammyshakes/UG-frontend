@@ -1,27 +1,50 @@
 .box-bordr{
     border-radius: 12px;
-    border: 1px solid rgb(255, 0, 0);
     background: rgba(0, 0, 0);
     padding: 10px;
     width: 395px;
+    min-width: 300px;
     color: aqua;
+    box-shadow: 0px 0px 5px 5px crimson;
   }
 
-  
+  .sweat-box{
+    margin:5px;
+    padding: 5px;
+    margin-top: 20px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.712);
+    box-shadow: 0px 0px 5px 3px orange;
+  }
+  .sweat1-box{
+    margin:5px;
+    padding: 5px;
+    margin-top: 20px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.712);
+    box-shadow: 0px 0px 5px 3px orangered;
+  }
 
 .box1-bordr{
     border-radius: 12px;
-    border: 1px solid rgb(255, 0, 0);
     background: rgba(0, 0, 0);
-    margin-top: 40px;
-    margin-left: 10px;
+    margin: 10px;
+    margin-top: 20px;
     padding: 20px;
-    width: 355px;
-    height: 360px;
+    height: 200px;
     color: aqua;
+    box-shadow: 0px 0px 5px 5px aqua;
   }
+
+  .sweat1-bordr{
+    border-radius: 12px;
+    color: aqua;
+    width: 100px;
+    box-shadow: 0px 0px 10px 3px orange;
+  }
+
   .MuiButton-contained:hover{
     color: aqua;
-    background: rgb(6, 8, 8);
+    background: black;
     font-weight: 100;
 }

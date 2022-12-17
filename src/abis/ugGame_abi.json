@@ -20,6 +20,11 @@
 				"internalType": "address",
 				"name": "_blood",
 				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_ugForgeSmith",
+				"type": "address"
 			}
 		],
 		"stateMutability": "nonpayable",
@@ -75,6 +80,30 @@
 		"inputs": [],
 		"name": "InvalidTokenId",
 		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_levelsToUpgrade",
+				"type": "uint256"
+			}
+		],
+		"name": "levelUpAmulet",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "totalBloodCost",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
 		"inputs": [],
@@ -150,30 +179,6 @@
 		],
 		"name": "BloodBurned",
 		"type": "event"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "tokenId",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_levelsToUpgrade",
-				"type": "uint256"
-			}
-		],
-		"name": "levelUpAmulet",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "totalBloodCost",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
 	},
 	{
 		"inputs": [
@@ -421,6 +426,11 @@
 				"internalType": "address",
 				"name": "_ugArena",
 				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_ugForgeSmith",
+				"type": "address"
 			}
 		],
 		"name": "setContracts",
@@ -593,32 +603,6 @@
 			}
 		],
 		"name": "setMaxFightClubsPerWallet",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "amt",
-				"type": "uint256"
-			}
-		],
-		"name": "setMaxForgesPerMint",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "amt",
-				"type": "uint256"
-			}
-		],
-		"name": "setMaxForgesPerWallet",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -816,6 +800,11 @@
 				"internalType": "uint256",
 				"name": "levelsToUpgrade",
 				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "numFighters",
+				"type": "uint256"
 			}
 		],
 		"name": "getAmuletLevelUpBloodCost",
@@ -946,6 +935,11 @@
 				"internalType": "uint256",
 				"name": "levelsToUpgrade",
 				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "numFighters",
+				"type": "uint256"
 			}
 		],
 		"name": "getRingLevelUpBloodCost",
@@ -967,6 +961,19 @@
 				"internalType": "contract IERC1155",
 				"name": "",
 				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "MAXIMUM_BLOOD_SUPPLY",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -1056,6 +1063,19 @@
 		"outputs": [
 			{
 				"internalType": "contract IUGArena",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "ugForgeSmith",
+		"outputs": [
+			{
+				"internalType": "contract IUGForgeSmith",
 				"name": "",
 				"type": "address"
 			}

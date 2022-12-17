@@ -5,7 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea, Box, Stack } from '@mui/material';
-import {getUGArena} from '../utils.js';
+import {getUGArena2, getUGGame4, getUGNft2} from '../utils.js';
 import './stakedFighterCard.css';
 import CircularProgressWithLabel from './CircularProgressWithLabel';
 /* global BigInt */
@@ -13,11 +13,17 @@ import CircularProgressWithLabel from './CircularProgressWithLabel';
 const StakedFighterCard = (props) => {
   const [unclaimed, setUnclaimed] = useState(undefined);
   const [clicked, setClicked] = useState(false);
-  const [progressForLevel, setProgressForLevel] = useState(0);
-  const [progressForRaid, setProgressForRaid] = useState(0);
+  const [bloodCostToLevel, setBloodCostToLevel] = useState();
+  const [progressForLevel, setProgressForLevel] = useState();
+  const [progressForRaid, setProgressForRaid] = useState();
+  const [timeLeftForRaid, setTimeLeftForRaid] = useState();
+  const [timeLeftForLevel, setTimeLeftForLevel] = useState();
+  const [amulet, setAmulet] = useState();
   const prv = useContext(ProviderContext);
-  const ugArenaContract = getUGArena();
-  const amulet = prv.stakedAmulet;
+  const ugArenaContract = getUGArena2();
+  const ugGameContract = getUGGame4();  
+  const ugNftContract = getUGNft2(); 
+
 
   const clickHandler = () => {
     setClicked((current) => {
@@ -28,38 +34,54 @@ const StakedFighterCard = (props) => {
 
   if(clicked && props.emptyArray) setClicked(false);
 
-  useEffect(() => {   
-    const init = async() => {    
-      const fighterUnclaimed = await ugArenaContract.functions.calculateStakingRewards(props.id);
-      setUnclaimed(fighterUnclaimed);
-      const blockNumber = await prv.provider.getBlockNumber();
-      const block = await prv.provider.getBlock(blockNumber);
-      
-      //kinda need to make sure amulet isnt expired so we can give accurate display
-      let amuletDays = amulet[0].lastLevelUpgradeTime + 7 * 86400 > block.timestamp ? amulet[0].level : 0;
-      
-      let timeLeftToLevelUp = props.lastLevelTime + (7 + amuletDays)*86400 - block.timestamp;
-      let progressLevel = timeLeftToLevelUp > 0 ? timeLeftToLevelUp * 100 /  ((7 + amuletDays)*86400) : 0;
-      setProgressForLevel(progressLevel);
-      //now for Raid progress bar
-      let timeLeftToRaid = props.lastRaidTime + 7 * 86400 - block.timestamp;
-      let progressRaid = timeLeftToRaid > 0 ? timeLeftToRaid * 100 /  (7 * 86400) : 0;
-      setProgressForRaid(progressRaid);
+  const getUpdates = async() => {
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    const stakedAmuletId = await ugArenaContract.getStakedAmuletIDForUser(accounts[0]);
+    const amulet = await ugNftContract.getRingAmulet(Number(stakedAmuletId));
+    const fighterUnclaimed = await ugArenaContract.calculateStakingRewards(props.id);  
+    const bloodCostToLevelUp = await ugGameContract.getFighterLevelUpBloodCost(props.level, 1);     
+    setAmulet(amulet);
+    setUnclaimed(fighterUnclaimed);
+    setBloodCostToLevel(bloodCostToLevelUp);
+ 
+    //kinda need to make sure amulet isnt expired so we can give accurate display
+    const amuletDays = amulet?.lastLevelUpgradeTime + 7 * 86400 > Date.now()/1000 ? amulet?.level : 0;
+    const timeLeftToLevelUp = props.lastLevelTime + (7 + amuletDays)*86400 - Date.now()/1000;
+    const progressLevel = timeLeftToLevelUp > 0 ? timeLeftToLevelUp * 100 /  ((7 + amuletDays)*86400) : 0;
+    setProgressForLevel(progressLevel);
+    
 
+    // console.log('ad', amulet?.lastLevelUpgradeTime);
+    // console.log('timeLeftToLevelUp', timeLeftToLevelUp/  86400);
+    // console.log('amulet days', (7 + amuletDays));
+    // console.log('progressLevel_ceil', Math.ceil(progressLevel));
+  
+
+    //now for Raid progress bar
+    const timeLeftToRaid = props.lastRaidTime + 7 * 86400 - Date.now()/1000;
+    const progressRaid = timeLeftToRaid > 0 ? timeLeftToRaid * 100 /  (7 * 86400) : 0;
+    setProgressForRaid(progressRaid);
+    // console.log('last raid time', props.lastRaidTime);
+    // console.log('timeLeftToRaid', timeLeftToRaid/  86400);
+    // console.log('progressLevel_ceil', Math.ceil(progressRaid));
+    setTimeLeftForLevel(timeLeftToLevelUp);
+    setTimeLeftForRaid(timeLeftToRaid);
+    
+  }
+  
+
+  useEffect(() => {   
+    getUpdates(); 
+
+    const init = async() => {          
+      const fighterUnclaimed = await ugArenaContract.calculateStakingRewards(props.id);
+      setUnclaimed(fighterUnclaimed);
+       
       
       const timer = setInterval(() => {
+        getUpdates();     
        
-        amuletDays = amulet[0].lastLevelUpgradeTime + 7 * 86400 > block.timestamp ? amulet[0].level : 0;
-        
-        timeLeftToLevelUp = props.lastLevelTime + (7 + amuletDays)*86400 - block.timestamp;
-        progressLevel = timeLeftToLevelUp > 0 ? timeLeftToLevelUp * 100 /  ((7 + amuletDays)*86400) : 0;
-        setProgressForLevel(progressLevel);
-        timeLeftToRaid = props.lastRaidTime + 7 * 86400 - block.timestamp;
-        progressRaid = timeLeftToRaid > 0 ? timeLeftToRaid * 100 /  (7 * 86400) : 0;
-        setProgressForRaid(progressRaid);
-        
-      }, 5000);
-
+      }, 15000);
       
       return () => {
         clearInterval(timer);
@@ -74,40 +96,47 @@ const StakedFighterCard = (props) => {
     className={clicked ? "card-bordr clicked": "card-bordr"}
     sx={{
       borderRadius: 6, 
-      maxWidth: 345, 
-      borderColor: clicked ? 'aqua' : 'red' 
+      maxWidth: 450, 
+      minWidth: 110,
+      borderColor: clicked ? 'aqua' : 'red' ,
+      borderWidth: 2
     }}>
       <CardActionArea onClick={clickHandler} >
         <CardContent  align="center" sx={{p: 0,color: 'red'}}>
-          {props.isFighter && <Typography gutterBottom variant="body2" component="div" sx={{fontFamily: 'Roboto', fontSize:'.75rem'}}>
-                                {`  LEVEL ${props.level}`}
-                              </Typography>}
+        {props.isFighter &&   <Typography gutterBottom variant="body2" component="div" sx={{fontFamily: 'Roboto', fontSize:'.6rem'}}>
+          {`#${props.id} `}
+                                </Typography>}
+          {props.isFighter &&   <Typography gutterBottom variant="body2" component="div" sx={{fontFamily: 'Roboto', fontSize:'.6rem', color: 'aqua'}}>
+          {`  LEVEL: ${props.level}`}
+                                </Typography>}
+          {props.isFighter &&  <Typography sx={{ fontSize: '.6rem', color: 'orange'}}>{`BR: ${props.brutality} Co: ${props.courage} Cu: ${props.cunning}`}</Typography>}
+         
           {props.isFighter &&   <Typography variant="body2" sx={{fontFamily: 'Alegreya Sans SC', fontSize:'.8rem'}}>
                                   {` ${unclaimed} BLOOD `}
                                 </Typography>}
-            {!props.isFighter && <Typography gutterBottom variant="body2" component="div" sx={{fontFamily: 'Roboto',color: 'cyan', fontSize:'.75rem'}}>
+          {!props.isFighter &&  <Typography gutterBottom variant="body2" component="div" sx={{fontFamily: 'Roboto',color: 'cyan', fontSize:'.75rem'}}>
                                   {` RANK ${props.rank}`}
                                 </Typography>}
-            {!props.isFighter &&   <Typography variant="body2" sx={{fontFamily: 'Alegreya Sans SC', color: 'yellow', fontSize:'.75rem'}}>
-                                      {` ${unclaimed} BLOOD `}
-                                    </Typography>}
+          {!props.isFighter &&  <Typography variant="body2" sx={{fontFamily: 'Alegreya Sans SC', color: 'yellow', fontSize:'.75rem'}}>
+                                  {` ${unclaimed} BLOOD `}
+                                </Typography>}
+                             
         </CardContent>
         <CardMedia
           component="img"
-          height="150"
+          height="180"
           image={props.imageUrl}
           alt="FYakuza"
           loading="lazy"
         />
         <CardContent  align="center" sx={{p: 0,color: 'cyan'}}>
         {props.isFighter && <Stack   >
-          <Box  sx={{ display: 'inline-flex',justifyContent: 'space-evenly' }}>
-                              <Stack direction="row"  spacing={2} >
-                             
-                                <CircularProgressWithLabel value={progressForLevel} sx={{  }} style={{color: Math.round(progressForLevel, 2) < 20 ? "red" : "chartreuse"}}/>
-                                <CircularProgressWithLabel value={progressForRaid} sx={{}} style={{color: Math.round(progressForRaid, 2) < 20 ? "red" : "chartreuse"}}/>
-                              
-                              </Stack>
+                              <Typography sx={{ fontSize: '.6rem', color: 'gold'}}>{`Level Up Cost: ${bloodCostToLevel}`}</Typography>
+                              <Box  sx={{ display: 'inline-flex',justifyContent: 'space-evenly' }}>
+                                <Stack direction="row"  spacing={2} >                              
+                                  <CircularProgressWithLabel value={Math.ceil(progressForLevel)} time={timeLeftForLevel  } style={{color: Math.ceil(progressForLevel) < 20 ? "red" : "chartreuse"}}/>
+                                  <CircularProgressWithLabel value={Math.ceil(progressForRaid)} time={ timeLeftForRaid} style={{color: Math.ceil(progressForRaid) < 20 ? "red" : "chartreuse"}}/>                                
+                                </Stack>
                               </Box>
                               <Box  sx={{ display: 'inline-flex',justifyContent: 'space-evenly' }}>
                                 <Typography sx={{ fontSize: '.6rem'}}>LEVEL</Typography>

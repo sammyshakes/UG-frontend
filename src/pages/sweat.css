@@ -1,0 +1,32 @@
+.MuiButton-contained:hover {
+    color: black;
+    background: deepskyblue;
+    font-weight: 1000;
+}
+.MuiButton-contained {
+    border-radius: 12px;
+    color:deepskyblue;
+    background: black;
+    font-weight: 1000;
+}
+
+.swet-box {
+    text-align: center;
+    margin:5px;
+    padding: 5px;
+    margin-top: 20px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.712);
+    box-shadow: 0px 0px 5px 4px red;
+}
+.swet2 {
+    text-align: center;
+}
+
+.swet1-bordr {
+    margin:5px;
+    padding: 5px;
+    border-radius: 12px;
+    width: 100%;
+    box-shadow: 0px 0px 10px 3px red;
+}

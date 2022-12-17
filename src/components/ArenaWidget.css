@@ -2,7 +2,14 @@
     border-radius: 12px;
     border: 1px solid rgb(255, 0, 0);
     background-color: rgba(87, 2, 2, 0.5);
-    box-shadow: 0px 0px 25px 5px rgb(8, 240, 240);
+    box-shadow: 0px 0px 10px 5px rgb(8, 240, 240);
+    min-width:850px;
+  }
+  .ring-bordr1{
+    border-radius: 12px;
+    border: 1px solid rgb(255, 0, 0);
+    background-color: rgba(87, 2, 2, 0.5);
+    box-shadow: 0px 0px 10px 5px orangered;
     min-width:170px;
     align-items: center;
   }
@@ -15,14 +22,14 @@
 
   .inner-bordr{
     border-radius: 12px;
-    border: 1px solid rgb(8, 240, 240);
-    align-items: center;
+    box-shadow: 0px 0px 50px 3px aqua;
+    border: 1px solid aqua;
+    
   }
   .stack-back{
     background-color: rgb(0, 0, 0, 0);
-    align-items: center;
   }
   .MuiButton-text:hover{
-    color: red;
+    color: aqua;
     font-weight: 1000;
 }

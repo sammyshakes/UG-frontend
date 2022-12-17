@@ -20,10 +20,15 @@ export default function CircularProgressWithLabel(props) {
           justifyContent: 'center',
         }}
       >
-        <Typography variant="caption" component="div" fontSize={'.6rem'} style={{color: Math.round(props.value) < 20 ? "red" : "cyan"}}>
-          {`${Math.round(props.value)}%`}
-        </Typography>
-        
+        {props.time/(86400) >= 1 && <Typography variant="caption" component="div" fontSize={'.6rem'} style={{color: Math.round(props.value) < 20 ? "orange" : "cyan"}}>
+          {`${Math.floor(props.time/(86400))}D+`}
+        </Typography>}
+        {Math.floor(props.time/(86400))<1 && Math.round(props.time/(3600))>0 && <Typography variant="caption" component="div" fontSize={'.7rem'} style={{color: Math.round(props.value) < 20 ? "orangered" : "cyan"}}>
+          {`${Math.floor(props.time/(3600)).toString() }H+`}
+        </Typography>}
+        {props.time <=0 && <Typography variant="caption" component="div" fontSize={'.6rem'} style={{color: Math.round(props.value) < 20 ? "orangered" : "cyan"}}>
+         0%
+        </Typography>}       
       </Box>
     </Box>
   );
