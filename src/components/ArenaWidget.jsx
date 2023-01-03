@@ -6,7 +6,7 @@ import ProviderContext from '../context/provider-context.js';
 import ringImage from '../assets/images/ring_500.png';
 import amuletImage from '../assets/images/amulet_500.png';
 import CircularProgressWithLabel from './CircularProgressWithLabel';
-import { getUGGame4, getUGArena2, getEthers, getUGNft2 } from '../utils.js';
+import { getUGGame5, getUGArena2, getUGArena3, getEthers, getUGNft2 } from '../utils.js';
 import ErrorModal from './ui/ErrorModal';
 /* global BigInt */
 
@@ -29,8 +29,9 @@ const ArenaWidget = (props) => {
 
   const prv = useContext(ProviderContext);
   const provider = getEthers();
-  const ugGameContract = getUGGame4();
+  const ugGameContract = getUGGame5();
   const ugArenaContract = getUGArena2();
+  const ugArena3Contract = getUGArena3();
   const ugNftContract = getUGNft2();
   
   const refreshProgress = async() => {
@@ -184,10 +185,10 @@ const ArenaWidget = (props) => {
 
   const levelAmuletHandler = async() => {
     //check for proper number of fighters
-    if(numStakedFighters < (amulet?.level + 1) * 4){
+    if(numStakedFighters < (amulet?.level + 1) * 3){
       setError({
           title: 'Your Army is too small!',
-          message: 'You need at least 4 fighters per Amulet Level.',
+          message: 'You need at least 3 fighters per Amulet Level.',
       });
       return;
     }
@@ -208,10 +209,10 @@ const ArenaWidget = (props) => {
 
   const maintainAmuletHandler = async() => {
     //check for proper number of fighters
-    if(numStakedFighters < amulet?.level * 4){
+    if(numStakedFighters < amulet?.level * 3){
       setError({
           title: 'Your Army is too small!',
-          message: 'You need at least 4 fighters per Ring Level.',
+          message: 'You need at least 3 fighters per Ring Level.',
       });
       return;
     }

@@ -55,22 +55,6 @@ export default function StakedFightClubList() {
       setSelectedFClubs([]);
     }
 
-    const maintainHandler = async() => {
-      if(selectedFClubs.length < 1){
-        setError({
-          title: 'Please Select a Fight Club',
-          message: 'Unless your scared..',
-        });
-        return;
-      }
-      const levelUpArray = selectedFClubs.map(i => { return 0;});
-      const sizeUpArray  = selectedFClubs.map(i => { return 0;});
-      const signedContract =  ugGameContract.connect(prv.provider.getSigner());
-      await signedContract.functions.levelUpFightClubs(selectedFClubs, levelUpArray, sizeUpArray) ;
-      //reset selected FYs array
-      setSelectedFClubs([]);
-    }
-
     const sizelevelHandler = async() => {
       const levelUpArray = selectedFClubs.map(i => { return 1;});
       const sizeUpArray  = selectedFClubs.map(i => { return 1;});
@@ -249,8 +233,8 @@ export default function StakedFightClubList() {
         <ButtonGroup variant="contained" color="error" sx={{ borderColor: 'red', border: 3  }}>
           <Button  variant="contained"  sx={{backgroundColor: 'black', color: 'red'}} onClick={sizeHandler} >Size Up </Button>
           <Button  variant="contained"  sx={{backgroundColor: 'black', color: 'red'}} onClick={levelHandler} >Level UP </Button>
+          <Button  variant="contained"  sx={{backgroundColor: 'black', color: 'red'}} onClick={claimAllHandler} >Claim All </Button>
           
-          <Button  variant="contained"  sx={{backgroundColor: 'black', color: 'red'}} onClick={maintainHandler} >maintain </Button>
           <Button  variant="contained"  sx={{backgroundColor: 'black', color: 'red'}} onClick={unstakeHandler} >Unstake </Button>
           <Button  variant="contained"  sx={{backgroundColor: 'black', color: 'red'}} onClick={unstakeAllHandler} >Unstake All </Button>
           <Button  variant="contained"  sx={{backgroundColor: 'black', color: 'red'}} onClick={UnselectHandler} >Unselect </Button>
