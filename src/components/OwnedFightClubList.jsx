@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 import {Button, Stack, ButtonGroup} from '@mui/material';
 import Typography from '@mui/material/Typography';
 import './ownedFightClubList.css';
-import {getUGRaid2, getUGRaid3, getUGNft2, getUGGame4, getUGMarket} from '../utils.js';
+import {getUGRaid3, getUGNft2, getUGGame5, getUGMarket, getFclubAlley} from '../utils.js';
 import ErrorModal from './ui/ErrorModal';
 import ListSingleModal from './ListSingleFclubModal';
 /* global BigInt */
@@ -21,11 +21,11 @@ export default function OwnedFightClubList() {
     const [isApprovedMarket, setIsApprovedMarket] = useState(false);
     const [error, setError] = useState();
     const ugRaidContract = getUGRaid3();
-    const ugRaid2Contract = getUGRaid2();
-    const ugGameContract = getUGGame4();
+    const fclubAlleyContract = getFclubAlley();
+    const ugGameContract = getUGGame5();
     const ugNftContract = getUGNft2();
     const ugMarketContract = getUGMarket();
-    const signedContract =  ugRaidContract.connect(prv.provider.getSigner());
+    const signedContract =  fclubAlleyContract.connect(prv.provider.getSigner());
 
     const getUpdates = async() => {
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });       
@@ -70,22 +70,6 @@ export default function OwnedFightClubList() {
       setSelectedFClubs([]);
     }
 
-    const maintainHandler = async() => {
-      if(selectedFClubs.length < 1){
-        setError({
-          title: 'Please Select a Fight Club',
-          message: 'Unless your scared..',
-        });
-        return;
-      }
-      const levelUpArray = selectedFClubs.map(i => { return 0;});
-      const sizeUpArray  = selectedFClubs.map(i => { return 0;});
-      const signedContract =  ugGameContract.connect(prv.provider.getSigner());
-      await signedContract.functions.levelUpFightClubs(selectedFClubs, levelUpArray, sizeUpArray) ;
-      //reset selected FYs array
-      setSelectedFClubs([]);
-    }
-
     const stakeHandler = async() => {    
       if(selectedFClubs.length < 1){
       setError({
@@ -94,26 +78,6 @@ export default function OwnedFightClubList() {
       });
       return;
       }
-      const Clubs = selectedFClubs?.map(fClub => {
-        return fclubs?.filter(fclub => fclub.id == fClub);
-      })
-      const expiredClubs = Clubs?.filter(club =>   Number(club[0]?.lastLevelUpgradeTime) + 86400 * 7 < Date.now() / 1000 );
-      if(expiredClubs.length > 0){
-        setError({
-          title: 'Expired Fight Club!',
-          message: 'can only stake a maintained fight club..',
-        });
-        return;
-        }  
-        const coolDownClubs = Clubs?.filter(club =>  (Number(club[0]?.lastUnstakeTime) > 0 && Number(club[0]?.lastUnstakeTime) + 86400 * 2 > Date.now() / 1000 ));
-        
-        if(coolDownClubs?.length > 0){
-          setError({
-            title: 'Fight Club in Cool Down!',
-            message: 'wait til Cool Down timer reaches 0..',
-          });
-          return;
-          }  
       await signedContract.functions.stakeFightclubs(selectedFClubs) ;
       //reset selected FYs array
       setSelectedFClubs([]);
@@ -131,25 +95,6 @@ export default function OwnedFightClubList() {
       });
       return;
     }
-    const Clubs = fclubIds?.map(fClub => {
-      return fclubs?.filter(fclub => fclub.id == fClub);
-    })
-    const expiredClubs = Clubs?.filter(club =>   Number(club[0]?.lastLevelUpgradeTime) + 86400 * 7 > Date.now() / 1000 );
-    if(expiredClubs.length > 0){
-      setError({
-        title: 'Expired Fight Club!',
-        message: 'can only stake a maintained fight club..',
-      });
-      return;
-      }  
-      const coolDownClubs = Clubs?.filter(club =>  (Number(club[0]?.lastUnstakeTime) > 0 && Number(club[0]?.lastUnstakeTime) + 86400 * 2 < Date.now() / 1000 ));
-      if(coolDownClubs.length > 0){
-        setError({
-          title: 'Fight Club in Cool Down!',
-          message: 'wait til Cool Down timer reaches 0..',
-        });
-        return;
-        }  
       //gonna return here until staking is active      
       await signedContract.functions.stakeFightclubs(fclubIds) ;
       //reset selected FYs array
@@ -179,7 +124,7 @@ export default function OwnedFightClubList() {
 
     const approveHandler = async() => {       
       const signedContract =  ugNftContract.connect(prv.provider.getSigner());
-      await signedContract.functions.setApprovalForAll(ugRaidContract.address, true) ;      
+      await signedContract.functions.setApprovalForAll(fclubAlleyContract.address, true) ;      
       return;      
     }
 
@@ -277,7 +222,6 @@ export default function OwnedFightClubList() {
           <Button  variant="contained" size="small" sx={{backgroundColor: 'black', color: 'red'}} onClick={sizeHandler} >size up </Button>
           <Button  variant="contained" size="small" sx={{backgroundColor: 'black', color: 'red'}} onClick={levelHandler} >level up </Button>    
              
-          <Button  variant="contained" size="small" sx={{backgroundColor: 'black', color: 'red'}} onClick={maintainHandler} >maintain </Button>
          
          
           {isApproved &&<Button  variant="contained" size="small" sx={{backgroundColor: 'black', color: 'red'}} onClick={stakeHandler} >stake </Button>}

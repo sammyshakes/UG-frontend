@@ -5,12 +5,12 @@ import FighterListingModal from './FighterListingModal'
 import './stakedFighterList.css';
 import ErrorModal from './ui/ErrorModal';
 import {Button, Stack, ButtonGroup, Typography, Box, ImageList, ImageListItem} from '@mui/material';
-import {getUGGame5, getUGArena3, getUGFYakuza, getUGMarket} from '../utils.js';
+import {getUGGame5, getUGYakDen, getUGFYakuza, getUGMarket} from '../utils.js';
 import TransferNft from './TransferNft'
 const baseUrl = 'https://the-u.club/reveal/fighteryakuza/';
 
 
-export default function OwnedFighterList() {
+export default function OwnedYakuzaList() {
     const prv = useContext(ProviderContext);
     const[selectedFYs, setSelectedFYs] = useState([]);    
     const[listIds, setListIds] = useState([]);  
@@ -22,13 +22,13 @@ export default function OwnedFighterList() {
     const [fighterListingModalIsShown, setFighterListingModalIsShown] = useState(false);
     const [error, setError] = useState();
     const ugGameContract = getUGGame5();
-    const ugArenaContract = getUGArena3();
+    const ugYakDenContract = getUGYakDen();
     const ugFyakuzaContract = getUGFYakuza();
     const ugMarketContract = getUGMarket();
 
     const getUpdates = async() => {
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });       
-      const approved = await ugFyakuzaContract.isApprovedForAll(accounts[0], ugArenaContract.address);
+      const approved = await ugFyakuzaContract.isApprovedForAll(accounts[0], ugYakDenContract.address);
       setIsApproved(approved);
 
       const approvedMarket = await ugFyakuzaContract.isApprovedForAll(accounts[0], ugMarketContract.address);
@@ -45,13 +45,13 @@ export default function OwnedFighterList() {
         let fy = {id, imageUrl, ..._ownedFYs[i]};
         return fy;
       })
-      ownedFYs = ownedFYs?.filter(fy => fy.isFighter === true);
+      ownedFYs = ownedFYs?.filter(fy => fy.isFighter === false);
       setOwnedFYs(ownedFYs);
     } 
 
     const approveHandler = async() => {
       const signedContract =  ugFyakuzaContract.connect(prv.provider.getSigner());
-      await signedContract.functions.setApprovalForAll(ugArenaContract.address, true) ;      
+      await signedContract.functions.setApprovalForAll(ugYakDenContract.address, true) ;      
       return;  
     }
 
@@ -71,15 +71,14 @@ export default function OwnedFighterList() {
       }
       console.log('selectedFYs',selectedFYs);
       const amountArray = selectedFYs.map(i => { return 1;});
-      const signedContract =  ugGameContract.connect(prv.provider.getSigner());
-      await signedContract.functions.levelUpFighters(selectedFYs, amountArray, false) ;
+      const signedContract =  ugYakDenContract.connect(prv.provider.getSigner());
+      await signedContract.functions.rankUpYakuzas(selectedFYs, amountArray, false) ;
       //reset selected FYs array
       setSelectedFYs([]);
     }
 
-    const stakeAllHandler = async() => {
-      
-      const signedContract =  ugArenaContract.connect(prv.provider.getSigner());
+    const stakeAllHandler = async() => {      
+      const signedContract =  ugYakDenContract.connect(prv.provider.getSigner());
       await signedContract.functions.stakeManyToArena(ownedIds) ;
       //reset selected FYs array
       setSelectedFYs([]);      
@@ -93,7 +92,7 @@ export default function OwnedFighterList() {
         });
         return;
       }
-      const signedContract =  ugArenaContract.connect(prv.provider.getSigner());
+      const signedContract =  ugYakDenContract.connect(prv.provider.getSigner());
       const receipt = await signedContract.functions.stakeManyToArena(selectedFYs) ;
       //reset selected FYs array
       setSelectedFYs([]);      
@@ -177,7 +176,7 @@ export default function OwnedFighterList() {
       />}
     <Box className="staked-bordr" mb={5} maxWidth={{sm: 800, md: 800}} maxHeight={{sm: 700, md: 700}}>
         <Typography variant="h4" align="center" sx={{fontFamily: 'Alegreya Sans SC', p:1, color: 'red' }}>
-            Wallet Fighters
+            Wallet Yakuza
         </Typography>
     <ImageList sx={{p:1, width: 750, height: 500 }} cols={5} rowHeight={250}  >
       {ownedFYs.map((fy) => (
