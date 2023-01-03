@@ -46,37 +46,37 @@ const Sidebar = () => {
     <ProviderContext.Provider value={{       
       balance: balance
     }}>
-    <Box className="sidebar-bordr" sx={{m:4, p:2, maxHeight: 810,  color: 'yellow'}}>
-        <Stack direction= {{sm: "row", md: "column"}}  justifyContent={"space-evenly"} align-items="center"  spacing={2}>       
-            <NavLink  to ='market' style={{textDecoration: "none", color: 'aqua'}}>Market</NavLink >
-            <NavLink  to ='mint' style={{textDecoration: "none", color: 'aqua'}}>Mint</NavLink >
-            <NavLink  to ='arena' style={{textDecoration: "none", color: 'aqua'}}>Arena</NavLink >
-            <NavLink  to ='raids' style={{textDecoration: "none", color: 'aqua'}}>Raids</NavLink >  
-            <NavLink  to ='weapons' style={{textDecoration: "none", color: 'aqua'}}>Weapons</NavLink >   
-            <NavLink  to ='sweat' style={{textDecoration: "none", color: 'aqua'}}>Sweat</NavLink >  
-            <NavLink  to ='forge' style={{textDecoration: "none", color: 'aqua'}}>Forge</NavLink >
-            <NavLink  to ='fightclubs' style={{textDecoration: "none", color: 'aqua'}}>FightClubs</NavLink >
-            <NavLink  to ='raidstats' style={{textDecoration: "none", color: 'aqua'}}>Raid Stats</NavLink >
-            <NavLink  to ='merge' style={{textDecoration: "none", color: 'aqua'}}>Merge</NavLink >
-            <NavLink  to ='wallet' style={{textDecoration: "none", color: 'aqua'}}>Wallet</NavLink >
-            <NavLink  to ='bloodGames' style={{textDecoration: "none", color: 'aqua'}}>Blood Fomo</NavLink >
-            <NavLink  to ='fighterGames' style={{textDecoration: "none", color: 'aqua'}}>Fighter Fomo</NavLink >
-            <ExternalLink href="https://docs.theundergroundresurrection.club/" target="_blank" style={{textDecoration: "none", color: 'aqua'}}>Whitepaper</ExternalLink>
-       
-            <NavLink  to ='migrate' style={{textDecoration: "none", color: 'aqua'}}>Migrate V1</NavLink > 
-            <NavLink  to ='v2fix' style={{textDecoration: "none", color: 'aqua'}}>Fix V2</NavLink >
-            
-            <Stack  direction= {{sm: "row", md: "column"}} spacing={1} className="sidebar-bordr shadw" p={1} sx={{backgroundColor:'black'}}>
-              <Stack sx={{fontSize:'.8rem', color: 'red', pb: 1,borderRadius: 5}}>
-                <span >Blood:</span>
-                <span>{Math.floor(balance).toString()}</span>
-              </Stack>   
-              <Stack sx={{fontSize:'.8rem', color: 'deepskyblue', pb: 1,borderRadius: 5}}>
-                <span >Sweat:</span>
-                <span>{Math.floor(sweatBalance).toString()}</span>
-              </Stack> 
-            </Stack> 
-          </Stack>
+    <Box className="sidebar-bordr" sx={{m:4, p:2, maxHeight: 720,  color: 'yellow'}}>
+      <Stack direction= {{sm: "row", md: "column"}}  justifyContent={"space-evenly"} align-items="center"  spacing={2}>       
+        <NavLink  to ='market' style={{textDecoration: "none", color: 'aqua'}}>Market</NavLink >
+        <NavLink  to ='mint' style={{textDecoration: "none", color: 'aqua'}}>Mint</NavLink >
+        <NavLink  to ='arena' style={{textDecoration: "none", color: 'aqua'}}>Arena</NavLink >
+        <NavLink  to ='raids' style={{textDecoration: "none", color: 'aqua'}}>Raids</NavLink >  
+        <NavLink  to ='weapons' style={{textDecoration: "none", color: 'aqua'}}>Weapons</NavLink >   
+        <NavLink  to ='sweat' style={{textDecoration: "none", color: 'aqua'}}>Sweat</NavLink >  
+        <NavLink  to ='forge' style={{textDecoration: "none", color: 'aqua'}}>Forge</NavLink >
+        <NavLink  to ='fightclubs' style={{textDecoration: "none", color: 'aqua'}}>FightClubs</NavLink >
+        <NavLink  to ='raidstats' style={{textDecoration: "none", color: 'aqua'}}>Raid Stats</NavLink >
+        <NavLink  to ='merge' style={{textDecoration: "none", color: 'aqua'}}>Merge</NavLink >
+        <NavLink  to ='wallet' style={{textDecoration: "none", color: 'aqua'}}>Wallet</NavLink >
+        <NavLink  to ='bloodGames' style={{textDecoration: "none", color: 'aqua'}}>Blood Fomo</NavLink >
+        {false && <NavLink  to ='fighterGames' style={{textDecoration: "none", color: 'aqua'}}>Fighter Fomo</NavLink >}
+        <ExternalLink href="https://docs.theundergroundresurrection.club/" target="_blank" style={{textDecoration: "none", color: 'aqua'}}>Whitepaper</ExternalLink>
+    
+        <NavLink  to ='migrate' style={{textDecoration: "none", color: 'aqua'}}>Migrate V1</NavLink > 
+        {false && <NavLink  to ='v2fix' style={{textDecoration: "none", color: 'aqua'}}>Fix V2</NavLink>}
+        
+        <Stack  direction= {{sm: "row", md: "column"}} spacing={1} className="sidebar-bordr shadw" p={1} sx={{backgroundColor:'black'}}>
+          <Stack sx={{fontSize:'.8rem', color: 'red', pb: 1,borderRadius: 5}}>
+            <span >Blood:</span>
+            <span>{Math.floor(balance).toString()}</span>
+          </Stack>   
+          <Stack sx={{fontSize:'.8rem', color: 'deepskyblue', pb: 1,borderRadius: 5}}>
+            <span >Sweat:</span>
+            <span>{Math.floor(sweatBalance).toString()}</span>
+          </Stack> 
+        </Stack> 
+      </Stack>
     </Box>
     
     </ProviderContext.Provider>

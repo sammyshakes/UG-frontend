@@ -3,7 +3,7 @@ import ProviderContext from '../context/provider-context';
 import './forgeMintBox.css'
 import {Box, Stack, Avatar, Typography, Button, Card, CardMedia, CardActions } from '@mui/material/';
 import bloodToken from '../assets/images/coin_transp_500.png';
-import {getUGGame3, getBlood, getUGNft2} from '../utils.js';
+import {getUGGame5, getBlood, getUGNft2} from '../utils.js';
 import ErrorModal from './ui/ErrorModal';
 
 const baseUrl = 'https://the-u.club/reveal/amulet/amulet_v2.png';
@@ -14,7 +14,7 @@ export default function AmuletMintBox() {
     const [balance, setBalance] = useState();
     const [numMinted, setNumMinted] = useState();
     const prv = useContext(ProviderContext);
-    const ugGameContract = getUGGame3();
+    const ugGameContract = getUGGame5();
     const bloodContract = getBlood();
     const ugNftContract = getUGNft2();    
 
