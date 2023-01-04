@@ -8,6 +8,7 @@ import amuletImage from '../assets/images/amulet_500.png';
 import CircularProgressWithLabel from './CircularProgressWithLabel';
 import { getUGGame5, getUGArena2, getUGArena3, getEthers, getUGNft2 } from '../utils.js';
 import ErrorModal from './ui/ErrorModal';
+import ArenaWidgetRankFix from './ArenaWidgetRankFix';
 /* global BigInt */
 
 const ArenaWidget = (props) => {
@@ -25,7 +26,8 @@ const ArenaWidget = (props) => {
   const [ringLevelCost, setRingLevelCost] = useState();
   const [amuletLevelCost, setAmuletLevelCost] = useState();
   const [ringMaintainCost, setRingMaintainCost] = useState();
-  const [amuletMaintainCost, setAmuletMaintainCost] = useState();
+  const [amuletMaintainCost, setAmuletMaintainCost] = useState();  
+  const [needsToUnstake, setNeedsToUnstake] = useState();
 
   const prv = useContext(ProviderContext);
   const provider = getEthers();
@@ -36,16 +38,26 @@ const ArenaWidget = (props) => {
   
   const refreshProgress = async() => {
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-    const ring = await ugNftContract.getRingAmulet(ugArenaContract.getStakedRingIDForUser(accounts[0]));    
-    const amulet = await ugNftContract.getRingAmulet(ugArenaContract.getStakedAmuletIDForUser(accounts[0]));
-    
+    let stakedRingId = await ugArenaContract.getStakedRingIDForUser(accounts[0]);
+    let stakedAmuletId = await ugArenaContract.getStakedAmuletIDForUser(accounts[0]);
+    //check if any need to be fixed from bloodRankFix
+    if((stakedRingId || stakedAmuletId) &&  (Number(stakedRingId) > 0 || Number(stakedAmuletId) > 0)){
+      setNeedsToUnstake(true);
+    } else {      
+      setNeedsToUnstake(false);
+      stakedRingId = ugArena3Contract.getStakedRingIDForUser(accounts[0]);
+      stakedAmuletId = ugArena3Contract.getStakedAmuletIDForUser(accounts[0]);
+    }
+
+    const ring = await ugNftContract.getRingAmulet(stakedRingId);    
+    const amulet = await ugNftContract.getRingAmulet(stakedAmuletId);
 
     if(amulet){
       const amuletExpireTime =   amulet?.lastLevelUpgradeTime + 7 * 86400 ;
       const timeLeftAmulet =  amuletExpireTime - (Date.now()/1000);
       const progressAmulet =   timeLeftAmulet * 100 /  (7 *86400) ;
       setProgressForAmulet(progressAmulet);
-      setTimeLeftForAmulet(timeLeftAmulet) 
+      setTimeLeftForAmulet(timeLeftAmulet) ;
     } else setProgressForAmulet(0);
     
     //now for Ring progress bar
@@ -128,10 +140,8 @@ const ArenaWidget = (props) => {
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
     const stakedRingId = await ugArenaContract.getStakedRingIDForUser(accounts[0]);
     const signedContract =  ugGameContract.connect(provider.getSigner());
-    console.log(signedContract);
     //const ids = selectedFYs.map(id => { return Number(id.toString()); })
     const receipt = await signedContract.functions.levelUpRing(stakedRingId, 1) ;
-    console.log(receipt);
   }
   const maintainRingHandler = async() => {
     //check for amulet if ring > 10
@@ -170,7 +180,6 @@ const ArenaWidget = (props) => {
   const unstakeRingHandler = async() => {
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
     const stakedRingId = await ugArenaContract.getStakedRingIDForUser(accounts[0]);
-    console.log('sr',stakedRingId);
     const signedContract =  ugArenaContract.connect(provider.getSigner());
     const receipt = await signedContract.functions.unstakeRing(Number(stakedRingId)) ;
   }
@@ -257,6 +266,7 @@ const ArenaWidget = (props) => {
 
   return (
     <div>
+      
     {error && (
                 <ErrorModal 
                     title={error.title} 
@@ -264,7 +274,8 @@ const ArenaWidget = (props) => {
                     onConfirm={errorHandler}
                 />
     )}
-   <Box className="ring-bordr" maxWidth={9/10} maxHeight={220}  sx={{display: 'flex',
+    { needsToUnstake && <ArenaWidgetRankFix ring={ring} amulet={amulet}/>}
+    {!needsToUnstake && <Box className="ring-bordr" maxWidth={9/10} maxHeight={220}  sx={{display: 'flex',
           justifyContent: 'center',py:1}} >
     <Box  className="inner-bordr" maxWidth={9/10} maxHeight={180} p={1.5}  sx={{display: 'flex',
           justifyContent: 'space-between',backgroundColor:'rgb(0,0,0,.5)'}}>
@@ -291,17 +302,17 @@ const ArenaWidget = (props) => {
           </Stack>
       
           
-          {ring?.level > 0  &&  <Stack >            
-            <Box sx={{pl: 1.5, pt: 2}}>
-            <CircularProgressWithLabel time={timeLeftForRing  } value={progressForRing>0 ? progressForRing : 0} size='3.3rem' thickness={4} sx={{}} style={{color: Math.round(progressForRing, 2) < 20 ? "red" : "chartreuse"}}></CircularProgressWithLabel>
-            </Box>         
-            <Box >
-            <Button variant="text" onClick={levelRingHandler} size="small" sx={{ maxHeight: 30, backgroundColor:'none', color: 'red', borderColor: 'aqua',  fontSize: '.8rem'}}  >level up</Button>
-            </Box>
-            <Box >
-             <Button variant="text" onClick={maintainRingHandler} size="small" sx={{ maxHeight: 30, backgroundColor:'none', color: 'red', borderColor: 'aqua',  fontSize: '.8rem'}}  >maintain</Button>
-            </Box>                               
-          </Stack>}
+            {ring?.level > 0  &&  <Stack >            
+              <Box sx={{pl: 1.5, pt: 2}}>
+              <CircularProgressWithLabel time={timeLeftForRing  } value={progressForRing>0 ? progressForRing : 0} size='3.3rem' thickness={4} sx={{}} style={{color: Math.round(progressForRing, 2) < 20 ? "red" : "chartreuse"}}></CircularProgressWithLabel>
+              </Box>         
+              <Box >
+              <Button variant="text" onClick={levelRingHandler} size="small" sx={{ maxHeight: 30, backgroundColor:'none', color: 'red', borderColor: 'aqua',  fontSize: '.8rem'}}  >level up</Button>
+              </Box>
+              <Box >
+              <Button variant="text" onClick={maintainRingHandler} size="small" sx={{ maxHeight: 30, backgroundColor:'none', color: 'red', borderColor: 'aqua',  fontSize: '.8rem'}}  >maintain</Button>
+              </Box>                               
+            </Stack>}
           <Stack >
             <Box height={80} sx={{pl: 1.5, pt: 2}}>
             </Box>
@@ -331,7 +342,7 @@ const ArenaWidget = (props) => {
                             </Typography>}              
             </Box>
             <Box sx={{}}>
-            {amulet?.level > 0  &&   <Button variant="text" onClick={unstakeAmuletHandler} size="small" sx={{pl: 1.4, maxHeight: 30, backgroundColor:'none', color: 'red', borderColor: 'aqua', fontSize: '.7rem'}} >unstake</Button>}
+              {amulet?.level > 0  &&   <Button variant="text" onClick={unstakeAmuletHandler} size="small" sx={{pl: 1.4, maxHeight: 30, backgroundColor:'none', color: 'red', borderColor: 'aqua', fontSize: '.7rem'}} >unstake</Button>}
             </Box>
           </Stack>
           {amulet?.level > 0  &&  <Stack>
@@ -381,7 +392,7 @@ const ArenaWidget = (props) => {
     </Stack>
     
   </Box>
-  </Box>
+  </Box>}
    </div>
   )
 }

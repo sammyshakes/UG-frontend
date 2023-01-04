@@ -28,7 +28,6 @@ const Arena = () => {
     const stakedIds = _stakedIds.map(id => { return Number(id); }) 
     
     const _stkdFighterIds = await ugArena3Contract.stakedByOwner(accounts[0]);
-    console.log('here', _stkdFighterIds)
     const stkdFighterIds = _stkdFighterIds.map(id => { return Number(id); }) ;
 
     const _stkdYakuzaIds = await ugYakDenContract.stakedIdsByUser(accounts[0]);
@@ -92,7 +91,6 @@ const Arena = () => {
   }, []);
 
   return (
-    console.log(stakedFighters),
     <Stack justifyContent={'center'} padding={0} margin={0} spacing={2}  >   
       <ArenaWidget />   
       {stakedFYs.length > 0 && <Stack  direction="row" justifyContent={'flex-start'} padding={2} spacing={5} maxWidth={1/1}> 

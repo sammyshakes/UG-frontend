@@ -4,7 +4,7 @@ import './ringCard.css'
 import ringImage from '../assets/images/ring_500.png';
 import React, {useContext, useEffect, useState} from 'react';
 import ProviderContext from '../context/provider-context';
-import {getUGNft2, getUGArena2, getUGMarket} from '../utils.js';
+import {getUGNft2, getUGArena2, getUGArena3, getUGMarket} from '../utils.js';
 import ErrorModal from './ui/ErrorModal';
 import ListSingleModal from './ListSingleModal';
 
@@ -14,7 +14,7 @@ const RingCard = (props) => {
     const [isApprovedStaking, setIsApprovedStaking] = useState(false);    
     const [isApprovedMarket, setIsApprovedMarket] = useState(false);
     const [error, setError] = useState();
-    const ugArenaContract = getUGArena2();
+    const ugArenaContract = getUGArena3();
     const ugNftContract = getUGNft2();
     const ugMarketContract = getUGMarket();
 

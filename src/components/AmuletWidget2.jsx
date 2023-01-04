@@ -2,7 +2,7 @@ import { Stack} from '@mui/material';
 import './v1RingWidget.css'
 import AmuletCard from './AmuletCard'
 import React, { useEffect, useState} from 'react';
-import {getUGNft2, getUGArena2, getUGMarket} from '../utils.js';
+import {getUGNft2} from '../utils.js';
 import ErrorModal from './ui/ErrorModal';
 
 const AmuletWidgetv2 = () => {

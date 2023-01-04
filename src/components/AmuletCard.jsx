@@ -1,12 +1,9 @@
 import {Button, Stack, Typography, Box} from '@mui/material';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import './v1RingWidget.css'
 import './ringCard.css'
 import React, {useContext, useEffect, useState} from 'react';
 import ProviderContext from '../context/provider-context';
-import {getUGNft2, getUGArena2, getUGMarket} from '../utils.js';
+import {getUGNft2, getUGArena3, getUGMarket} from '../utils.js';
 import ErrorModal from './ui/ErrorModal';
 import ListSingleModal from './ListSingleModal';
 
@@ -17,7 +14,7 @@ const AmuletCard = (props) => {
     const [isApprovedMarket, setIsApprovedMarket] = useState(false);
     const [error, setError] = useState();
     const baseUrl = 'https://the-u.club/reveal/amulet/amulet_v2.png';
-    const ugArenaContract = getUGArena2();
+    const ugArenaContract = getUGArena3();
     const ugNftContract = getUGNft2();
     const ugMarketContract = getUGMarket();
 
