@@ -1,9 +1,10 @@
-import {useContext, useState, useEffect} from 'react';
-import ProviderContext from '../context/provider-context';
+import {useState, useEffect} from 'react';
 import StakedFighterList from '../components/StakedFighterList';
+import StakedFighterListRankFix from '../components/StakedFighterListRankFix';
 import StakedYakuzaList from '../components/StakedYakuzaList';
+import StakedYakuzaListRankFix from '../components/StakedYakuzaListRankFix';
 import ArenaWidget from '../components/ArenaWidget';
-import {Stack} from '@mui/material/';
+import {Stack, Typography} from '@mui/material/';
 import { getUGArena2, getUGArena3, getUGYakDen, getUGFYakuza} from '../utils.js';
 import './arena.css';
 const baseUrl = 'https://the-u.club/reveal/fighteryakuza/'; 
@@ -92,12 +93,17 @@ const Arena = () => {
 
   return (
     <Stack justifyContent={'center'} padding={0} margin={0} spacing={2}  >   
-      <ArenaWidget />   
-      {stakedFYs.length > 0 && <Stack  direction="row" justifyContent={'flex-start'} padding={2} spacing={5} maxWidth={1/1}> 
-       
-        <StakedFighterList stakedFYs={stakedFYs} />
-        <StakedYakuzaList stakedFYs={stakedFYs} />
-      </Stack>}
+      <ArenaWidget />  
+      {stakedFYs.length > 0 && 
+      <Stack>
+        <Typography variant="h2" align="center" sx={{fontFamily: 'Alegreya Sans SC',  p:0, color: 'gold' }}>
+            UNSTAKE FIGHTERS / YAKUZA
+        </Typography>
+        <Stack  direction="row" justifyContent={'flex-start'} padding={2} spacing={5} maxWidth={1/1}>        
+          <StakedFighterListRankFix stakedFYs={stakedFYs} />
+          <StakedYakuzaListRankFix stakedFYs={stakedFYs} />
+        </Stack>
+      </Stack> }
       {stakedFYs.length === 0 && <Stack  direction="row" justifyContent={'flex-start'} padding={2} spacing={5} maxWidth={1/1}> 
         <StakedFighterList stakedFYs={stakedFighters} />
         <StakedYakuzaList stakedFYs={stakedYaks} />

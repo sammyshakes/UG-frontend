@@ -64,7 +64,7 @@ export default function OwnedYakuzaList() {
     const levelHandler = async() => {
       if(selectedFYs.length < 1){
         setError({
-          title: 'Please Select a Fighter',
+          title: 'Please Select a Yakuza',
           message: 'Unless your scared..',
         });
         return;
@@ -87,7 +87,7 @@ export default function OwnedYakuzaList() {
     const stakeHandler = async() => {
       if(selectedFYs.length < 1){
         setError({
-          title: 'Please Select a Fighter',
+          title: 'Please Select a Yakuza',
           message: 'Unless your scared..',
         });
         return;
@@ -101,7 +101,7 @@ export default function OwnedYakuzaList() {
     const listHandler = async() => {
       if(selectedFYs.length < 1){
         setError({
-          title: 'Please Select a Fighter',
+          title: 'Please Select a Yakuza',
           message: 'Unless your scared..',
         });
         return;

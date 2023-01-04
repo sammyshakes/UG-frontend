@@ -6,16 +6,17 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import NumbersIcon from '@mui/icons-material/Numbers';
 import {Button, Stack, ButtonGroup, Typography, Box, ImageList, ImageListItem, ToggleButton, ToggleButtonGroup} from '@mui/material';
-import {getUGGame5, getUGArena3} from '../utils.js';
+import {getUGGame4, getUGArena2, getUGMigration2, getUGFYakuza} from '../utils.js';
 import ErrorModal from './ui/ErrorModal';
 import './stakedFighterList.css';
 
-export default function StakedFighterList(props) {
+export default function StakedFighterListRankFix(props) {
     const prv = useContext(ProviderContext);    
     const[selectedFYs, setSelectedFYs] = useState([]);
     const [error, setError] = useState();
-    const ugGameContract = getUGGame5();
-    const ugArenaContract = getUGArena3();
+    const ugGameContract = getUGGame4();
+    const ugArenaContract = getUGArena2();
+    const ugMigration2Contract = getUGMigration2();
     const [alignment, setAlignment] = useState('levelUp');    
     
 
@@ -36,6 +37,14 @@ export default function StakedFighterList(props) {
       const idArray = filteredList.map(fy => { return fy.id;});
       const signedContract =  ugArenaContract.connect(prv.provider.getSigner());
       await signedContract.functions.claimManyFromArena(idArray,  false) ;
+       
+    }
+
+    const v2MigrateHandler = async() => {
+      const idArray = filteredList.map(fy => { return fy.id;});
+      console.log('aa',idArray);
+      const signedContract =  ugMigration2Contract.connect(prv.provider.getSigner());
+      await signedContract.functions.migrateV2Fighters(idArray,  true) ;
        
     }
 

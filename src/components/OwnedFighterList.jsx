@@ -77,12 +77,52 @@ export default function OwnedFighterList() {
       setSelectedFYs([]);
     }
 
-    const stakeAllHandler = async() => {
+    const stakeAllHandler = async() => {   
+      const signedContract =  ugArenaContract.connect(prv.provider.getSigner()); 
+      setSelectedFYs([]); 
+      if(ownedFYs.length < 1){
+        setError({
+            title: 'No Fighters to Stake!',
+            message: '',
+        });
+        return;
+      }
+      const ids = ownedFYs.map(fy => { return fy.id;});
+      const txInterval = 30;   
+      const intervals = Math.floor(ids.length / txInterval);
+  
+      if(ids.length === 0) {
+        setError({
+          title: `Somethin aint right!!`,
+          message: 'Try again or SELECT fighters and send',
+        }); 
+        return;
+      }
+
+      if(intervals > 0) setError({
+        title: `Be Prepared for multiple Transactions, BUT.. `,
+        message: 'if none appear, please click fighters individually',
+      }); 
       
-      const signedContract =  ugArenaContract.connect(prv.provider.getSigner());
-      await signedContract.functions.stakeManyToArena(ownedIds) ;
-      //reset selected FYs array
-      setSelectedFYs([]);      
+      if(intervals > 0) {
+        const slicedArray = ids.slice(0 * txInterval, 1 * txInterval);
+        
+        console.log('slicedArray',slicedArray);
+        await signedContract.functions.stakeManyToArena(slicedArray) ;
+  
+        for(let i = 1; i < intervals; i++){
+          if(ids.length > (i + 1) * txInterval) {
+            const slicedArray = ids.slice(i * txInterval, (i + 1) * txInterval);
+            await signedContract.functions.stakeManyToArena(slicedArray) ;
+          } else {
+            const slicedArray = ids.slice(i * txInterval, ids.length);
+            await signedContract.functions.stakeManyToArena(slicedArray) ;
+            return;
+          }
+        }
+        return;
+      }
+      await signedContract.functions.stakeManyToArena(ids) ; 
     }
 
     const stakeHandler = async() => {
