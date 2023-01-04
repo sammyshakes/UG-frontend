@@ -3,7 +3,7 @@ import ProviderContext from '../context/provider-context';
 import './forgeMintBox.css'
 import {Box, Stack, Avatar, Typography, Button, Card,CardContent, CardMedia, CardActions } from '@mui/material/';
 import bloodToken from '../assets/images/coin_transp_500.png';
-import {getUGGame3, getBlood, getUGNft2} from '../utils.js';
+import {getUGGame5, getBlood, getUGNft2} from '../utils.js';
 import ErrorModal from './ui/ErrorModal';
 import ForgeCard from './ForgeCard'
 
@@ -15,7 +15,7 @@ export default function RingMintBox() {
     const [balance, setBalance] = useState();
     const [numMinted, setNumMinted] = useState();
     const prv = useContext(ProviderContext);
-    const ugGameContract = getUGGame3();
+    const ugGameContract = getUGGame5();
     const bloodContract = getBlood();
     const ugNftContract = getUGNft2();    
 

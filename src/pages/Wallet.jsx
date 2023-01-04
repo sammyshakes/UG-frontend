@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 import OwnedFighterList from '../components/OwnedFighterList'
+import OwnedYakuzaList from '../components/OwnedYakuzaList'
 import RingWidgetv2 from '../components/RingWidgetv2'
 import AmuletWidget2 from '../components/AmuletWidget2'
 import OwnedFightClubList from '../components/OwnedFightClubList';
 import OwnedForgeList from '../components/OwnedForgeList';
-
 import {Stack} from '@mui/material/';
 
 const Wallet = () => {
@@ -36,7 +36,8 @@ const Wallet = () => {
         </Stack> 
       <Stack align="left" spacing={2} direction="row" > 
         <Stack>
-          <OwnedFighterList onList={fighterListCartCollector}/>    
+          <OwnedFighterList onList={fighterListCartCollector}/>  
+          <OwnedYakuzaList onList={fighterListCartCollector}/>  
         </Stack>          
       </Stack>  
       <OwnedFightClubList/>
