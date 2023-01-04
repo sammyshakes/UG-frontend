@@ -10,8 +10,9 @@ import ErrorModal from "./ui/ErrorModal";
 import {
   getUGRaid2,
   getUGRaid3,
+  getUGRaid4,
   getUGWeapons2,
-  getUGArena2,
+  getUGArena3,
   getUGFYakuza,
   getRaidEntry4,
 } from "../utils.js";
@@ -162,7 +163,7 @@ const columns = [
 
 const IsInRaid = (props) => {
   const [isRaiding, setIsRaiding] = useState(false);
-  const ugRaidContract = getUGRaid3();
+  const ugRaidContract = getUGRaid4();
 
   const getRaidStatus = async () => {
     const israiding = await ugRaidContract.viewIfRaiderIsInQueue(
@@ -225,6 +226,7 @@ export default function FighterTable() {
   const [userRaidWinnings, setUserRaidWinnings] = useState(0);
   const [userWeaponsWinnings, setUserWeaponsWinnings] = useState(0);
   const [userRaid2Winnings, setUserRaid2Winnings] = useState(0);
+  const [userRaid4Winnings, setUserRaid4Winnings] = useState(0);
   const [ttlBloodFee, setTtlBloodFee] = useState(0);
   const [ttlSweatBurn, setTtlSweatBurn] = useState(0);
   const [numRaids, setNumRaids] = useState(0);
@@ -236,8 +238,9 @@ export default function FighterTable() {
 
   const ugRaid2Contract = getUGRaid2();
   const ugRaidContract = getUGRaid3();
+  const ugRaid4Contract = getUGRaid4();
   const ugWeaponsContract = getUGWeapons2();
-  const ugArenaContract = getUGArena2();
+  const ugArenaContract = getUGArena3();
   const ugFYakuzaContract = getUGFYakuza();
   const raidEntryContract = getRaidEntry4();
 
@@ -417,7 +420,7 @@ export default function FighterTable() {
 
     const finalArray = [];
     for (const fighter of sortedRaidTimeList) {
-      await ugRaidContract.viewIfRaiderIsInQueue(fighter.id).then((result) => {
+      await ugRaid4Contract.viewIfRaiderIsInQueue(fighter.id).then((result) => {
         if (!result) {
           finalArray.push(fighter);
         }
@@ -450,7 +453,7 @@ export default function FighterTable() {
     const entries = tickets?.map((ticket) => Object.values(ticket));
     const signedContract = raidEntryContract.connect(prv.provider.getSigner());
     //let gas = await signedContract.estimateGas.enterRaid(ids,entries);
-    const receipt = await signedContract.functions.enterRaid(ids, entries);
+    await signedContract.functions.enterRaid(ids, entries);
     setEnteredBulkRaiders(0);
   };
 
@@ -465,20 +468,26 @@ export default function FighterTable() {
 
   const claimHandler = async () => {
     const signedContract = ugRaidContract.connect(prv.provider.getSigner());
-    const receipt = await signedContract.functions.claimRaiderBloodRewards();
+    await signedContract.functions.claimRaiderBloodRewards();
     setUserRaidWinnings(0);
   };
 
   const claimWeaponsHandler = async () => {
     const signedContract = ugRaidContract.connect(prv.provider.getSigner());
-    const receipt = await signedContract.functions.claimWeapons();
+    await signedContract.functions.claimWeapons();
     setUserWeaponsWinnings(0);
   };
 
   const claim2Handler = async () => {
     const signedContract = ugRaid2Contract.connect(prv.provider.getSigner());
-    const receipt = await signedContract.functions.claimRaiderBloodRewards();
+    await signedContract.functions.claimRaiderBloodRewards();
     setUserRaid2Winnings(0);
+  };
+
+  const claim4Handler = async () => {
+    const signedContract = ugRaid4Contract.connect(prv.provider.getSigner());
+    await signedContract.functions.claimRaiderBloodRewards();
+    setUserRaid4Winnings(0);
   };
 
   const hideFighterHandler = () => {
@@ -498,8 +507,12 @@ export default function FighterTable() {
     const userRaid2Rewards = await ugRaid2Contract.raiderOwnerBloodRewards(
       accounts[0]
     );
+    const userRaid4Rewards = await ugRaid4Contract.raiderOwnerBloodRewards(
+      accounts[0]
+    );
     setUserRaidWinnings(userRaidRewards);
     setUserRaid2Winnings(userRaid2Rewards);
+    setUserRaid4Winnings(userRaid4Rewards);
   };
 
   const errorHandler = () => {
@@ -531,8 +544,10 @@ export default function FighterTable() {
       });
       //const filteredList = stakedFYs?.filter(fy => (fy.isFighter === true));
       setStakedFYs(stakedFYs);
-      const numRaids = await ugRaidContract.ttlRaids();
-      setNumRaids(numRaids);
+      const numRaids = await ugRaidContract.ttlRaids();   
+      const numRaids2 = await ugRaid2Contract.ttlRaids();    
+      const numRaids4 = await ugRaid4Contract.ttlRaids();
+      setNumRaids(numRaids + numRaids2 + numRaids4);
 
       const userWeaponsRewards = await ugRaidContract.getUnclaimedWeaponsCount(
         accounts[0]
@@ -856,7 +871,7 @@ export default function FighterTable() {
                 fontSize: "1.1rem",
               }}
             >
-              {Math.floor(Number(userRaidWinnings)).toString()}
+              {Math.floor(Number(userRaid4Winnings)).toString()}
               <Typography
                 component="span"
                 variant="body2"
@@ -884,7 +899,7 @@ export default function FighterTable() {
                 fontFamily: "Alegreya Sans SC",
                 fontSize: ".9rem",
               }}
-              onClick={claimHandler}
+              onClick={claim4Handler}
             >
               Claim Winnings
             </Button>
@@ -984,6 +999,55 @@ export default function FighterTable() {
           >
             500 Sweat per Raider to bulk raid
           </Typography>
+          {Number(userRaidWinnings) > 0 && (
+            <Stack
+              className="box10-bordr"
+              direction="row"
+              sx={{ justifyContent: "space-around" }}
+            >
+              <Typography
+                variant="body2"
+                p={1}
+                sx={{
+                  fontFamily: "Alegreya Sans SC",
+                  color: "gold",
+                  fontSize: "1rem",
+                }}
+              >
+                {Math.floor(Number(userRaidWinnings)).toString()}
+                <Typography
+                  component="span"
+                  variant="body2"
+                  pl={1}
+                  sx={{
+                    fontFamily: "Alegreya Sans SC",
+                    color: "crimson",
+                    fontSize: "1rem",
+                  }}
+                >
+                  Blood
+                </Typography>
+              </Typography>
+              <Button
+                variant="text"
+                justify="center"
+                size="medium"
+                className="raidButton"
+                sx={{
+                  m: 1,
+                  borderRadius: 5,
+                  border: 1,
+                  color: "black",
+                  backgroundColor: "aqua",
+                  fontFamily: "Alegreya Sans SC",
+                  fontSize: ".9rem",
+                }}
+                onClick={claimHandler}
+              >
+                Claim Rank Fix
+              </Button>
+            </Stack>
+          )}
 
           {Number(userRaid2Winnings) > 0 && (
             <Stack
