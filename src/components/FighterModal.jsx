@@ -1,19 +1,16 @@
 import {useEffect, useState} from 'react';
-import { getUGRaid3, getUGWeapons2} from '../utils.js';
+import {getUGRaid4, getUGWeapons2} from '../utils.js';
 import './fighterModal.css'
 import Modal from './Modal'
 import YakFamily from './yakuzaFamily/YakFamily';
 import sweatToken from '../assets/images/sweat.png';
-import yamaguchi from '../assets/images/yakuza_families/Yamaguchi.png';
-import sumiyoshi from '../assets/images/yakuza_families/Sumiyoshi1.png';
-import inagawa from '../assets/images/yakuza_families/Inagawa.png';
 import {Box, Card , Stack, CardMedia, CardContent, Typography, Button} from '@mui/material';
 
 const FighterModal = (props) => {
     const [sizeQueues, setSizeQueues] = useState({size1: 0, size2: 0, size3: 0, size4: 0});
     const [isQueued, setIsQueued] = useState(false);
     const [sweatBalance, setSweatBalance] = useState(0);
-    const ugRaidContract = getUGRaid3();
+    const ugRaidContract = getUGRaid4();
     const ugWeaponsContract = getUGWeapons2();
     const levelTier = Math.floor((props.raider.level - 1)/3 +1);
     // const baseUrl = 'https://the-u.club/reveal/fightclub/';
