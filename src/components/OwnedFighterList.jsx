@@ -15,7 +15,6 @@ export default function OwnedFighterList() {
     const[selectedFYs, setSelectedFYs] = useState([]);    
     const[listIds, setListIds] = useState([]);  
     const[selectedFYObjs, setSelectedFYObjs] = useState([]);
-    const[ownedIds, setOwnedIds] = useState([]);    
     const[ownedFYs, setOwnedFYs] = useState([]);
     const[isApproved, setIsApproved] = useState(false);    
     const[isApprovedMarket, setIsApprovedMarket] = useState(false);
@@ -36,7 +35,6 @@ export default function OwnedFighterList() {
       
       const _ownedIds = await ugFyakuzaContract.walletOfOwner(accounts[0]);
       const ownedIds = _ownedIds?.map(id => { return Number(id.toString()); })
-      setOwnedIds(ownedIds);
       const _ownedFYs = await ugFyakuzaContract.getFighters(ownedIds); 
     
       let ownedFYs = ownedIds?.map((id, i) => {        

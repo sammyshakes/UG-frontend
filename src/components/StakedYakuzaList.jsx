@@ -41,7 +41,6 @@ export default function StakedYakuzaList(props) {
 
     const unstakeAllHandler = async() => {   
       const signedContract =  ugYakDen.connect(prv.provider.getSigner());    
-      // const filteredArray = filteredList.filter(fy => (fy.imageId > 0));
       if(props.stakedFYs.length < 1){
         setError({
             title: 'No Fighters to Unstake!',
@@ -52,6 +51,7 @@ export default function StakedYakuzaList(props) {
       const ids = props.stakedFYs.map(fy => { return fy.id;});
       const txInterval = 30;   
       const intervals = Math.floor(ids.length / txInterval);
+      console.log('intervals', intervals)
   
       if(ids.length === 0) {
         setError({
@@ -66,13 +66,8 @@ export default function StakedYakuzaList(props) {
         message: 'if none appear, please click fighters individually',
       }); 
       
-      if(intervals > 0) {
-        const slicedArray = ids.slice(0 * txInterval, 1 * txInterval);
-        
-        console.log('slicedArray',slicedArray);
-        await signedContract.functions.claimManyFromArena(slicedArray, true) ;
-  
-        for(let i = 1; i < intervals; i++){
+      if(intervals > 0) {  
+        for(let i = 0; i <= intervals; i++){
           if(ids.length > (i + 1) * txInterval) {
             const slicedArray = ids.slice(i * txInterval, (i + 1) * txInterval);
             await signedContract.functions.claimManyFromArena(slicedArray, true) ;

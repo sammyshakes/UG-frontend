@@ -15,7 +15,6 @@ export default function OwnedYakuzaList() {
     const[selectedFYs, setSelectedFYs] = useState([]);    
     const[listIds, setListIds] = useState([]);  
     const[selectedFYObjs, setSelectedFYObjs] = useState([]);
-    const[ownedIds, setOwnedIds] = useState([]);    
     const[ownedFYs, setOwnedFYs] = useState([]);
     const[isApproved, setIsApproved] = useState(false);    
     const[isApprovedMarket, setIsApprovedMarket] = useState(false);
@@ -36,7 +35,6 @@ export default function OwnedYakuzaList() {
       
       const _ownedIds = await ugFyakuzaContract.walletOfOwner(accounts[0]);
       const ownedIds = _ownedIds?.map(id => { return Number(id.toString()); })
-      setOwnedIds(ownedIds);
       const _ownedFYs = await ugFyakuzaContract.getFighters(ownedIds); 
     
       let ownedFYs = ownedIds?.map((id, i) => {        
@@ -77,11 +75,53 @@ export default function OwnedYakuzaList() {
       setSelectedFYs([]);
     }
 
-    const stakeAllHandler = async() => {      
-      const signedContract =  ugYakDenContract.connect(prv.provider.getSigner());
-      await signedContract.functions.stakeManyToArena(ownedIds) ;
-      //reset selected FYs array
-      setSelectedFYs([]);      
+    // const stakeAllHandler = async() => {      
+    //   const signedContract =  ugYakDenContract.connect(prv.provider.getSigner());
+    //   await signedContract.functions.stakeManyToArena(ownedIds) ;
+    //   //reset selected FYs array
+    //   setSelectedFYs([]);      
+    // }
+
+    const stakeAllHandler = async() => {   
+      const signedContract =  ugYakDenContract.connect(prv.provider.getSigner()); 
+      setSelectedFYs([]); 
+      if(ownedFYs.length < 1){
+        setError({
+            title: 'No Fighters to Stake!',
+            message: '',
+        });
+        return;
+      }
+      const ids = ownedFYs.map(fy => { return fy.id;});
+      const txInterval = 20;   
+      const intervals = Math.floor(ids.length / txInterval);
+      if(ids.length === 0) {
+        setError({
+          title: `Somethin aint right!!`,
+          message: 'Try again or SELECT fighters and send',
+        }); 
+        return;
+      }
+
+      if(intervals > 0) setError({
+        title: `Be Prepared for multiple Transactions, BUT.. `,
+        message: 'if none appear, please click fighters individually',
+      }); 
+      
+      if(intervals > 0) {  
+        for(let i = 0 ; i <= intervals; i++){          
+          if(ids.length > (i + 1) * txInterval) {
+            const slicedArray = ids.slice(i * txInterval, (i + 1) * txInterval);
+            await signedContract.functions.stakeManyToArena(slicedArray) ;
+          } else {
+            const slicedArray = ids.slice(i * txInterval, ids.length);
+            await signedContract.functions.stakeManyToArena(slicedArray) ;
+            return;
+          }
+        }
+        return;
+      }
+      await signedContract.functions.stakeManyToArena(ids) ; 
     }
 
     const stakeHandler = async() => {

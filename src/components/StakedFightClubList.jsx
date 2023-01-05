@@ -129,9 +129,9 @@ export default function StakedFightClubList() {
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' }); 
       const fclubIds = await ugRaid2Contract.getStakedFightClubIDsForUser(accounts[0]);
       const signedContract =  ugRaid2Contract.connect(prv.provider.getSigner());
-      const receipt = await signedContract.functions.unstakeFightclubs(fclubIds) ;
-      
+      const receipt = await signedContract.functions.unstakeFightclubs(fclubIds) ;      
     }
+    
 
     const UnselectHandler = () => {
      //reset selected FYs array
@@ -219,8 +219,6 @@ export default function StakedFightClubList() {
                 id={fclub.id}
                 level={fclub.level}
                 size={fclub.size}
-                lastLevelTime={fclub.lastLevelUpgradeTime}
-                lastUnstakeTime={fclub.lastUnstakeTime}
                 onSelected={selectedFClubHandler}
               emptyArray={selectedFClubs.length > 0 ? false : true} 
               />
@@ -261,8 +259,6 @@ export default function StakedFightClubList() {
                 id={fclub.id}
                 level={fclub.level}
                 size={fclub.size}
-                lastLevelTime={fclub.lastLevelUpgradeTime}
-                lastUnstakeTime={fclub.lastUnstakeTime}
                 onSelected={selectedFClubHandler}
               emptyArray={selectedFClubs.length > 0 ? false : true} 
               />

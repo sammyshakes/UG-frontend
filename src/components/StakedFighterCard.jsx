@@ -5,24 +5,25 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea, Box, Stack } from '@mui/material';
-import {getUGArena2, getUGGame4, getUGNft2} from '../utils.js';
+import {getUGArena3, getUGGame5, getUGNft2, getUGYakDen} from '../utils.js';
 import './stakedFighterCard.css';
 import CircularProgressWithLabel from './CircularProgressWithLabel';
 /* global BigInt */
 
 const StakedFighterCard = (props) => {
   const [unclaimed, setUnclaimed] = useState(undefined);
+  const [yakUnclaimed, setYakUnclaimed] = useState(undefined);
   const [clicked, setClicked] = useState(false);
   const [bloodCostToLevel, setBloodCostToLevel] = useState();
   const [progressForLevel, setProgressForLevel] = useState();
   const [progressForRaid, setProgressForRaid] = useState();
   const [timeLeftForRaid, setTimeLeftForRaid] = useState();
   const [timeLeftForLevel, setTimeLeftForLevel] = useState();
-  const [amulet, setAmulet] = useState();
   const prv = useContext(ProviderContext);
-  const ugArenaContract = getUGArena2();
-  const ugGameContract = getUGGame4();  
+  const ugArenaContract = getUGArena3();
+  const ugGameContract = getUGGame5();  
   const ugNftContract = getUGNft2(); 
+  const ugYakDenContract = getUGYakDen(); 
 
 
   const clickHandler = () => {
@@ -39,9 +40,10 @@ const StakedFighterCard = (props) => {
     const stakedAmuletId = await ugArenaContract.getStakedAmuletIDForUser(accounts[0]);
     const amulet = await ugNftContract.getRingAmulet(Number(stakedAmuletId));
     const fighterUnclaimed = await ugArenaContract.calculateStakingRewards(props.id);  
-    const bloodCostToLevelUp = await ugGameContract.getFighterLevelUpBloodCost(props.level, 1);     
-    setAmulet(amulet);
+    const yakuzaUnclaimed = await ugYakDenContract.calculateStakingRewards(props.id); 
+    const bloodCostToLevelUp = await ugGameContract.getFighterLevelUpBloodCost(props.level, 1);  
     setUnclaimed(fighterUnclaimed);
+    setYakUnclaimed(yakuzaUnclaimed);
     setBloodCostToLevel(bloodCostToLevelUp);
  
     //kinda need to make sure amulet isnt expired so we can give accurate display
@@ -65,8 +67,7 @@ const StakedFighterCard = (props) => {
     // console.log('timeLeftToRaid', timeLeftToRaid/  86400);
     // console.log('progressLevel_ceil', Math.ceil(progressRaid));
     setTimeLeftForLevel(timeLeftToLevelUp);
-    setTimeLeftForRaid(timeLeftToRaid);
-    
+    setTimeLeftForRaid(timeLeftToRaid);    
   }
   
 
@@ -75,8 +76,7 @@ const StakedFighterCard = (props) => {
 
     const init = async() => {          
       const fighterUnclaimed = await ugArenaContract.calculateStakingRewards(props.id);
-      setUnclaimed(fighterUnclaimed);
-       
+      setUnclaimed(fighterUnclaimed);       
       
       const timer = setInterval(() => {
         getUpdates();     
@@ -118,7 +118,7 @@ const StakedFighterCard = (props) => {
                                   {` RANK ${props.rank}`}
                                 </Typography>}
           {!props.isFighter &&  <Typography variant="body2" sx={{fontFamily: 'Alegreya Sans SC', color: 'yellow', fontSize:'.75rem'}}>
-                                  {` ${unclaimed} BLOOD `}
+                                  {` ${yakUnclaimed} BLOOD `}
                                 </Typography>}
                              
         </CardContent>

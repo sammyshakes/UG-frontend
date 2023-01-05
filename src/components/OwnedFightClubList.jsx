@@ -9,7 +9,6 @@ import { Button, Stack, ButtonGroup } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import "./ownedFightClubList.css";
 import {
-  getUGRaid3,
   getUGNft2,
   getUGGame5,
   getUGMarket,
@@ -26,12 +25,10 @@ export default function OwnedFightClubList() {
   const [isApproved, setIsApproved] = useState();
   const [isApprovedMarket, setIsApprovedMarket] = useState(false);
   const [error, setError] = useState();
-  const ugRaidContract = getUGRaid3();
   const fclubAlleyContract = getFclubAlley();
   const ugGameContract = getUGGame5();
   const ugNftContract = getUGNft2();
   const ugMarketContract = getUGMarket();
-  const signedContract = fclubAlleyContract.connect(prv.provider.getSigner());
 
   const getUpdates = async () => {
     const accounts = await window.ethereum.request({
@@ -41,7 +38,7 @@ export default function OwnedFightClubList() {
     const fclubs = await ugNftContract.getForgeFightClubs(fclubIds);
     const approved = await ugNftContract.isApprovedForAll(
       accounts[0],
-      ugRaidContract.address
+      fclubAlleyContract.address
     );
     const approvedMarket = await ugNftContract.isApprovedForAll(
       accounts[0],
@@ -108,6 +105,7 @@ export default function OwnedFightClubList() {
       });
       return;
     }
+    const signedContract = fclubAlleyContract.connect(prv.provider.getSigner());
     await signedContract.functions.stakeFightclubs(selectedFClubs);
     //reset selected FYs array
     setSelectedFClubs([]);
@@ -126,6 +124,7 @@ export default function OwnedFightClubList() {
       });
       return;
     }
+    const signedContract = fclubAlleyContract.connect(prv.provider.getSigner());
     //gonna return here until staking is active
     await signedContract.functions.stakeFightclubs(fclubIds);
     //reset selected FYs array

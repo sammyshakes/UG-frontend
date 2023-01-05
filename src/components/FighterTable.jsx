@@ -523,7 +523,7 @@ export default function FighterTable() {
     const accounts = await window.ethereum.request({
       method: "eth_requestAccounts",
     });
-    const _stakedIds = await ugArenaContract.getStakedFighterIDsForUser(
+    const _stakedIds = await ugArenaContract.stakedByOwner(
       accounts[0]
     );
     const stakedIds = _stakedIds.map((id) => {
@@ -544,10 +544,13 @@ export default function FighterTable() {
       });
       //const filteredList = stakedFYs?.filter(fy => (fy.isFighter === true));
       setStakedFYs(stakedFYs);
-      const numRaids = await ugRaidContract.ttlRaids();   
+      console.log('raid2', ugRaid2Contract.address);
+      console.log('raid3', ugRaidContract.address);
+      console.log('raid4', ugRaid4Contract.address);
+      const numRaids3 = await ugRaidContract.ttlRaids();   
       const numRaids2 = await ugRaid2Contract.ttlRaids();    
       const numRaids4 = await ugRaid4Contract.ttlRaids();
-      setNumRaids(numRaids + numRaids2 + numRaids4);
+      setNumRaids(numRaids3 + numRaids2 + numRaids4);
 
       const userWeaponsRewards = await ugRaidContract.getUnclaimedWeaponsCount(
         accounts[0]
