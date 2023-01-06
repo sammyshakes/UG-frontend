@@ -1,6 +1,6 @@
 import {useContext, useState,useEffect, React} from 'react';
 import ProviderContext from '../context/provider-context';
-import { getUGRaid3, getUGWeapons2 } from '../utils.js';
+import { getUGRaid3, getUGRaid4, getUGWeapons2 } from '../utils.js';
 import './refereeModal.css'
 import RefModal from './RefModal'
 import ErrorModal from './ui/ErrorModal';
@@ -15,7 +15,7 @@ const array = [...Array(20).keys()];
 
 const RefereeModal = (props) => {
     const prv = useContext(ProviderContext);
-    const ugRaidContract = getUGRaid3();
+    const ugRaidContract = getUGRaid4();
     const signedContract =  ugRaidContract.connect(prv.provider.getSigner());
     const [error, setError] = useState();
     const [size1FullRaids, setSize1FullRaids] = useState(undefined);
@@ -180,25 +180,34 @@ const RefereeModal = (props) => {
         //     return await  ugRaidContract.getRaiderQueueLength(key,1);
         // });
 
-        const size1Queue = [];
-        const size2Queue = [];
-        const size3Queue = [];
-        const size4Queue = [];
+        // const size1Queue = [];
+        // const size2Queue = [];
+        // const size3Queue = [];
+        // const size4Queue = [];
 
-        for(const levelTier of array) {         
-            const _size1Queue = await ugRaidContract.getRaiderQueueLength(levelTier + 1,1);
-            const _size2Queue = await ugRaidContract.getRaiderQueueLength(levelTier + 1,2);
-            const _size3Queue = await ugRaidContract.getRaiderQueueLength(levelTier + 1,3);
-            const _size4Queue = await ugRaidContract.getRaiderQueueLength(levelTier + 1,4);
-            size1Queue.push(Math.floor(_size1Queue/5));
-            size2Queue.push(Math.floor(_size2Queue/10));
-            size3Queue.push(Math.floor(_size3Queue/15));
-            size4Queue.push(Math.floor(_size4Queue/20));
-        }
-        setSize1FullRaids(size1Queue.reduce((a,v) =>  a = a + v , 0 ));
-        setSize2FullRaids(size2Queue.reduce((a,v) =>  a = a + v , 0 ));
-        setSize3FullRaids(size3Queue.reduce((a,v) =>  a = a + v , 0 ));
-        setSize4FullRaids(size4Queue.reduce((a,v) =>  a = a + v , 0 ));
+        // for(const levelTier of array) {         
+        //     const _size1Queue = await ugRaidContract.getRaiderQueueLength(levelTier + 1,1);
+        //     const _size2Queue = await ugRaidContract.getRaiderQueueLength(levelTier + 1,2);
+        //     const _size3Queue = await ugRaidContract.getRaiderQueueLength(levelTier + 1,3);
+        //     const _size4Queue = await ugRaidContract.getRaiderQueueLength(levelTier + 1,4);
+        //     size1Queue.push(Math.floor(_size1Queue/5));
+        //     size2Queue.push(Math.floor(_size2Queue/10));
+        //     size3Queue.push(Math.floor(_size3Queue/15));
+        //     size4Queue.push(Math.floor(_size4Queue/20));
+        // }
+        // setSize1FullRaids(size1Queue.reduce((a,v) =>  a = a + v , 0 ));
+        // setSize2FullRaids(size2Queue.reduce((a,v) =>  a = a + v , 0 ));
+        // setSize3FullRaids(size3Queue.reduce((a,v) =>  a = a + v , 0 ));
+        // setSize4FullRaids(size4Queue.reduce((a,v) =>  a = a + v , 0 ));
+
+        const size1Queue = await ugRaidContract.getRaiderQueueLengths(1);
+        const size2Queue = await ugRaidContract.getRaiderQueueLengths(2);
+        const size3Queue = await ugRaidContract.getRaiderQueueLengths(3);
+        const size4Queue = await ugRaidContract.getRaiderQueueLengths(4);
+        setSize1FullRaids(size1Queue);
+        setSize2FullRaids(size2Queue);
+        setSize3FullRaids(size3Queue);
+        setSize4FullRaids(size4Queue);
     }
 
     const errorHandler = () => {

@@ -73,7 +73,7 @@ export default function StakedFightClubList() {
         return;
       }
       const signedContract =  ugFclubAlleyContract.connect(prv.provider.getSigner());
-      await signedContract.functions.claimFightClubBloodRewards(selectedFClubs, false);        
+      await signedContract.functions.claimFightClubs(selectedFClubs, false);        
     }
 
     const claimAllHandler = async() => {
@@ -85,7 +85,7 @@ export default function StakedFightClubList() {
         return;
       }
       const signedContract =  ugFclubAlleyContract.connect(prv.provider.getSigner());
-      await signedContract.functions.claimFightClubBloodRewards(fclubIds, false);        
+      await signedContract.functions.claimFightClubs(fclubIds, false);        
     }
 
     const claim2Handler = async() => {
@@ -104,23 +104,25 @@ export default function StakedFightClubList() {
         return;
       }
       const signedContract =  ugFclubAlleyContract.connect(prv.provider.getSigner());
-      await signedContract.functions.claimFightClubBloodRewards(selectedFClubs, true); 
+      await signedContract.functions.claimFightClubs(selectedFClubs, true); 
       //reset selected FYs array
       setSelectedFClubs([]);      
     }
 
     const unstakeAllHandler = async() => {
-      if(fclubs.length < 1){
+      // const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' }); 
+      // const fclubIds = await ugFclubAlleyContract.getStakedFightClubIDsForUser(accounts[0]);
+      if(fclubIds.length < 1){
         setError({
           title: 'You dont have any Staked Fight Clubs',
           message: 'Might be a wise move to do so..',
         });
         return;
       }
-      // const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' }); 
-      // const fclubIds = await ugFclubAlleyContract.getStakedFightClubIDsForUser(accounts[0]);
+      console.log('f',fclubIds);
+      console.log('f',ugFclubAlleyContract.address);
       const signedContract =  ugFclubAlleyContract.connect(prv.provider.getSigner());
-      const receipt = await signedContract.functions.unstakeFightclubs(fclubIds) ;
+      const receipt = await signedContract.functions.claimFightClubs(fclubIds, true) ;
       //reset selected FYs array
       setSelectedFClubs([]);      
     }
@@ -154,8 +156,9 @@ export default function StakedFightClubList() {
 
     const getUpdates = async() => {
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' }); 
-      const fclubIds = await ugFclubAlleyContract.getStakedFightClubIDsForUser(accounts[0]);      
+      const fclubIds = await ugFclubAlleyContract.getStakedFightClubIDsForUser(accounts[0]);  
       const fclubs = await ugNftContract.getForgeFightClubs(fclubIds);
+      const ids = fclubs.map(fy => { return fy.id;});
       const fightClubUnclaimed = await ugFclubAlleyContract.calculateAllStakingRewards(fclubIds);
 
       const fclubIds2 = await ugRaid2Contract.getStakedFightClubIDsForUser(accounts[0]);
@@ -163,7 +166,7 @@ export default function StakedFightClubList() {
       const fightClubUnclaimed2 = await ugRaid2Contract.fightClubOwnerBloodRewards(accounts[0]);
 
       setUnclaimed(fightClubUnclaimed);
-      setFclubIds(fclubIds);
+      setFclubIds(ids);
       setFclubs(fclubs);
       setUnclaimed2(fightClubUnclaimed2);
       setFclubs2(fclubs2);
@@ -181,7 +184,7 @@ export default function StakedFightClubList() {
           const timer = setInterval(() => {
             getUpdates();
             
-          }, 15000);
+          }, 5000);
      
           return () => {
             clearInterval(timer);
@@ -209,7 +212,7 @@ export default function StakedFightClubList() {
           <Stack direction="row" sx={{justifyContent: 'space-between'}}>                        
               <Typography variant='body2'  sx={{p: 1,fontFamily: 'Alegreya Sans SC',  fontSize:'1.25rem', color: 'palegreen'}}>Fight Club Profits</Typography> 
               <Typography variant='body2'  sx={{p: 1, fontFamily: 'Alegreya Sans SC',  fontSize:'1.25rem', color: 'red'}}>{unclaimed.toString()}</Typography>  
-              <Button  variant="outlined" size="small" sx={{m: 1,borderRadius: '10px', borderColor: "palegreen", backgroundColor: 'black', color: 'palegreen'}} onClick={claimHandler} >Claim</Button>
+              <Button  variant="outlined" size="small" sx={{m: 1,borderRadius: '10px', borderColor: "palegreen", backgroundColor: 'black', color: 'palegreen'}} onClick={claimAllHandler} >Claim All</Button>
               </Stack>
       </Container>
         <ImageList sx={{p:1, maxWidth: 850, maxHeight: 600}} cols={2} rowHeight={400}  >
@@ -231,7 +234,7 @@ export default function StakedFightClubList() {
         <ButtonGroup variant="contained" color="error" sx={{ borderColor: 'red', border: 3  }}>
           <Button  variant="contained"  sx={{backgroundColor: 'black', color: 'red'}} onClick={sizeHandler} >Size Up </Button>
           <Button  variant="contained"  sx={{backgroundColor: 'black', color: 'red'}} onClick={levelHandler} >Level UP </Button>
-          <Button  variant="contained"  sx={{backgroundColor: 'black', color: 'red'}} onClick={claimAllHandler} >Claim All </Button>
+          <Button  variant="contained"  sx={{backgroundColor: 'black', color: 'red'}} onClick={claimHandler} >Claim</Button>
           
           <Button  variant="contained"  sx={{backgroundColor: 'black', color: 'red'}} onClick={unstakeHandler} >Unstake </Button>
           <Button  variant="contained"  sx={{backgroundColor: 'black', color: 'red'}} onClick={unstakeAllHandler} >Unstake All </Button>
