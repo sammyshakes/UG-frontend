@@ -4,7 +4,7 @@ import './ArenaWidget.css';
 import {useEffect, useState} from 'react';
 import ringImage from '../assets/images/ring_500.png';
 import amuletImage from '../assets/images/amulet_500.png';
-import { getUGArena2, getEthers, getUGNft } from '../utils.js';
+import { getUGArena2, getEthers } from '../utils.js';
 import ErrorModal from './ui/ErrorModal';
 /* global BigInt */
 

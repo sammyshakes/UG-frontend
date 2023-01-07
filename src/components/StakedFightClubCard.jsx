@@ -5,12 +5,14 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea, Box, Stack } from "@mui/material";
+import CircularProgressWithLabel from "./CircularProgressWithLabel";
 
 import { getUGGame5, getFclubAlley } from "../utils.js";
 import "./fightclubcard.css";
 /* global BigInt */
 
-const FightClubCard = (props) => {
+const StakedFightClubCard = (props) => {
+  const [unclaimedRewards, setUnclaimedRewards] = useState(false);
   const [clicked, setClicked] = useState(false);
   const [levelUpCost, setLevelUpCost] = useState(undefined);
   const [sizeUpCost, setSizeUpCost] = useState(undefined);
@@ -35,6 +37,7 @@ const FightClubCard = (props) => {
       0,
       1
     );
+    setUnclaimedRewards(await ugFclubAlley.calculateStakingRewards(props.id));
     setLevelUpCost(levelUpCost);
     setSizeUpCost(sizeUpCost);
   };
@@ -55,7 +58,7 @@ const FightClubCard = (props) => {
 
       const timer = setInterval(() => {
         updateProgress();
-      }, 5000);
+      }, 60000);
 
       return () => {
         clearInterval(timer);
@@ -78,7 +81,19 @@ const FightClubCard = (props) => {
       }}
     >
       <CardActionArea onClick={clickHandler}>
-        <CardContent align="center" sx={{ p: 0, color: "red" }}></CardContent>
+        <CardContent align="center" sx={{ p: 0, color: "red" }}>
+          <Typography
+            sx={{
+              display: "inline-flex",
+              justifyContent: "flex-end",
+              fontFamily: "Alegreya Sans SC",
+              fontSize: "1rem",
+              color: "red",
+            }}
+          >
+            Earnings: {Number(unclaimedRewards).toLocaleString()}
+          </Typography>
+        </CardContent>
         <CardMedia
           component="img"
           height="300"
@@ -148,4 +163,4 @@ const FightClubCard = (props) => {
   );
 };
 
-export default FightClubCard;
+export default StakedFightClubCard;

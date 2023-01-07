@@ -8,12 +8,7 @@ import Box from "@mui/material/Box";
 import { Button, Stack, ButtonGroup } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import "./ownedFightClubList.css";
-import {
-  getUGNft2,
-  getUGGame5,
-  getUGMarket,
-  getFclubAlley,
-} from "../utils.js";
+import { getUGNft2, getUGGame5, getUGMarket, getFclubAlley } from "../utils.js";
 import ErrorModal from "./ui/ErrorModal";
 import ListSingleModal from "./ListSingleFclubModal";
 /* global BigInt */
@@ -67,7 +62,8 @@ export default function OwnedFightClubList() {
     await signedContract.functions.levelUpFightClubs(
       selectedFClubs,
       levelUpArray,
-      sizeUpArray
+      sizeUpArray,
+      false
     );
     //reset selected FYs array
     setSelectedFClubs([]);
@@ -91,7 +87,8 @@ export default function OwnedFightClubList() {
     await signedContract.functions.levelUpFightClubs(
       selectedFClubs,
       levelUpArray,
-      sizeUpArray
+      sizeUpArray,
+      false
     );
     //reset selected FYs array
     setSelectedFClubs([]);
@@ -247,8 +244,6 @@ export default function OwnedFightClubList() {
                   id={fclub.id}
                   level={fclub.level}
                   size={fclub.size}
-                  lastLevelTime={fclub.lastLevelUpgradeTime}
-                  lastUnstakeTime={fclub.lastUnstakeTime}
                   onSelected={selectedFClubHandler}
                   emptyArray={selectedFClubs.length > 0 ? false : true}
                 />

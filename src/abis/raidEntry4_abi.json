@@ -291,6 +291,45 @@
   {
     "inputs": [
       {
+        "internalType": "uint8",
+        "name": "cut",
+        "type": "uint8"
+      }
+    ],
+    "name": "setFightClubCut",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint8",
+        "name": "multiplier",
+        "type": "uint8"
+      }
+    ],
+    "name": "setTrainMultilpier",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint8",
+        "name": "cut",
+        "type": "uint8"
+      }
+    ],
+    "name": "setYakuzaCut",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "_newOwner",
         "type": "address"

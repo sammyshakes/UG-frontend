@@ -6,7 +6,7 @@ import ProviderContext from '../context/provider-context.js';
 import ringImage from '../assets/images/ring_500.png';
 import amuletImage from '../assets/images/amulet_500.png';
 import CircularProgressWithLabel from './CircularProgressWithLabel';
-import { getUGGame5, getUGArena2, getUGArena3, getEthers, getUGNft2 } from '../utils.js';
+import { getUGGame5, getUGArena2, getUGArena3, getEthers, getUGNft2, getUGYakDen } from '../utils.js';
 import ErrorModal from './ui/ErrorModal';
 import ArenaWidgetRankFix from './ArenaWidgetRankFix';
 /* global BigInt */
@@ -32,21 +32,22 @@ const ArenaWidget = (props) => {
   const prv = useContext(ProviderContext);
   const provider = getEthers();
   const ugGameContract = getUGGame5();
-  const ugArenaContract = getUGArena2();
-  const ugArena3Contract = getUGArena3();
+  const ugArena2Contract = getUGArena2();
+  const ugArenaContract = getUGArena3();
   const ugNftContract = getUGNft2();
+  const ugYakDenContract = getUGYakDen();
   
   const refreshProgress = async() => {
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-    let stakedRingId = await ugArenaContract.getStakedRingIDForUser(accounts[0]);
-    let stakedAmuletId = await ugArenaContract.getStakedAmuletIDForUser(accounts[0]);
+    let stakedRingId = await ugArena2Contract.getStakedRingIDForUser(accounts[0]);
+    let stakedAmuletId = await ugArena2Contract.getStakedAmuletIDForUser(accounts[0]);
     //check if any need to be fixed from bloodRankFix
     if((stakedRingId || stakedAmuletId) &&  (Number(stakedRingId) > 0 || Number(stakedAmuletId) > 0)){
       setNeedsToUnstake(true);
     } else {      
       setNeedsToUnstake(false);
-      stakedRingId = ugArena3Contract.getStakedRingIDForUser(accounts[0]);
-      stakedAmuletId = ugArena3Contract.getStakedAmuletIDForUser(accounts[0]);
+      stakedRingId = ugArenaContract.getStakedRingIDForUser(accounts[0]);
+      stakedAmuletId = ugArenaContract.getStakedAmuletIDForUser(accounts[0]);
     }
 
     const ring = await ugNftContract.getRingAmulet(stakedRingId);    
@@ -73,7 +74,7 @@ const ArenaWidget = (props) => {
     setRing(ring);
     setAmulet(amulet);  
     
-    const _stakedFighterIds = await ugArenaContract.getStakedFighterIDsForUser(accounts[0])
+    const _stakedFighterIds = await ugArenaContract.stakedByOwner(accounts[0])
     const stakedFighterIds = _stakedFighterIds?.map(id => { return Number(id.toString()); })
 
     if(stakedFighterIds.length > 0){
@@ -81,16 +82,16 @@ const ArenaWidget = (props) => {
       setUnclaimedFighterBlood(Number(unclaimedFighterBlood)); 
     } else setUnclaimedFighterBlood(0); 
     
-    const _stakedYakuzaIds = await ugArenaContract.getStakedYakuzaIDsForUser(accounts[0])
+    const _stakedYakuzaIds = await ugYakDenContract.stakedIdsByUser(accounts[0])
     const stakedYakuzaIds = _stakedYakuzaIds?.map(id => { return Number(id); })
 
     if(stakedYakuzaIds.length > 0){
-      const unclaimedYakuzaBlood = await ugArenaContract.calculateAllStakingRewards(stakedYakuzaIds);
+      const unclaimedYakuzaBlood = await ugYakDenContract.calculateAllStakingRewards(stakedYakuzaIds);
       setUnclaimedYakuzaBlood(Number(unclaimedYakuzaBlood)); 
     } else setUnclaimedYakuzaBlood(0); 
     
-    const numStakedFighters = await ugArenaContract.numUserStakedFighters(accounts[0]);
-    const numStakedYakuza = await ugArenaContract.numUserStakedYakuza(accounts[0]);
+    const numStakedFighters = stakedFighterIds.length;
+    const numStakedYakuza = stakedYakuzaIds.length;
     
     setNumStakedFighters(numStakedFighters);   
     setNumStakedYakuza(numStakedYakuza); 

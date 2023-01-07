@@ -180,10 +180,6 @@ const RefereeModal = (props) => {
         //     return await  ugRaidContract.getRaiderQueueLength(key,1);
         // });
 
-        // const size1Queue = [];
-        // const size2Queue = [];
-        // const size3Queue = [];
-        // const size4Queue = [];
 
         // for(const levelTier of array) {         
         //     const _size1Queue = await ugRaidContract.getRaiderQueueLength(levelTier + 1,1);
@@ -200,14 +196,11 @@ const RefereeModal = (props) => {
         // setSize3FullRaids(size3Queue.reduce((a,v) =>  a = a + v , 0 ));
         // setSize4FullRaids(size4Queue.reduce((a,v) =>  a = a + v , 0 ));
 
-        const size1Queue = await ugRaidContract.getRaiderQueueLengths(1);
-        const size2Queue = await ugRaidContract.getRaiderQueueLengths(2);
-        const size3Queue = await ugRaidContract.getRaiderQueueLengths(3);
-        const size4Queue = await ugRaidContract.getRaiderQueueLengths(4);
-        setSize1FullRaids(size1Queue);
-        setSize2FullRaids(size2Queue);
-        setSize3FullRaids(size3Queue);
-        setSize4FullRaids(size4Queue);
+
+        setSize1FullRaids(await ugRaidContract.getRaiderQueueLengths(1));
+        setSize2FullRaids(await ugRaidContract.getRaiderQueueLengths(2));
+        setSize3FullRaids(await ugRaidContract.getRaiderQueueLengths(3));
+        setSize4FullRaids(await ugRaidContract.getRaiderQueueLengths(4));
     }
 
     const errorHandler = () => {
