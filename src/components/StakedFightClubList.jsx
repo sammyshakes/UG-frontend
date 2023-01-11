@@ -41,7 +41,8 @@ export default function StakedFightClubList() {
     await signedContract.functions.levelUpFightClubs(
       selectedFClubs,
       levelUpArray,
-      sizeUpArray
+      sizeUpArray,
+      true
     );
     //reset selected FYs array
     setSelectedFClubs([]);
@@ -65,7 +66,8 @@ export default function StakedFightClubList() {
     await signedContract.functions.levelUpFightClubs(
       selectedFClubs,
       levelUpArray,
-      sizeUpArray
+      sizeUpArray,
+      true
     );
     //reset selected FYs array
     setSelectedFClubs([]);
@@ -82,7 +84,8 @@ export default function StakedFightClubList() {
     await signedContract.functions.levelUpFightClubs(
       selectedFClubs,
       levelUpArray,
-      sizeUpArray
+      sizeUpArray,
+      true
     );
     //reset selected FYs array
     setSelectedFClubs([]);
@@ -153,7 +156,7 @@ export default function StakedFightClubList() {
     const signedContract = ugFclubAlleyContract.connect(
       prv.provider.getSigner()
     );
-    const receipt = await signedContract.functions.claimFightClubs(
+    await signedContract.functions.claimFightClubs(
       fclubIds,
       true
     );

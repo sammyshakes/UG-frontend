@@ -17,6 +17,12 @@ export default function StakedYakuzaList(props) {
     // const filteredList = prv.stakedFYs.filter(fy => ( fy.isFighter !== true));
     // console.log('f',filteredList);
 
+    const rankHandler = async() => {
+      const amountArray = selectedFYs.map(i => { return 1;});      
+      const signedContract =  ugYakDen.connect(prv.provider.getSigner());
+      await signedContract.functions.rankUpYakuzas(selectedFYs, amountArray, true) ;     
+    }
+
     const claimHandler = async() => {
       const signedContract =  ugYakDen.connect(prv.provider.getSigner());
       await signedContract.functions.claimManyFromArena(selectedFYs,  false) ;
@@ -139,10 +145,15 @@ export default function StakedYakuzaList(props) {
       </ImageList>
       <Stack direction="row"  maxwidth={'md'} sx={{ justifyContent: 'center' }}>
         <ButtonGroup  color="error" sx={{ borderColor: 'aqua', border: 3  }}>
-          <Button  variant="contained" size="small"  sx={{backgroundColor: 'black', color: 'aqua', border: 2}} onClick={claimHandler} >Claim </Button>
-          <Button  variant="contained" size="small"  sx={{backgroundColor: 'black', color: 'aqua', border: 2}} onClick={claimAllHandler} >Claim All </Button>
-          <Button  variant="contained" size="small" sx={{backgroundColor: 'black', color: 'aqua', border: 2}} onClick={unstakeHandler} >Unstake </Button>
-          <Button  variant="contained" size="small" sx={{backgroundColor: 'black', color: 'aqua', border: 2}} onClick={unstakeAllHandler} >Unstake All </Button>
+          <Button  variant="contained" size="small"  sx={{backgroundColor: 'black', color: 'aqua', border: 2}} onClick={rankHandler} >Rank Up </Button>
+          <Stack>
+            <Button  variant="contained" size="small"  sx={{backgroundColor: 'black', color: 'aqua', border: 2}} onClick={claimHandler} >Claim </Button>
+            <Button  variant="contained" size="small"  sx={{backgroundColor: 'black', color: 'aqua', border: 2}} onClick={claimAllHandler} >Claim All </Button>
+          </Stack>
+          <Stack>
+            <Button  variant="contained" size="small" sx={{backgroundColor: 'black', color: 'aqua', border: 2}} onClick={unstakeHandler} >Unstake </Button>
+            <Button  variant="contained" size="small" sx={{backgroundColor: 'black', color: 'aqua', border: 2}} onClick={unstakeAllHandler} >Unstake All </Button>
+          </Stack>
           <Button  variant="contained" size="small" sx={{backgroundColor: 'black', color: 'aqua', border: 2}} onClick={UnselectHandler} >Unselect </Button>
         </ButtonGroup>
       </Stack>

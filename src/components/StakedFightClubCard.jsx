@@ -58,7 +58,7 @@ const StakedFightClubCard = (props) => {
 
       const timer = setInterval(() => {
         updateProgress();
-      }, 60000);
+      }, 5000);
 
       return () => {
         clearInterval(timer);

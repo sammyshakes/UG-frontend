@@ -231,6 +231,7 @@ export default function FighterTable() {
   const [ttlSweatBurn, setTtlSweatBurn] = useState(0);
   const [numRaids, setNumRaids] = useState(0);
   const [enteredBulkRaiders, setEnteredBulkRaiders] = useState(0);
+  const [enteredTrainRaiders, setEnteredTrainRaiders] = useState(0);
 
   const baseUrl = "https://the-u.club/reveal/fighteryakuza/";
   const random = Math.floor(Math.random() * (500 - 1 + 1)) + 1 + 20000;
@@ -256,6 +257,11 @@ export default function FighterTable() {
   const enteredBulkRaidersChangeHandler = (event) => {
     event.preventDefault();
     setEnteredBulkRaiders(event.target.value);
+  };
+
+  const enteredBulkTrainChangeHandler = (event) => {
+    event.preventDefault();
+    setEnteredTrainRaiders(event.target.value);
   };
 
   const handleSnackBar = () => {
@@ -457,6 +463,57 @@ export default function FighterTable() {
     setEnteredBulkRaiders(0);
   };
 
+  const bulkEnterTrainHandler = async () => {
+    handleSnackBar();
+    const size = 1;
+    const yakFamily = 0;
+    const mandatorySweat = 1000;
+    const accounts = await window.ethereum.request({
+      method: "eth_requestAccounts",
+    });
+    const sweatBalance = await ugWeaponsContract.balanceOf(accounts[0], 56);
+
+    let filteredList = stakedFYs?.filter((fy) => fy.isFighter === true);
+    filteredList = filteredList?.filter(eligibleForWeapons);
+
+    //check if any in raid yet
+    let sortedRaidTimeList = filteredList?.sort(
+      (a, b) => a.lastRaidTime - b.lastRaidTime
+    );
+    if (sortedRaidTimeList.length > enteredTrainRaiders) {
+      sortedRaidTimeList = sortedRaidTimeList.slice(0, enteredTrainRaiders);
+    }
+
+    //error
+    if (sortedRaidTimeList.length === 0) {
+      setError({
+        title: "No Fighters to Train ",
+        message: "Acquire some...",
+      });
+      return;
+    }
+
+    if (sortedRaidTimeList.length * mandatorySweat > Number(sweatBalance)) {
+      setError({
+        title: "Not enough Sweat",
+        message: "Acquire 1000 per fighter...",
+      });
+      return;
+    }
+    const ids = sortedRaidTimeList?.map((fighter) => fighter.id);
+    const tickets = sortedRaidTimeList?.map((fighter) => {
+      return {
+        size: Number(size),
+        yakFamily: Number(yakFamily),
+        sweat: Number(mandatorySweat),
+      };
+    });
+    const entries = tickets?.map((ticket) => Object.values(ticket));
+    const signedContract = raidEntryContract.connect(prv.provider.getSigner());
+    await signedContract.functions.enterTrain(ids, entries);
+    setEnteredTrainRaiders(0);
+  };
+
   const refereeHandler = async () => {
     setRefereeIsShown(true);
   };
@@ -544,15 +601,15 @@ export default function FighterTable() {
       });
       //const filteredList = stakedFYs?.filter(fy => (fy.isFighter === true));
       setStakedFYs(stakedFYs);
-      console.log('raid2', ugRaid2Contract.address);
-      console.log('raid3', ugRaidContract.address);
-      console.log('raid4', ugRaid4Contract.address);
+      // console.log('raid2', ugRaid2Contract.address);
+      // console.log('raid3', ugRaidContract.address);
+      // console.log('raid4', ugRaid4Contract.address);
       const numRaids3 = await ugRaidContract.ttlRaids();   
       const numRaids2 = await ugRaid2Contract.ttlRaids();    
       const numRaids4 = await ugRaid4Contract.ttlRaids();
-      setNumRaids(numRaids3 + numRaids2 + numRaids4);
+      setNumRaids(Number(numRaids3) + Number(numRaids2) + Number(numRaids4));
 
-      const userWeaponsRewards = await ugRaidContract.getUnclaimedWeaponsCount(
+      const userWeaponsRewards = await ugRaid4Contract.getUnclaimedWeaponsCount(
         accounts[0]
       );
       setUserWeaponsWinnings(userWeaponsRewards);
@@ -622,7 +679,7 @@ export default function FighterTable() {
           pt={1}
           sx={{
             height: "80vh",
-            minHeight: 850,
+            minHeight: 900,
             "& .TimeLeft": {
               color: "darkorchid",
             },
@@ -1001,6 +1058,54 @@ export default function FighterTable() {
             sx={{ fontFamily: "Alegreya Sans SC", color: "deepskyblue" }}
           >
             500 Sweat per Raider to bulk raid
+          </Typography>
+          <Box>
+            <Stack>
+              <Stack
+                className="box10-bordr"
+                direction="row"
+                sx={{ justifyContent: "space-between" }}
+              >
+                <Box width={130} className="input-group m-1 ">
+                  <input
+                    type="number"
+                    min="10"
+                    step="10"
+                    onChange={enteredBulkTrainChangeHandler}
+                    className="form-control"
+                    placeholder="How Many? "
+                    aria-label="Qty"
+                    aria-describedby="basic-addon2"
+                  />
+                </Box>
+
+                <Button
+                  variant="text"
+                  justify="center"
+                  size="medium"
+                  className="raidButton"
+                  sx={{
+                    m: 1,
+                    borderRadius: 5,
+                    border: 1,
+                    color: "black",
+                    backgroundColor: "orange",
+                    fontFamily: "Alegreya Sans SC",
+                    minWidth: 1 / 2.5,
+                  }}
+                  onClick={bulkEnterTrainHandler}
+                >
+                  Bulk Train
+                </Button>
+              </Stack>
+            </Stack>
+          </Box>
+          <Typography
+            pl={1}
+            align="center"
+            sx={{ fontFamily: "Alegreya Sans SC", color: "deepskyblue" }}
+          >
+            1000 Sweat per Raider to bulk train
           </Typography>
           {Number(userRaidWinnings) > 0 && (
             <Stack

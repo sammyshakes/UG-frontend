@@ -4,7 +4,7 @@ import './ArenaWidget.css';
 import {useEffect, useState} from 'react';
 import ringImage from '../assets/images/ring_500.png';
 import amuletImage from '../assets/images/amulet_500.png';
-import { getUGArena2, getEthers } from '../utils.js';
+import {getUGGame4, getUGArena2, getEthers } from '../utils.js';
 import ErrorModal from './ui/ErrorModal';
 /* global BigInt */
 
@@ -17,6 +17,7 @@ const ArenaWidgetRankFix = (props) => {
 
   const provider = getEthers();
   const ugArenaContract = getUGArena2();
+  const ugGameContract = getUGGame4();
   
   const refreshProgress = async() => {
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -44,6 +45,64 @@ const ArenaWidgetRankFix = (props) => {
     setNumStakedFighters(numStakedFighters);   
     setNumStakedYakuza(numStakedYakuza); 
     
+  }
+
+  const maintainRingHandler = async() => {
+    //check for amulet if ring > 10
+    if(props.ring?.level > 10 && props.amulet?.level < 1){
+      setError({
+          title: 'You need an Amulet..',
+          message: '.. to maintain a Ring past level 10.',
+      });
+      return;
+    }
+    //check for proper number of fighters
+    if(numStakedFighters < props.ring?.level * 3){
+      setError({
+          title: 'Your Army is too small!',
+          message: 'You need at least 3 fighters per Ring Level.',
+      });
+      return;
+    }
+    //check for blood balance
+    if(props.balance/(10**18) < props.ringMaintainCost){
+      setError({
+          title: 'Not Enough $BLOOD!',
+          message: 'You must acquire more $BLOOD to maintain your Ring.',
+      });
+      return;
+    }
+    //tbd
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    const stakedRingId = await ugArenaContract.getStakedRingIDForUser(accounts[0]);
+    console.log(stakedRingId)
+    const signedContract =  ugGameContract.connect(provider.getSigner());
+    //const ids = selectedFYs.map(id => { return Number(id.toString()); })
+    const receipt = await signedContract.functions.levelUpRing(Number(stakedRingId?.toString()), 0) ;
+  }
+
+  const maintainAmuletHandler = async() => {
+    //check for proper number of fighters
+    if(numStakedFighters < props.amulet?.level * 3){
+      setError({
+          title: 'Your Army is too small!',
+          message: 'You need at least 3 fighters per Ring Level.',
+      });
+      return;
+    }
+    //check for blood balance
+    if(props.balance/(10**18) < props.amuletMaintainCost){
+      setError({
+          title: 'Not Enough $BLOOD!',
+          message: 'You must acquire more $BLOOD to maintain your Amulet.',
+      });
+      return;
+    }
+    //tbd
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' }); 
+    const stakedAmuletId = await ugArenaContract.getStakedAmuletIDForUser(accounts[0]);
+    const signedContract =  ugGameContract.connect(provider.getSigner());
+    await signedContract.functions.levelUpAmulet(Number(stakedAmuletId), 0) ;
   }
     
   
@@ -111,14 +170,14 @@ const ArenaWidgetRankFix = (props) => {
                     onConfirm={errorHandler}
                 />
     )}
-   <Box className="ring-bordr" maxWidth={850} maxHeight={220}  sx={{p:1}} >
+   <Box className="ring-bordr" maxWidth={900} maxHeight={200}  sx={{p:1}} >
     <Box  className="inner-bordr" maxWidth={850} maxHeight={180} p={1.5}  sx={{backgroundColor:'rgb(0,0,0,.5)'}}>
       <Stack className="stack-back"   direction="row"  justifyContent="space-evenly"  sx={{p:0,backgroundColor:'rgb(0,0,0,0)'}}  >
        
-        <Box className="ring-bordr1"sx={{width: 80}}>
+        <Box className="ring-bordr1"sx={{width: 250}}>
         <Stack direction="row" justifyContent="center" p={1}>
         
-          <Stack>
+          
             <Box sx={{pl:2 }}>
               <img className="ring"  src={ringImage} alt="Ring" />
             </Box>
@@ -126,7 +185,11 @@ const ArenaWidgetRankFix = (props) => {
               {props?.ring?.level > 0 && <Typography variant="button"  component="div" align="center" sx={{ fontFamily: 'Alegreya Sans SC', fontSize: '1.1rem'}}>
                   {`LEVEL   ${props?.ring?.level}`}
               </Typography>}
-            </Box>  
+            </Box> 
+            <Stack>
+            <Stack  direction="row" justifyContent="center">
+              <Button variant="text" onClick={maintainRingHandler} size="small" sx={{ maxHeight: 30, backgroundColor:'none', color: 'red', borderColor: 'aqua',  fontSize: '.8rem'}}  >maintain</Button>
+              </Stack> 
             <Box >
             {props?.ring?.level > 0 && <Button variant="outlined" onClick={unstakeRingHandler} size="large" sx={{ maxHeight: 30, backgroundColor:'none', color: 'red', borderColor: 'aqua', width:100}}  >unstake</Button>}
             </Box>             
@@ -136,10 +199,10 @@ const ArenaWidgetRankFix = (props) => {
         
       </Stack>   
       </Box>
-      <Box className="ring-bordr1" sx={{width: 100}}>
+      <Box className="ring-bordr1" sx={{width: 250}}>
         <Stack  direction="row"justifyContent="center" p={1} >   
         
-          <Stack>
+          
             <Box sx={{pl:1.5 }}>
                 <img  className="ring"  src={amuletImage} alt="Amulet"  />
             </Box>  
@@ -148,6 +211,10 @@ const ArenaWidgetRankFix = (props) => {
                               {`LEVEL   ${props?.amulet?.level}`}
                             </Typography>}
             </Box>
+            <Stack>
+            <Stack  direction="row" justifyContent="center">
+            {props?.amulet?.level > 0 && <Button variant="text"  onClick={maintainAmuletHandler} size="small" sx={{ maxHeight: 30, backgroundColor:'none', color: 'red', borderColor: 'aqua', fontSize: '.8rem'}} >maintain</Button>}
+            </Stack>
             <Box sx={{}}>
             {props?.amulet?.level > 0 && <Button variant="outlined" onClick={unstakeAmuletHandler} size="large" sx={{ maxHeight: 30, backgroundColor:'none', color: 'red', borderColor: 'aqua'}} >unstake</Button>}
             </Box>

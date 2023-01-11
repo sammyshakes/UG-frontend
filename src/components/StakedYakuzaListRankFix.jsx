@@ -6,7 +6,7 @@ import { getUGArena2, getUGFYakuza} from '../utils.js';
 import './stakedFighterList.css';
 const baseUrl = 'https://the-u.club/reveal/fighteryakuza/';
 
-export default function StakedYakuzaList() {
+export default function StakedYakuzaListRankFix() {
     const prv = useContext(ProviderContext);    
     const[selectedFYs, setSelectedFYs] = useState([]);
     const[stakedYakuza, setStakedYakuza] = useState();
@@ -180,8 +180,6 @@ export default function StakedYakuzaList() {
       </ImageList>
       <Stack direction="row"  maxwidth={'md'} sx={{ justifyContent: 'center' }}>
         <ButtonGroup  color="error" sx={{ borderColor: 'aqua', border: 3  }}>
-          <Button  variant="contained" size="small"  sx={{backgroundColor: 'black', color: 'aqua', border: 2}} onClick={claimHandler} >Claim </Button>
-          <Button  variant="contained" size="small"  sx={{backgroundColor: 'black', color: 'aqua', border: 2}} onClick={claimAllHandler} >Claim All </Button>
           <Button  variant="contained" size="small" sx={{backgroundColor: 'black', color: 'aqua', border: 2}} onClick={unstakeHandler} >Unstake </Button>
           <Button  variant="contained" size="small" sx={{backgroundColor: 'black', color: 'aqua', border: 2}} onClick={unstakeAllHandler} >Unstake All </Button>
           <Button  variant="contained" size="small" sx={{backgroundColor: 'black', color: 'aqua', border: 2}} onClick={UnselectHandler} >Unselect </Button>

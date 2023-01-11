@@ -660,13 +660,8 @@
         "type": "uint256"
       }
     ],
-    "name": "getRaiderQueueLengths",
+    "name": "getRaiderSizeQueueLengths",
     "outputs": [
-      {
-        "internalType": "uint256[]",
-        "name": "",
-        "type": "uint256[]"
-      },
       {
         "internalType": "uint256",
         "name": "",
@@ -894,6 +889,19 @@
   {
     "inputs": [
       {
+        "internalType": "uint32",
+        "name": "pct",
+        "type": "uint32"
+      }
+    ],
+    "name": "setBrutalityWeight",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "_ugArena",
         "type": "address"
@@ -955,6 +963,19 @@
   {
     "inputs": [
       {
+        "internalType": "uint32",
+        "name": "pct",
+        "type": "uint32"
+      }
+    ],
+    "name": "setFightClubCut",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "uint256",
         "name": "numRaiders",
         "type": "uint256"
@@ -968,12 +989,25 @@
   {
     "inputs": [
       {
-        "internalType": "uint256",
+        "internalType": "uint32",
         "name": "pct",
-        "type": "uint256"
+        "type": "uint32"
       }
     ],
     "name": "setRefereeBasePct",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint32",
+        "name": "pct",
+        "type": "uint32"
+      }
+    ],
+    "name": "setScarsWeight",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -994,12 +1028,64 @@
   {
     "inputs": [
       {
+        "internalType": "uint32",
+        "name": "pct",
+        "type": "uint32"
+      }
+    ],
+    "name": "setSweatWeight",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "bool",
         "name": "active",
         "type": "bool"
       }
     ],
     "name": "setWeaponsRound",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint32",
+        "name": "pct",
+        "type": "uint32"
+      }
+    ],
+    "name": "setWeaponsWeight",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint32",
+        "name": "pct",
+        "type": "uint32"
+      }
+    ],
+    "name": "setYakIntimidationWeight",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint32",
+        "name": "pct",
+        "type": "uint32"
+      }
+    ],
+    "name": "setYakuzaCut",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

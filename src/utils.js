@@ -42,91 +42,99 @@ import fclubAlleyAbi from "./abis/fclubAlley_abi.json";
 const { ethers } = require("ethers");
 
 //v2 oops contracts mainnet
-// const ugNftAddress = process.env.REACT_APP__UGNFT_MAINNET_ADDRESS;
-// const ugArenaAddress = process.env.REACT_APP__UGARENA_MAINNET_ADDRESS;
-// const ugGameAddress = process.env.REACT_APP_UGGAME_MAINNET_ADDRESS;
-// const ugRaidAddress = process.env.REACT_APP_UGRAID_MAINNET_ADDRESS;
-// const ugWeaponsAddress = process.env.REACT_APP_UGWEAPONS_MAINNET_ADDRESS;
-// const ugForgeSmithAddress = process.env.REACT_APP_UGFORGESMITH_MAINNET_ADDRESS;
+const ugNftAddress = process.env.REACT_APP__UGNFT_MAINNET_ADDRESS;
+const ugArenaAddress = process.env.REACT_APP__UGARENA_MAINNET_ADDRESS;
+const ugGameAddress = process.env.REACT_APP_UGGAME_MAINNET_ADDRESS;
+const ugRaidAddress = process.env.REACT_APP_UGRAID_MAINNET_ADDRESS;
+const ugWeaponsAddress = process.env.REACT_APP_UGWEAPONS_MAINNET_ADDRESS;
+const ugForgeSmithAddress = process.env.REACT_APP_UGFORGESMITH_MAINNET_ADDRESS;
 
 //v2 oops contracts testnet
-const ugNftAddress = process.env.REACT_APP__UGNFT_TESTNET_ADDRESS;
-const ugArenaAddress = process.env.REACT_APP__UGARENA_TESTNET_ADDRESS;
-const ugGameAddress = process.env.REACT_APP_UGGAME_TESTNET_ADDRESS;
-const ugRaidAddress = process.env.REACT_APP_UGRAID_TESTNET_ADDRESS;
-const ugRaid3Address = process.env.REACT_APP_UGRAID_TESTNET_ADDRESS;
-const ugWeaponsAddress = process.env.REACT_APP_UGWEAPONS_TESTNET_ADDRESS;
-const ugForgeSmithAddress = process.env.REACT_APP_UGFORGESMITH_TESTNET_ADDRESS;
-const ugMigrationAddress = process.env.REACT_APP_UGMIGRATION_TESTNET_ADDRESS;
-const forgeMintAddress = process.env.REACT_APP_FORGEMINT_TESTNET_ADDRESS;
+// const ugNftAddress = process.env.REACT_APP__UGNFT_TESTNET_ADDRESS;
+// const ugArenaAddress = process.env.REACT_APP__UGARENA_TESTNET_ADDRESS;
+// const ugGameAddress = process.env.REACT_APP_UGGAME_TESTNET_ADDRESS;
+// const ugRaidAddress = process.env.REACT_APP_UGRAID_TESTNET_ADDRESS;
+// const ugRaid3Address = process.env.REACT_APP_UGRAID_TESTNET_ADDRESS;
+// const ugWeaponsAddress = process.env.REACT_APP_UGWEAPONS_TESTNET_ADDRESS;
+// const ugForgeSmithAddress = process.env.REACT_APP_UGFORGESMITH_TESTNET_ADDRESS;
+// const ugMigrationAddress = process.env.REACT_APP_UGMIGRATION_TESTNET_ADDRESS;
+// const forgeMintAddress = process.env.REACT_APP_FORGEMINT_TESTNET_ADDRESS;
 
 //v2 contracts testnet
-const ugNft2Address = process.env.REACT_APP__UGNFT2_TESTNET_ADDRESS;
-const ugArena2Address = process.env.REACT_APP__UGARENA2_TESTNET_ADDRESS;
-const ugGame2Address = process.env.REACT_APP_UGGAME2_TESTNET_ADDRESS;
-const ugGame3Address = process.env.REACT_APP_UGGAME2_TESTNET_ADDRESS;
-const ugGame4Address = process.env.REACT_APP_UGGAME2_TESTNET_ADDRESS;
-const ugRaid2Address = process.env.REACT_APP_UGRAID2_TESTNET_ADDRESS;
-const ugWeapons2Address = process.env.REACT_APP_UGWEAPONS2_TESTNET_ADDRESS;
-const ugForgeSmith2Address =
-  process.env.REACT_APP_UGFORGESMITH2_TESTNET_ADDRESS;
-const ugForgeSmith3Address =
-  process.env.REACT_APP_UGFORGESMITH2_TESTNET_ADDRESS;
-const ugFYakuzaAddress = process.env.REACT_APP__UGFYAKUZA_TESTNET_ADDRESS;
-const raidEntryAddress = process.env.REACT_APP_RAIDENTRY_TESTNET_ADDRESS;
-const raidEntry2Address = process.env.REACT_APP_RAIDENTRY_TESTNET_ADDRESS;
-const ugMigration2Address = process.env.REACT_APP_UGMIGRATION2_TESTNET_ADDRESS;
-const ugMarketAddress = process.env.REACT_APP_UGMARKET_TESTNET_ADDRESS;
-const ugBloodFomoAddress = process.env.REACT_APP_BLOODFOMO_TESTNET_ADDRESS;
-const ugFighterFomoAddress = process.env.REACT_APP_FIGHTERFOMO_TESTNET_ADDRESS;
-const mergeAddress = process.env.REACT_APP_MERGE_TESTNET_ADDRESS;
+// const ugNft2Address = process.env.REACT_APP__UGNFT2_TESTNET_ADDRESS;
+// const ugArena2Address = process.env.REACT_APP__UGARENA2_TESTNET_ADDRESS;
+// const ugGame2Address = process.env.REACT_APP_UGGAME2_TESTNET_ADDRESS;
+// const ugGame3Address = process.env.REACT_APP_UGGAME2_TESTNET_ADDRESS;
+// const ugGame4Address = process.env.REACT_APP_UGGAME2_TESTNET_ADDRESS;
+// const ugRaid2Address = process.env.REACT_APP_UGRAID2_TESTNET_ADDRESS;
+// const ugWeapons2Address = process.env.REACT_APP_UGWEAPONS2_TESTNET_ADDRESS;
+// const ugForgeSmith2Address =
+//   process.env.REACT_APP_UGFORGESMITH2_TESTNET_ADDRESS;
+// const ugForgeSmith3Address =
+//   process.env.REACT_APP_UGFORGESMITH2_TESTNET_ADDRESS;
+// const ugFYakuzaAddress = process.env.REACT_APP__UGFYAKUZA_TESTNET_ADDRESS;
+// const raidEntryAddress = process.env.REACT_APP_RAIDENTRY_TESTNET_ADDRESS;
+// const raidEntry2Address = process.env.REACT_APP_RAIDENTRY_TESTNET_ADDRESS;
+// const ugMigration2Address = process.env.REACT_APP_UGMIGRATION2_TESTNET_ADDRESS;
+// const ugMarketAddress = process.env.REACT_APP_UGMARKET_TESTNET_ADDRESS;
+// const ugBloodFomoAddress = process.env.REACT_APP_BLOODFOMO_TESTNET_ADDRESS;
+// const ugFighterFomoAddress = process.env.REACT_APP_FIGHTERFOMO_TESTNET_ADDRESS;
+// const mergeAddress = process.env.REACT_APP_MERGE_TESTNET_ADDRESS;
 
 //bloodRankFix testnet
-const ugArena3Address = process.env.REACT_APP_UGARENA3_TESTNET_ADDRESS;
-const ugRaid4Address = process.env.REACT_APP_UGRAID4_TESTNET_ADDRESS;
-const ugGame5Address = process.env.REACT_APP_UGGAME5_TESTNET_ADDRESS;
-const fclubAlleyAddress = process.env.REACT_APP_FIGHTCLUBALLEY_TESTNET_ADDRESS;
-const ugYakDenAddress = process.env.REACT_APP_UGYAKDEN_TESTNET_ADDRESS;
-const raidEntry4Address = process.env.REACT_APP_RAIDENTRY4_TESTNET_ADDRESS;
+// const ugArena3Address = process.env.REACT_APP_UGARENA3_TESTNET_ADDRESS;
+// const ugRaid4Address = process.env.REACT_APP_UGRAID4_TESTNET_ADDRESS;
+// const ugGame5Address = process.env.REACT_APP_UGGAME5_TESTNET_ADDRESS;
+// const fclubAlleyAddress = process.env.REACT_APP_FIGHTCLUBALLEY_TESTNET_ADDRESS;
+// const ugYakDenAddress = process.env.REACT_APP_UGYAKDEN_TESTNET_ADDRESS;
+// const raidEntry4Address = process.env.REACT_APP_RAIDENTRY4_TESTNET_ADDRESS;
+
+//bloodRankFix mainnet
+const ugArena3Address = process.env.REACT_APP_UGARENA3_MAINNET_ADDRESS;
+const ugRaid4Address = process.env.REACT_APP_UGRAID4_MAINNET_ADDRESS;
+const ugGame5Address = process.env.REACT_APP_UGGAME5_MAINNET_ADDRESS;
+const fclubAlleyAddress = process.env.REACT_APP_FIGHTCLUBALLEY_MAINNET_ADDRESS;
+const ugYakDenAddress = process.env.REACT_APP_UGYAKDEN_MAINNET_ADDRESS;
+const raidEntry4Address = process.env.REACT_APP_RAIDENTRY4_MAINNET_ADDRESS;
 
 //v2 contracts mainnet
-// const ugFYakuzaAddress = process.env.REACT_APP__UGFYAKUZA_MAINNET_ADDRESS;
-// const ugNft2Address = process.env.REACT_APP__UGNFT2_MAINNET_ADDRESS;
-// const ugArena2Address = process.env.REACT_APP__UGARENA2_MAINNET_ADDRESS;
-// const ugGame2Address = process.env.REACT_APP_UGGAME2_MAINNET_ADDRESS;
-// const ugGame3Address = process.env.REACT_APP_UGGAME3_MAINNET_ADDRESS;
-// const ugGame4Address = process.env.REACT_APP_UGGAME4_MAINNET_ADDRESS;
-// const ugRaid2Address = process.env.REACT_APP_UGRAID2_MAINNET_ADDRESS;
-// const ugRaid3Address = process.env.REACT_APP_UGRAID3_MAINNET_ADDRESS;
-// const ugWeapons2Address = process.env.REACT_APP_UGWEAPONS2_MAINNET_ADDRESS;
-// const ugForgeSmith2Address =
-//   process.env.REACT_APP_UGFORGESMITH2_MAINNET_ADDRESS;
-// const ugForgeSmith3Address =
-//   process.env.REACT_APP_UGFORGESMITH3_MAINNET_ADDRESS;
-// const raidEntryAddress = process.env.REACT_APP_RAIDENTRY_MAINNET_ADDRESS;
-// const raidEntry2Address = process.env.REACT_APP_RAIDENTRY2_MAINNET_ADDRESS;
-// const raidEntry3Address = process.env.REACT_APP_RAIDENTRY3_MAINNET_ADDRESS;
-// const ugMigration2Address = process.env.REACT_APP_UGMIGRATION2_MAINNET_ADDRESS;
-// const ugMarketAddress = process.env.REACT_APP_UGMARKET_MAINNET_ADDRESS;
-// const ugBloodFomoAddress = process.env.REACT_APP_BLOODFOMO_MAINNET_ADDRESS;
-// const ugFighterFomoAddress = process.env.REACT_APP_FIGHTERFOMO_MAINNET_ADDRESS;
-// const mergeAddress = process.env.REACT_APP_MERGE_MAINNET_ADDRESS;
+const ugFYakuzaAddress = process.env.REACT_APP__UGFYAKUZA_MAINNET_ADDRESS;
+const ugNft2Address = process.env.REACT_APP__UGNFT2_MAINNET_ADDRESS;
+const ugArena2Address = process.env.REACT_APP__UGARENA2_MAINNET_ADDRESS;
+const ugGame2Address = process.env.REACT_APP_UGGAME2_MAINNET_ADDRESS;
+const ugGame3Address = process.env.REACT_APP_UGGAME3_MAINNET_ADDRESS;
+const ugGame4Address = process.env.REACT_APP_UGGAME4_MAINNET_ADDRESS;
+const ugRaid2Address = process.env.REACT_APP_UGRAID2_MAINNET_ADDRESS;
+const ugRaid3Address = process.env.REACT_APP_UGRAID3_MAINNET_ADDRESS;
+const ugWeapons2Address = process.env.REACT_APP_UGWEAPONS2_MAINNET_ADDRESS;
+const ugForgeSmith2Address =
+  process.env.REACT_APP_UGFORGESMITH2_MAINNET_ADDRESS;
+const ugForgeSmith3Address =
+  process.env.REACT_APP_UGFORGESMITH3_MAINNET_ADDRESS;
+const raidEntryAddress = process.env.REACT_APP_RAIDENTRY_MAINNET_ADDRESS;
+const raidEntry2Address = process.env.REACT_APP_RAIDENTRY2_MAINNET_ADDRESS;
+const raidEntry3Address = process.env.REACT_APP_RAIDENTRY3_MAINNET_ADDRESS;
+const ugMigration2Address = process.env.REACT_APP_UGMIGRATION2_MAINNET_ADDRESS;
+const ugMarketAddress = process.env.REACT_APP_UGMARKET_MAINNET_ADDRESS;
+const ugBloodFomoAddress = process.env.REACT_APP_BLOODFOMO_MAINNET_ADDRESS;
+const ugFighterFomoAddress = process.env.REACT_APP_FIGHTERFOMO_MAINNET_ADDRESS;
+const mergeAddress = process.env.REACT_APP_MERGE_MAINNET_ADDRESS;
 
 //v1 contracts mainnet
-// const bloodAddress = process.env.REACT_APP_BLOOD_MAINNET_ADDRESS;
-// const oldNftAddress = process.env.REACT_APP_OLDNFT_MAINNET_ADDRESS;
-// const oldArenaAddress = process.env.REACT_APP_OLDARENA_MAINNET_ADDRESS;
-// const oldGameAddress = process.env.REACT_APP_OLDGAME_MAINNET_ADDRESS;
-// const oldRingAddress = process.env.REACT_APP_OLDRING_MAINNET_ADDRESS;
-// const oldAmuletAddress = process.env.REACT_APP_OLDAMULET_MAINNET_ADDRESS;
+const bloodAddress = process.env.REACT_APP_BLOOD_MAINNET_ADDRESS;
+const oldNftAddress = process.env.REACT_APP_OLDNFT_MAINNET_ADDRESS;
+const oldArenaAddress = process.env.REACT_APP_OLDARENA_MAINNET_ADDRESS;
+const oldGameAddress = process.env.REACT_APP_OLDGAME_MAINNET_ADDRESS;
+const oldRingAddress = process.env.REACT_APP_OLDRING_MAINNET_ADDRESS;
+const oldAmuletAddress = process.env.REACT_APP_OLDAMULET_MAINNET_ADDRESS;
 
 //v1 contracts testnet
-const bloodAddress = process.env.REACT_APP_BLOOD_TESTNET_ADDRESS;
-const oldGameAddress = process.env.REACT_APP_OLDGAME_TESTNET_ADDRESS;
-const oldNftAddress = process.env.REACT_APP_OLDNFT_TESTNET_ADDRESS;
-const oldRingAddress = process.env.REACT_APP_OLDRING_TESTNET_ADDRESS;
-const oldAmuletAddress = process.env.REACT_APP_OLDAMULET_TESTNET_ADDRESS;
-const oldArenaAddress = process.env.REACT_APP_OLDARENA_TESTNET_ADDRESS;
+// const bloodAddress = process.env.REACT_APP_BLOOD_TESTNET_ADDRESS;
+// const oldGameAddress = process.env.REACT_APP_OLDGAME_TESTNET_ADDRESS;
+// const oldNftAddress = process.env.REACT_APP_OLDNFT_TESTNET_ADDRESS;
+// const oldRingAddress = process.env.REACT_APP_OLDRING_TESTNET_ADDRESS;
+// const oldAmuletAddress = process.env.REACT_APP_OLDAMULET_TESTNET_ADDRESS;
+// const oldArenaAddress = process.env.REACT_APP_OLDARENA_TESTNET_ADDRESS;
 
 const getEthers = () => {
   return new ethers.providers.Web3Provider(window.ethereum);

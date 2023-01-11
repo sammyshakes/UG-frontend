@@ -59,7 +59,7 @@ export default function OwnedYakuzaList() {
       return;  
     }    
 
-    const levelHandler = async() => {
+    const rankHandler = async() => {
       if(selectedFYs.length < 1){
         setError({
           title: 'Please Select a Yakuza',
@@ -246,7 +246,7 @@ export default function OwnedYakuzaList() {
           {!isApproved && <Button  variant="contained" size="small" sx={{backgroundColor: 'black', color: 'red'}} onClick={approveHandler} >Approve Staking </Button>}
           {isApprovedMarket && <Button  variant="contained" size="small" sx={{backgroundColor: 'black', color: 'red'}} onClick={listHandler} >List </Button>}
           {!isApprovedMarket && <Button  variant="contained" size="small" sx={{backgroundColor: 'black', color: 'red'}} onClick={approveMarketHandler} >Approve Market </Button>}
-          <Button  variant="contained" size="small" sx={{backgroundColor: 'black', color: 'red'}} onClick={levelHandler} >Level UP </Button>
+          <Button  variant="contained" size="small" sx={{backgroundColor: 'black', color: 'red'}} onClick={rankHandler} >Rank UP </Button>
           <Button  variant="contained" size="small" sx={{backgroundColor: 'black', color: 'red'}} onClick={UnselectHandler} >Unselect </Button>
         </ButtonGroup>
       </Stack>

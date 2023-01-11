@@ -4,7 +4,7 @@ import {Box, Button, Stack, Typography} from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import WeaponModal from './WeaponModal';
 import ErrorModal from './ui/ErrorModal';
-import {getUGArena2, getUGFYakuza, getUGForgeSmith3 } from '../utils.js';
+import {getUGArena3, getUGFYakuza, getUGForgeSmith3 } from '../utils.js';
 import CircularProgressWithLabel from './CircularProgressWithLabel';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
@@ -209,7 +209,7 @@ export default function WeaponTable() {
   const baseUrl = 'https://the-u.club/reveal/fighteryakuza/';
   const baseWeaponUrl = 'https://the-u.club/reveal/weapons/';
 
-  const ugArenaContract = getUGArena2();
+  const ugArenaContract = getUGArena3();
   const ugFYakuzaContract = getUGFYakuza();    
   const ugForgeSmithContract = getUGForgeSmith3();
 
@@ -301,7 +301,7 @@ export default function WeaponTable() {
 
   const getUpdates = async() => {      
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });      
-    const _stakedIds = await ugArenaContract.getStakedFighterIDsForUser(accounts[0]);        
+    const _stakedIds = await ugArenaContract.stakedByOwner(accounts[0]);        
     const stakedIds = _stakedIds.map(id => { return Number(id); })       
     if(stakedIds.length > 0){
     const _stakedFYs = await ugFYakuzaContract.getFighters(stakedIds); 

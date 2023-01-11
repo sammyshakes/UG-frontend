@@ -5,12 +5,12 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea, Box, Stack } from '@mui/material';
-import {getUGArena3, getUGGame5, getUGNft2, getUGYakDen} from '../utils.js';
+import {getUGArena2, getUGGame5, getUGNft2, getUGYakDen} from '../utils.js';
 import './stakedFighterCard.css';
 import CircularProgressWithLabel from './CircularProgressWithLabel';
 /* global BigInt */
 
-const StakedFighterCard = (props) => {
+const StakedFighterCardRankFix = (props) => {
   const [unclaimed, setUnclaimed] = useState(undefined);
   const [yakUnclaimed, setYakUnclaimed] = useState(undefined);
   const [clicked, setClicked] = useState(false);
@@ -20,7 +20,7 @@ const StakedFighterCard = (props) => {
   const [timeLeftForRaid, setTimeLeftForRaid] = useState();
   const [timeLeftForLevel, setTimeLeftForLevel] = useState();
   const prv = useContext(ProviderContext);
-  const ugArenaContract = getUGArena3();
+  const ugArenaContract = getUGArena2();
   const ugGameContract = getUGGame5();  
   const ugNftContract = getUGNft2(); 
   const ugYakDenContract = getUGYakDen(); 
@@ -146,5 +146,5 @@ const StakedFighterCard = (props) => {
   );
   
 };
-export default StakedFighterCard;
+export default StakedFighterCardRankFix;
 

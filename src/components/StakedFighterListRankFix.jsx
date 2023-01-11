@@ -1,6 +1,6 @@
 import {useContext, useState, useEffect} from 'react';
 import ProviderContext from '../context/provider-context';
-import StakedFighterCard from './StakedFighterCard';
+import StakedFighterCardRankFix from './StakedFighterCardRankFix';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
@@ -13,11 +13,19 @@ import './stakedFighterList.css';
 export default function StakedFighterListRankFix(props) {
     const prv = useContext(ProviderContext);    
     const[selectedFYs, setSelectedFYs] = useState([]);
+    const[stillYakuza, setStillYakuza] = useState(true);
     const [error, setError] = useState();
     const ugGameContract = getUGGame4();
     const ugArenaContract = getUGArena2();
     const ugMigration2Contract = getUGMigration2();
     const [alignment, setAlignment] = useState('levelUp');    
+
+
+    const getUpdates = async() => {   
+      const yakuzaList = props.stakedFYs?.filter(fy => (fy.isFighter === false));
+      
+        if (yakuzaList.length === 0) setStillYakuza(false);
+    }
     
 
     const levelHandler = async() => {
@@ -50,6 +58,7 @@ export default function StakedFighterListRankFix(props) {
 
     const unstakeHandler = async() => {
       const signedContract =  ugArenaContract.connect(prv.provider.getSigner());
+      console.log(selectedFYs)
       const receipt = await signedContract.functions.claimManyFromArena(selectedFYs,  true) ;
       //reset selected FYs array
       setSelectedFYs([]);      
@@ -132,6 +141,25 @@ export default function StakedFighterListRankFix(props) {
       }
     };
 
+    useEffect(() => {     
+      const init = async() => {  
+       
+        getUpdates();
+        
+        const timer = setInterval(() => {
+          getUpdates();
+            
+        }, 5000);
+  
+        return () => {
+          clearInterval(timer);
+        };
+  
+      }
+      init();
+      // eslint-disable-next-line
+    }, []);
+
     const filteredList = props.stakedFYs?.filter(fy => (fy.isFighter === true));
     let sortedLevelList  = filteredList?.sort((a, b) => b.level - a.level);
 
@@ -152,7 +180,7 @@ export default function StakedFighterListRankFix(props) {
                     onConfirm={errorHandler}
                 />
     )}
-    <Box className="staked-bordr"  maxHeight={{sm: '80vh', md: '80vh'}}>
+    {!stillYakuza && <Box className="staked-bordr"  maxHeight={{sm: '80vh', md: '80vh'}}>
       <Stack direction="row" sx={{ justifyContent: 'space-between'}}>
         <Typography variant="h4" align="center" sx={{fontFamily: 'Alegreya Sans SC',  p:0, color: 'red' }}>
             Staked Fighters
@@ -188,7 +216,7 @@ export default function StakedFighterListRankFix(props) {
     <ImageList sx={{p:1,  maxHeight: '60vh'}} cols={4} rowHeight={320} >
       {sortedLevelList?.map((fy) => (
         <ImageListItem key={fy?.id}  >
-            <StakedFighterCard key={fy?.id} 
+            <StakedFighterCardRankFix key={fy?.id} 
              id={fy?.id}
              brutality= {fy?.brutality}
              courage={fy?.courage}
@@ -208,24 +236,17 @@ export default function StakedFighterListRankFix(props) {
      
       </ImageList>
       <Stack direction="row"  maxwidth={'md'} sx={{ justifyContent: 'center' }}>
-        <ButtonGroup color="error" sx={{  }}>
-          
-        <Button  variant="contained" size="small"  sx={{backgroundColor: 'black', color: 'aqua', border: 2}} onClick={levelHandler} >Level up</Button>
-          <Stack >
-            <Button  variant="contained" size="small"  sx={{backgroundColor: 'black', color: 'aqua', border: 2}} onClick={claimHandler} >Claim </Button>
-            <Button  variant="contained" size="small"  sx={{backgroundColor: 'black',color: 'aqua', border: 2}} onClick={claimAllHandler} >Claim All</Button>
-          </Stack>
-          <Stack>
-            <Button  variant="contained" size="small"  sx={{backgroundColor: 'black', color: 'aqua', border: 2}} onClick={unstakeHandler} >Unstake</Button>
-            <Button  variant="contained" size="small"  sx={{backgroundColor: 'black', color: 'aqua', border: 2}} onClick={unstakeAllHandler} >Unstake All</Button>
-          </Stack>
-         
+        <ButtonGroup color="error" >          
+          <Button  variant="contained" size="small"  sx={{backgroundColor: 'black', color: 'aqua', border: 2}} onClick={claimHandler} >Claim </Button>
+          <Button  variant="contained" size="small"  sx={{backgroundColor: 'black',color: 'aqua', border: 2}} onClick={claimAllHandler} >Claim All</Button>        
+          <Button  variant="contained" size="small"  sx={{backgroundColor: 'black', color: 'aqua', border: 2}} onClick={unstakeHandler} >Unstake</Button>
+          <Button  variant="contained" size="small"  sx={{backgroundColor: 'black', color: 'aqua', border: 2}} onClick={unstakeAllHandler} >Unstake All</Button>         
           <Button  variant="contained" size="small"  sx={{backgroundColor: 'black', color: 'aqua', border: 2}} onClick={UnselectHandler} >Unselect</Button>
         
         </ButtonGroup>
       </Stack>
    
-    </Box>
+    </Box>}
         </div>
   );
 }

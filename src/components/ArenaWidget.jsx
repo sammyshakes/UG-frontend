@@ -275,7 +275,7 @@ const ArenaWidget = (props) => {
                     onConfirm={errorHandler}
                 />
     )}
-    { needsToUnstake && <ArenaWidgetRankFix ring={ring} amulet={amulet}/>}
+    { needsToUnstake && <ArenaWidgetRankFix ring={ring} amulet={amulet} balance={prv.balance} amuletMaintainCost={amuletMaintainCost} ringMaintainCost={ringMaintainCost}/>}
     {!needsToUnstake && <Box className="ring-bordr" maxWidth={9/10} maxHeight={220}  sx={{display: 'flex',
           justifyContent: 'center',py:1}} >
     <Box  className="inner-bordr" maxWidth={9/10} maxHeight={180} p={1.5}  sx={{display: 'flex',

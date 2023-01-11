@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {getUGRaid4, getUGWeapons2} from '../utils.js';
+import {getUGRaid4, getUGWeapons2, getRaidEntry4, getEthers} from '../utils.js';
 import './fighterModal.css'
 import Modal from './Modal'
 import YakFamily from './yakuzaFamily/YakFamily';
@@ -12,6 +12,8 @@ const FighterModal = (props) => {
     const [sweatBalance, setSweatBalance] = useState(0);
     const ugRaidContract = getUGRaid4();
     const ugWeaponsContract = getUGWeapons2();
+    const raidEntry4Contract = getRaidEntry4();
+    const provider = getEthers();
     const levelTier = Math.floor((props.raider.level - 1)/3 +1);
     // const baseUrl = 'https://the-u.club/reveal/fightclub/';
     // const random = Math.floor(Math.random() * (500 - 1 + 1)) + 1 + 20000;
@@ -89,9 +91,25 @@ const FighterModal = (props) => {
         
         props.hideModal();       
     }
+
     const cancelRaiderHandler = () => {
         props.hideModal(); 
         props.cancelRaider(props.raider.id);     
+    }
+
+    const trainHandler = async() => {
+        let ids = [];
+        let tickets=[];
+        ids[0] = props.raider.id;
+        tickets[0] = {
+            size: 1,
+            yakFamily: 0,
+            sweat: 1000,
+        }
+        const entries = tickets?.map((ticket) => Object.values(ticket));
+        const signedContract = raidEntry4Contract.connect(provider.getSigner());
+        await signedContract.functions.enterTrain(ids, entries);
+        props.hideModal();    
     }
 
     const getWeapon = (score) => {
@@ -247,6 +265,7 @@ const FighterModal = (props) => {
                     <Stack direction="row" sx={{pt: 2, justifyContent: 'space-between'}}>
                         <Button variant='contained' size="small"  sx={{fontFamily: 'Alegreya Sans SC',  fontSize:'.8rem', color: 'black', backgroundColor:'crimson'}} value={4} onClick={props.hideModal}>Back</Button>
                         
+                        {weaponEligible && <Button variant='contained' size="small"  sx={{fontFamily: 'Alegreya Sans SC',  fontSize:'.8rem', color: 'black', backgroundColor:'orange'}} value={props.raider.id} onClick={trainHandler}>Train</Button>}
                         {!isQueued && !weaponEligible && <Typography variant='body2' pl={1}  sx={{fontFamily: 'Alegreya Sans SC', color: 'yellow',  fontSize:'1.1rem'}}>You Need {weaponString} To Raid</Typography>}    
                         {isQueued && <Typography variant='body2' pl={1}  sx={{fontFamily: 'Alegreya Sans SC', color: 'orange',  fontSize:'1.5rem'}}>Currently Raiding</Typography>}     
                                              

@@ -197,10 +197,10 @@ const RefereeModal = (props) => {
         // setSize4FullRaids(size4Queue.reduce((a,v) =>  a = a + v , 0 ));
 
 
-        setSize1FullRaids(await ugRaidContract.getRaiderQueueLengths(1));
-        setSize2FullRaids(await ugRaidContract.getRaiderQueueLengths(2));
-        setSize3FullRaids(await ugRaidContract.getRaiderQueueLengths(3));
-        setSize4FullRaids(await ugRaidContract.getRaiderQueueLengths(4));
+        setSize1FullRaids(Number(await ugRaidContract.getRaiderSizeQueueLengths(1)));
+        setSize2FullRaids(Number(await ugRaidContract.getRaiderSizeQueueLengths(2)));
+        setSize3FullRaids(Number(await ugRaidContract.getRaiderSizeQueueLengths(3)));
+        setSize4FullRaids(Number(await ugRaidContract.getRaiderSizeQueueLengths(4)));
     }
 
     const errorHandler = () => {
@@ -215,7 +215,7 @@ const RefereeModal = (props) => {
               const timer = setInterval(() => {
                 getFullRaids(); 
                 
-              }, 60000);
+              }, 1000);
               return () => {
                 clearInterval(timer);
               };

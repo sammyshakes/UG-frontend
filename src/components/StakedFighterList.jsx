@@ -22,8 +22,7 @@ export default function StakedFighterList(props) {
     const levelHandler = async() => {
       const amountArray = selectedFYs.map(i => { return 1;});      
       const signedContract =  ugGameContract.connect(prv.provider.getSigner());
-      await signedContract.functions.levelUpFighters(selectedFYs, amountArray, true) ;
-     
+      await signedContract.functions.levelUpFighters(selectedFYs, amountArray, true) ;     
     }
 
     const claimHandler = async() => {

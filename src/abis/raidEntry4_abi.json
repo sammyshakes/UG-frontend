@@ -279,6 +279,49 @@
     "inputs": [
       {
         "internalType": "address",
+        "name": "_ugFYakuza",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_blood",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_ugArena",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_ugWeapons",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_ugRaid",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_ugYakDen",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_fclubAlley",
+        "type": "address"
+      }
+    ],
+    "name": "setContracts",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
         "name": "newWallet",
         "type": "address"
       }
