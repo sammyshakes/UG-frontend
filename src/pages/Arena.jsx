@@ -25,21 +25,17 @@ const Arena = () => {
 
   const getUpdates = async() => {      
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });      
-    const _stakedIds = await ugArenaContract.getStakedFighterIDsForUser(accounts[0]);        
-    const stakedIds = _stakedIds.map(id => { return Number(id); }) 
+    const _stakedIds = await ugArenaContract.getStakedFighterIDsForUser(accounts[0]);      
     
-    const _stkdFighterIds = await ugArena3Contract.stakedByOwner(accounts[0]);
-    const stkdFighterIds = _stkdFighterIds.map(id => { return Number(id); }) ;
+    const _stkdFighterIds = await ugArena3Contract.stakedByOwner(accounts[0]);   
 
     const _stkdYakuzaIds = await ugYakDenContract.stakedIdsByUser(accounts[0]);
-    const stkdYakuzaIds = _stkdYakuzaIds.map(id => { return Number(id); }) ;
 
-    if(stakedIds.length > 0){
-      const _stakedFYs = await ugFYakuzaContract.getFighters(stakedIds); 
-          
+    if(_stakedIds.length > 0){
+      const stakedIds = _stakedIds.map(id => { return Number(id); })
+      const _stakedFYs = await ugFYakuzaContract.getFighters(stakedIds);           
       const stakedFYs = stakedIds.map((id, i) => {        
-        let imageUrl =  "fighter/" ;
-        
+        let imageUrl =  "fighter/" ;        
         imageUrl = baseUrl.concat(imageUrl.concat(_stakedFYs[i].imageId).concat('.png'));
         let fy = {id, imageUrl, ..._stakedFYs[i]};
         //console.log('fy',fy);
@@ -48,12 +44,11 @@ const Arena = () => {
       setStakedFYs(stakedFYs);
     } else setStakedFYs([]);
      
-    if(stkdFighterIds.length > 0){
-      const _stakedFYs = await ugFYakuzaContract.getFighters(stkdFighterIds); 
-          
+    if(_stkdFighterIds.length > 0){
+      const stkdFighterIds = _stkdFighterIds.map(id => { return Number(id); }) ;
+      const _stakedFYs = await ugFYakuzaContract.getFighters(stkdFighterIds);           
       const stakedFYs = stkdFighterIds.map((id, i) => {        
-        let imageUrl =  "fighter/" ;
-        
+        let imageUrl =  "fighter/" ;        
         imageUrl = baseUrl.concat(imageUrl.concat(_stakedFYs[i].imageId).concat('.png'));
         let fy = {id, imageUrl, ..._stakedFYs[i]};
         //console.log('fy',fy);
@@ -62,12 +57,11 @@ const Arena = () => {
       setStakedFighters(stakedFYs);
     } else setStakedFighters([]);
 
-    if(stkdYakuzaIds.length > 0){
-      const _stakedFYs = await ugFYakuzaContract.getFighters(stkdYakuzaIds); 
-          
+    if(_stkdYakuzaIds.length > 0){      
+      const stkdYakuzaIds = _stkdYakuzaIds.map(id => { return Number(id); }) ;
+      const _stakedFYs = await ugFYakuzaContract.getFighters(stkdYakuzaIds);           
       const stakedFYs = stkdYakuzaIds.map((id, i) => {        
-        let imageUrl =  "yakuza/" ;
-        
+        let imageUrl =  "yakuza/" ;        
         imageUrl = baseUrl.concat(imageUrl.concat(_stakedFYs[i].imageId).concat('.png'));
         let fy = {id, imageUrl, ..._stakedFYs[i]};
         //console.log('fy',fy);

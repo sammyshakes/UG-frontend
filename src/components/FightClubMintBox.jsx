@@ -136,12 +136,13 @@ export default function FightClubMintBox() {
                 <Box ml={4}>  
                     <Avatar className="fclub2-bordr" sx={{ height: 50, width: 50 }} alt="Blood Token" src={bloodToken} />
                 </Box>
-                    <Typography variant="button" align='center' sx={{fontFamily: 'Alegreya Sans SC', mx:2, color: 'aqua', fontSize: '1rem' }} > 5M Blood/ Fight Club</Typography>
+                    <Typography variant="button" align='center' sx={{fontFamily: 'Alegreya Sans SC', mx:2, color: 'aqua', fontSize: '1rem' }} > 8M Blood/ Fight Club</Typography>
                                 
                         <Box  className="input-group my-2 fclub1-bordr" >
-                            <input type="number" min='1' max='5' step='1' onChange={QtyChangeHandler}  className="form-control" placeholder="How Many?" aria-label="Qty" aria-describedby="basic-addon2" />
+                            {/* <input type="number" min='1' max='5' step='1' onChange={QtyChangeHandler}  className="form-control" placeholder="How Many?" aria-label="Qty" aria-describedby="basic-addon2" /> */}
+                            <input type="number" min='1' max='5' step='1' onChange={QtyChangeHandler}  className="form-control" placeholder="Mint Paused" aria-label="Qty" aria-describedby="basic-addon2" />
                             <Box className="input-group-append " >
-                                <Button sx={{ color: 'red' }} onClick={mintHandler}>MINT</Button>
+                                <Button disabled sx={{ color: 'red' }} onClick={mintHandler}>MINT</Button>
                             </Box>
                         </Box>                
                 </Stack>              

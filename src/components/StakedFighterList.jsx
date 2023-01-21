@@ -122,7 +122,7 @@ export default function StakedFighterList(props) {
       }
     };
 
-    const filteredList = props.stakedFYs?.filter(fy => (fy.isFighter === true));
+    const filteredList = props?.stakedFYs?.filter(fy => (fy.isFighter === true));
     let sortedLevelList  = filteredList?.sort((a, b) => b.level - a.level);
 
     if(alignment === 'levelUp') sortedLevelList = filteredList?.sort((a, b) => a.level - b.level);

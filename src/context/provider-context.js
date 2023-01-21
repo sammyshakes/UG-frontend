@@ -13,8 +13,8 @@ const ProviderContext = React.createContext({
     ownedV1FYIds: [],
     v1RingIds: [],
     v1AmuletIds: [],
-    stakedRing: [],
-    stakedAmulet: [],
+    stakedRing: undefined,
+    stakedAmulet: undefined,
     ownedForgeIds: []
 });
 

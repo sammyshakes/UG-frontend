@@ -163,10 +163,10 @@ const columns = [
 
 const IsInRaid = (props) => {
   const [isRaiding, setIsRaiding] = useState(false);
-  const ugRaidContract = getUGRaid4();
+  const ugRaid4Contract = getUGRaid4();
 
   const getRaidStatus = async () => {
-    const israiding = await ugRaidContract.viewIfRaiderIsInQueue(
+    const israiding = await ugRaid4Contract.viewIfRaiderIsInQueue(
       props.fighterId
     );
     setIsRaiding(israiding);
@@ -225,6 +225,7 @@ export default function FighterTable() {
   const [pageSize, setPageSize] = useState(10);
   const [userRaidWinnings, setUserRaidWinnings] = useState(0);
   const [userWeaponsWinnings, setUserWeaponsWinnings] = useState(0);
+  const [userWeapons4Winnings, setUserWeapons4Winnings] = useState(0);
   const [userRaid2Winnings, setUserRaid2Winnings] = useState(0);
   const [userRaid4Winnings, setUserRaid4Winnings] = useState(0);
   const [ttlBloodFee, setTtlBloodFee] = useState(0);
@@ -535,6 +536,12 @@ export default function FighterTable() {
     setUserWeaponsWinnings(0);
   };
 
+  const claimWeapons4Handler = async () => {
+    const signedContract = ugRaid4Contract.connect(prv.provider.getSigner());
+    await signedContract.functions.claimWeapons();
+    setUserWeapons4Winnings(0);
+  };
+
   const claim2Handler = async () => {
     const signedContract = ugRaid2Contract.connect(prv.provider.getSigner());
     await signedContract.functions.claimRaiderBloodRewards();
@@ -609,7 +616,12 @@ export default function FighterTable() {
       const numRaids4 = await ugRaid4Contract.ttlRaids();
       setNumRaids(Number(numRaids3) + Number(numRaids2) + Number(numRaids4));
 
-      const userWeaponsRewards = await ugRaid4Contract.getUnclaimedWeaponsCount(
+      const userWeapons4Rewards = await ugRaid4Contract.getUnclaimedWeaponsCount(
+        accounts[0]
+      );
+      setUserWeapons4Winnings(userWeapons4Rewards);
+      //old weapons rewards
+      const userWeaponsRewards = await ugRaidContract.getUnclaimedWeaponsCount(
         accounts[0]
       );
       setUserWeaponsWinnings(userWeaponsRewards);
@@ -624,7 +636,7 @@ export default function FighterTable() {
       const timer = setInterval(() => {
         updateRaidRewards();
         getUpdates();
-      }, 60000);
+      }, 15000);
 
       return () => {
         clearInterval(timer);
@@ -978,6 +990,53 @@ export default function FighterTable() {
                 fontSize: "1.1rem",
               }}
             >
+              {Number(userWeapons4Winnings[0])}
+              <Typography
+                component="span"
+                variant="body2"
+                pl={1}
+                sx={{
+                  fontFamily: "Alegreya Sans SC",
+                  color: "deepskyblue",
+                  fontSize: "1rem",
+                }}
+              >
+                Weapons
+              </Typography>
+            </Typography>
+            <Button
+              variant="text"
+              justify="center"
+              size="medium"
+              className="raidButton"
+              sx={{
+                m: 1,
+                borderRadius: 5,
+                border: 1,
+                color: "black",
+                backgroundColor: "aqua",
+                fontFamily: "Alegreya Sans SC",
+                fontSize: ".9rem",
+              }}
+              onClick={claimWeapons4Handler}
+            >
+              Claim Weapons
+            </Button>
+          </Stack>
+          {Number(userWeaponsWinnings[0]) > 0 && <Stack
+            className="box10-bordr"
+            direction="row"
+            sx={{ justifyContent: "space-between" }}
+          >
+            <Typography
+              variant="body2"
+              p={1}
+              sx={{
+                fontFamily: "Alegreya Sans SC",
+                color: "gold",
+                fontSize: "1.1rem",
+              }}
+            >
               {Number(userWeaponsWinnings[0])}
               <Typography
                 component="span"
@@ -1008,9 +1067,9 @@ export default function FighterTable() {
               }}
               onClick={claimWeaponsHandler}
             >
-              Claim Weapons
+              Claim Weapons Fix
             </Button>
-          </Stack>
+          </Stack>}
           <Box>
             <Stack>
               <Stack

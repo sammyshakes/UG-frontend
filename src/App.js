@@ -10,6 +10,8 @@ import {
   getOldArena,
   getOldNft,
   getUGArena,
+  getUGArena3,
+  getUGNft2,
   getUGNft,
   getOldRing,
   getOldAmulet,
@@ -60,35 +62,20 @@ function App() {
   const oldRingContract = getOldRing();
   const oldAmuletContract = getOldAmulet();
   const ugArenaContract = getUGArena();
+  const ugArena3Contract = getUGArena3();
+  const ugNft2Contract = getUGNft2();
   const ugNftContract = getUGNft();
   const bloodContract = getBlood();
+
+  let ring;
+  let amulet;
 
   const getUpdates = async () => {
     const accounts = await window.ethereum.request({
       method: "eth_requestAccounts",
     });
     const _balance = await bloodContract.balanceOf(accounts[0]);
-
-    const _stakedIds = await ugArenaContract.getStakedFighterIDsForUser(
-      accounts[0]
-    );
-    const stakedIds = _stakedIds.map((id) => {
-      return Number(id.toString());
-    });
-    const _stakedFYs = await ugNftContract.getFighters(stakedIds);
-    const stakedFYs = stakedIds.map((id, i) => {
-      let imageUrl = !_stakedFYs[i].isFighter ? "yakuza/" : "fighter/";
-
-      imageUrl = baseUrl.concat(
-        imageUrl.concat(_stakedFYs[i].imageId).concat(".png")
-      );
-      let fy = { id, imageUrl, ..._stakedFYs[i] };
-      //console.log('fy',fy);
-      return fy;
-    });
-
     setBalance(_balance);
-    setStakedFYs(stakedFYs);
   };
 
   useEffect(() => {
@@ -114,10 +101,10 @@ function App() {
       const accounts = await window.ethereum.request({
         method: "eth_requestAccounts",
       });
-      const stakedRing = await ugArenaContract.getStakedRingIDForUser(
+      const stakedRing = await ugArena3Contract.getStakedRingIDForUser(
         accounts[0]
       );
-      const stakedAmulet = await ugArenaContract.getStakedAmuletIDForUser(
+      const stakedAmulet = await ugArena3Contract.getStakedAmuletIDForUser(
         accounts[0]
       );
       const v1StakedIds = await oldArenaContract.getStakedTokenIds(accounts[0]);
@@ -146,9 +133,9 @@ function App() {
       });
       const _stakedFYs = await ugNftContract.getFighters(stakedIds);
       const _ownedFYs = await ugNftContract.getFighters(ownedIds);
-      const ring = await ugNftContract.getRingAmulet(stakedRing);
-      const amulet = await ugNftContract.getRingAmulet(stakedAmulet);
-
+      ring = await ugNft2Contract.getRingAmulet(stakedRing);
+      amulet = await ugNft2Contract.getRingAmulet(stakedAmulet);
+      console.log('xyz',amulet);
       const ownedFYs = ownedIds?.map((id, i) => {
         let imageUrl = !_ownedFYs[i]?.isFighter ? "yakuza/" : "fighter/";
         imageUrl = baseUrl.concat(
@@ -185,7 +172,7 @@ function App() {
 
     const interval = setInterval(() => {
       getUpdates();
-    }, 300000);
+    }, 30000);
     return () => clearInterval(interval);
     // eslint-disable-next-line
   }, []);
@@ -203,8 +190,8 @@ function App() {
         ownedV1FYIds: ownedV1FYIds,
         v1RingIds: v1RingIds,
         v1AmuletIds: v1AmuletIds,
-        stakedRing: activeRing,
-        stakedAmulet: activeAmulet,
+        stakedRing: ring,
+        stakedAmulet: amulet,
         balance: balance,
         ownedForgeIds: ownedForgeIds,
       }}

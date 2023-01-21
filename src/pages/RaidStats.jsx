@@ -6,7 +6,7 @@ import { flexbox } from '@mui/system';
 
 const GET_RAIDS = gql`
   query GetRaids {
-    raids(first: 1000, orderBy: timestamp, orderDirection: desc) {
+    raids(first: 200, orderBy: timestamp, orderDirection: desc) {
         id
         raidId
         fightclubId
@@ -39,7 +39,7 @@ const GET_RAIDS = gql`
 
 const GET_RAIDS_FIGHTCLUB = gql`
   query GetRaids($fightclub: BigInt!) {
-    raids(first: 1000, where: { fightclubId: $fightclub}, orderBy: timestamp, orderDirection: desc) {
+    raids(first: 200, where: { fightclubId: $fightclub}, orderBy: timestamp, orderDirection: desc) {
         id
         raidId
         fightclubId
@@ -72,7 +72,7 @@ const GET_RAIDS_FIGHTCLUB = gql`
 
 const GET_RAIDS_FIGHTER = gql`
   query GetRaids($fighter: BigInt!) {
-    raids(first: 1000, where: { tickets_: { raider: $fighter } },orderBy:  timestamp, orderDirection: desc) {
+    raids(first: 200, where: { tickets_: { raider: $fighter } },orderBy:  timestamp, orderDirection: desc) {
       id
       raidId
       fightclubId
@@ -256,8 +256,6 @@ function DisplayRaids(props) {
                 <Typography variant='body2'  sx={{fontFamily: 'Alegreya Sans SC',  fontSize:'.8rem', color: 'aqua'}}><SimpleDateTime dateSeparator="/" timeSeparator=":">{Number(timestamp)}</SimpleDateTime></Typography>
                 <Typography variant='body2'  sx={{p: 0,fontFamily: 'Alegreya Sans SC',  fontSize:'1rem', color: 'deepskyblue'}}>Level Tier: {levelTier}</Typography>   
                 <Typography variant='body2'  sx={{fontFamily: 'Alegreya Sans SC',  fontSize:'1rem', color: 'deepskyblue'}}>Size Tier: {sizeTier}</Typography>      
-                <Typography variant='body2'  sx={{fontFamily: 'Alegreya Sans SC',  fontSize:'.8rem', color: 'gold'}}>Fight Club Id: {fightclubId}</Typography>
-                <Typography variant='body2'  sx={{fontFamily: 'Alegreya Sans SC',  fontSize:'.8rem', color: 'gold'}}>Fight Club Revenue: {Number(tickets[0]?.entryFee) * 5 * Number(sizeTier) * 0.25}</Typography>
                 <Typography variant='body2'  sx={{fontFamily: 'Alegreya Sans SC',  fontSize:'.8rem', color: 'aqua'}}>Yakuza Share Stolen: {yakShareStolen.toString()}</Typography>
                 <Typography variant='body2'  sx={{fontFamily: 'Alegreya Sans SC',  fontSize:'.8rem', color: 'red'}}>Raid Entry Fee: {tickets[0]?.entryFee}</Typography>
               </Stack>                  

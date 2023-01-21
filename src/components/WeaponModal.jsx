@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import { getUGRaid3, getUGWeapons2} from '../utils.js';
+import { getUGRaid4, getUGWeapons2} from '../utils.js';
 import './weaponModal.css'
 import Modal from './Modal';
 import {Box, Card , Stack, CardMedia, CardContent, Typography, Button} from '@mui/material';
@@ -10,7 +10,7 @@ const WeaponModal = (props) => {
     const [weaponBals, setWeaponBals] = useState([]);
     const [weaponIds, setWeaponIds] = useState([]);
     const ugWeaponsContract = getUGWeapons2();
-    const ugRaidContract = getUGRaid3();
+    const ugRaidContract = getUGRaid4();
     const [error, setError] = useState();
     const [alreadyInQueue, setAlreadyInQueue] = useState(undefined);
 

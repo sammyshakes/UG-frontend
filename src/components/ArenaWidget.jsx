@@ -36,18 +36,22 @@ const ArenaWidget = (props) => {
   const ugArenaContract = getUGArena3();
   const ugNftContract = getUGNft2();
   const ugYakDenContract = getUGYakDen();
+  console.log('prv',prv);
   
   const refreshProgress = async() => {
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
     let stakedRingId = await ugArena2Contract.getStakedRingIDForUser(accounts[0]);
     let stakedAmuletId = await ugArena2Contract.getStakedAmuletIDForUser(accounts[0]);
+    // let stakedRingId = prv.stakedRing;
+    // let stakedAmuletId = prv.stakedAmulet;
+    console.log('sr',stakedRingId);
     //check if any need to be fixed from bloodRankFix
     if((stakedRingId || stakedAmuletId) &&  (Number(stakedRingId) > 0 || Number(stakedAmuletId) > 0)){
       setNeedsToUnstake(true);
     } else {      
       setNeedsToUnstake(false);
-      stakedRingId = ugArenaContract.getStakedRingIDForUser(accounts[0]);
-      stakedAmuletId = ugArenaContract.getStakedAmuletIDForUser(accounts[0]);
+      stakedRingId = await ugArenaContract.getStakedRingIDForUser(accounts[0]);
+      stakedAmuletId = await ugArenaContract.getStakedAmuletIDForUser(accounts[0]);
     }
 
     const ring = await ugNftContract.getRingAmulet(stakedRingId);    

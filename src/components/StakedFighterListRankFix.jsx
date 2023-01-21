@@ -75,7 +75,7 @@ export default function StakedFighterListRankFix(props) {
         return;
       }
       const ids = filteredArray.map(fy => { return fy.id;});
-      const txInterval = 30;   
+      const txInterval = 4;   
       const intervals = Math.floor(ids.length / txInterval);
   
       if(ids.length === 0) {
