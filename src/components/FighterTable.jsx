@@ -277,6 +277,11 @@ export default function FighterTable() {
     setOpen(false);
   };
 
+  const exitRaiderHandler = async (raiderId) => {
+    const signedContract = ugRaid4Contract.connect(prv.provider.getSigner());
+    await signedContract.functions.removeRaidersFromQueue([raiderId]);
+  };
+
   const cancelRaiderHandler = (raiderId) => {
     setRaidTickets((prevState) => {
       const cancelledTicket = prevState.filter(
@@ -414,8 +419,8 @@ export default function FighterTable() {
     });
     const sweatBalance = await ugWeaponsContract.balanceOf(accounts[0], 56);
 
-    let filteredList = stakedFYs?.filter((fy) => fy.isFighter === true);
-    filteredList = filteredList?.filter(eligibleForWeapons);
+    // let filteredList = stakedFYs?.filter((fy) => fy.isFighter === true);
+    let filteredList = stakedFYs?.filter(eligibleForWeapons);
 
     //check if any in raid yet
     let sortedRaidTimeList = filteredList?.sort(
@@ -474,8 +479,8 @@ export default function FighterTable() {
     });
     const sweatBalance = await ugWeaponsContract.balanceOf(accounts[0], 56);
 
-    let filteredList = stakedFYs?.filter((fy) => fy.isFighter === true);
-    filteredList = filteredList?.filter(eligibleForWeapons);
+    // let filteredList = stakedFYs?.filter((fy) => fy.isFighter === true);
+    let filteredList = stakedFYs?.filter(eligibleForWeapons);
 
     //check if any in raid yet
     let sortedRaidTimeList = filteredList?.sort(
@@ -587,9 +592,7 @@ export default function FighterTable() {
     const accounts = await window.ethereum.request({
       method: "eth_requestAccounts",
     });
-    const _stakedIds = await ugArenaContract.stakedByOwner(
-      accounts[0]
-    );
+    const _stakedIds = await ugArenaContract.stakedByOwner(accounts[0]);
     const stakedIds = _stakedIds.map((id) => {
       return Number(id);
     });
@@ -611,14 +614,13 @@ export default function FighterTable() {
       // console.log('raid2', ugRaid2Contract.address);
       // console.log('raid3', ugRaidContract.address);
       // console.log('raid4', ugRaid4Contract.address);
-      const numRaids3 = await ugRaidContract.ttlRaids();   
-      const numRaids2 = await ugRaid2Contract.ttlRaids();    
+      const numRaids3 = await ugRaidContract.ttlRaids();
+      const numRaids2 = await ugRaid2Contract.ttlRaids();
       const numRaids4 = await ugRaid4Contract.ttlRaids();
       setNumRaids(Number(numRaids3) + Number(numRaids2) + Number(numRaids4));
 
-      const userWeapons4Rewards = await ugRaid4Contract.getUnclaimedWeaponsCount(
-        accounts[0]
-      );
+      const userWeapons4Rewards =
+        await ugRaid4Contract.getUnclaimedWeaponsCount(accounts[0]);
       setUserWeapons4Winnings(userWeapons4Rewards);
       //old weapons rewards
       const userWeaponsRewards = await ugRaidContract.getUnclaimedWeaponsCount(
@@ -661,6 +663,7 @@ export default function FighterTable() {
         <FighterModal
           raider={selectedRaider}
           collectTicket={raidTicketCollector}
+          exitRaider={exitRaiderHandler}
           cancelRaider={cancelRaiderHandler}
           hideModal={hideFighterHandler}
           sweatBurn={ttlSweatBurn}
@@ -1023,53 +1026,55 @@ export default function FighterTable() {
               Claim Weapons
             </Button>
           </Stack>
-          {Number(userWeaponsWinnings[0]) > 0 && <Stack
-            className="box10-bordr"
-            direction="row"
-            sx={{ justifyContent: "space-between" }}
-          >
-            <Typography
-              variant="body2"
-              p={1}
-              sx={{
-                fontFamily: "Alegreya Sans SC",
-                color: "gold",
-                fontSize: "1.1rem",
-              }}
+          {Number(userWeaponsWinnings[0]) > 0 && (
+            <Stack
+              className="box10-bordr"
+              direction="row"
+              sx={{ justifyContent: "space-between" }}
             >
-              {Number(userWeaponsWinnings[0])}
               <Typography
-                component="span"
                 variant="body2"
-                pl={1}
+                p={1}
                 sx={{
                   fontFamily: "Alegreya Sans SC",
-                  color: "deepskyblue",
-                  fontSize: "1rem",
+                  color: "gold",
+                  fontSize: "1.1rem",
                 }}
               >
-                Weapons
+                {Number(userWeaponsWinnings[0])}
+                <Typography
+                  component="span"
+                  variant="body2"
+                  pl={1}
+                  sx={{
+                    fontFamily: "Alegreya Sans SC",
+                    color: "deepskyblue",
+                    fontSize: "1rem",
+                  }}
+                >
+                  Weapons
+                </Typography>
               </Typography>
-            </Typography>
-            <Button
-              variant="text"
-              justify="center"
-              size="medium"
-              className="raidButton"
-              sx={{
-                m: 1,
-                borderRadius: 5,
-                border: 1,
-                color: "black",
-                backgroundColor: "aqua",
-                fontFamily: "Alegreya Sans SC",
-                fontSize: ".9rem",
-              }}
-              onClick={claimWeaponsHandler}
-            >
-              Claim Weapons Fix
-            </Button>
-          </Stack>}
+              <Button
+                variant="text"
+                justify="center"
+                size="medium"
+                className="raidButton"
+                sx={{
+                  m: 1,
+                  borderRadius: 5,
+                  border: 1,
+                  color: "black",
+                  backgroundColor: "aqua",
+                  fontFamily: "Alegreya Sans SC",
+                  fontSize: ".9rem",
+                }}
+                onClick={claimWeaponsHandler}
+              >
+                Claim Weapons Fix
+              </Button>
+            </Stack>
+          )}
           <Box>
             <Stack>
               <Stack

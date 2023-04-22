@@ -132,7 +132,7 @@ const RaidStats = () => {
 
   if(queryState === 'RECENT') return (
     <Box >
-      <Stack direction="row" spacing={2} sx={{p: 2,  justifyContent: 'space-evenly'}}>
+      <Stack direction="row" spacing={2} sx={{p: 2,  justifyContent: 'flex-start'}}>
         <div className="col-4 mt-2">
           <form onSubmit={submitFighterHandler}>
             <div className="input-group">
@@ -141,14 +141,14 @@ const RaidStats = () => {
             </div>
           </form>
         </div>
-        <div className="col-4 mt-2">
+        {/* <div className="col-4 mt-2">
           <form onSubmit={submitFightclubHandler}>
             <div className="input-group">
               <input type="number" className="form-control" placeholder="FightClub Id" aria-describedby="button-addon2" value={enteredFightClub}  onChange={enteredFightclubChangeHandler}/>
               <button className="btn btn-outline-info" type="submit" id="button-addon2"  >Get Fight Club Raids</button>
             </div>
           </form>
-        </div>
+        </div> */}
       </Stack>
       <RaidStatsRecent/>
     </Box>
@@ -156,7 +156,7 @@ const RaidStats = () => {
 
   if(queryState === 'FIGHTER') return (
     <Box >
-      <Stack direction="row" spacing={2} sx={{p: 2,  justifyContent: 'space-evenly'}}>
+      <Stack direction="row" spacing={2} sx={{p: 2,  justifyContent: 'flex-start'}}>
         <div className="col-4 mt-2">
           <form onSubmit={submitFighterHandler}>
             <div className="input-group">
@@ -165,14 +165,14 @@ const RaidStats = () => {
             </div>
           </form>
         </div>
-        <div className="col-4 mt-2">
+        {/* <div className="col-4 mt-2">
           <form onSubmit={submitFightclubHandler}>
             <div className="input-group">
               <input type="number" className="form-control" placeholder="FightClub Id" aria-describedby="button-addon2" value={enteredFightClub}  onChange={enteredFightclubChangeHandler}/>
               <button className="btn btn-outline-info" type="submit" id="button-addon2"  >Get Fight Club Raids</button>
             </div>
           </form>
-        </div>
+        </div> */}
       </Stack>
       <RaidFighters id={enteredFighter}/>
     </Box>
@@ -180,7 +180,7 @@ const RaidStats = () => {
 
   if(queryState === 'FIGHTCLUB') return (
     <Box >
-      <Stack direction="row" spacing={2} sx={{p: 2,  justifyContent: 'space-evenly'}}>
+      <Stack direction="row" spacing={2} sx={{p: 2,  justifyContent: 'flex-start'}}>
         <div className="col-4 mt-2">
           <form onSubmit={submitFighterHandler}>
             <div className="input-group">
@@ -189,14 +189,14 @@ const RaidStats = () => {
             </div>
           </form>
         </div>
-        <div className="col-4 mt-2">
+        {/* <div className="col-4 mt-2">
           <form onSubmit={submitFightclubHandler}>
             <div className="input-group">
               <input type="number" className="form-control" placeholder="FightClub Id" aria-describedby="button-addon2" value={enteredFightClub}  onChange={enteredFightclubChangeHandler}/>
               <button className="btn btn-outline-info" type="submit" id="button-addon2"  >Get Fight Club Raids</button>
             </div>
           </form>
-        </div>
+        </div> */}
       </Stack>
     <RaidFightclubs id={enteredFightClub}/>
     </Box>
